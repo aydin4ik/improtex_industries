@@ -8190,9 +8190,9 @@ a.navbar-item.is-active,
   background-color: transparent;
   border-bottom-color: #3273dc;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
+  border-bottom-width: 1px;
   color: #3273dc;
-  padding-bottom: calc(0.5rem - 3px);
+  padding-bottom: calc(0.5rem - 1px);
 }
 
 .navbar-content {
@@ -23499,5 +23499,110 @@ readers do not read off random characters that represent icons */
   overflow: visible;
   position: static;
   width: auto;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8e4a6dcc692b3887f9f542cd6894d6d4);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8e4a6dcc692b3887f9f542cd6894d6d4) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?44d537ab79f921fde5a28b2c1636f397) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?333bae208dc363746961b234ff6c2500) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?0bff33a5fd7ec390235476b4859747a0) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?c2801fb415f03c7b170934769d7b5397) format("svg");
+}
+
+.fa,
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.navbar {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.16);
+}
+
+.navbar-brand .navbar-item {
+  padding: 1rem 0;
+}
+
+.navbar-brand .navbar-item img {
+  max-height: 3.75rem;
+}
+
+.navbar-start {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbar-end {
+  margin-left: 0;
+}
+
+.navbar-end .navbar-item {
+  padding: 1rem 0.5rem;
+}
+
+.navbar-item {
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 1rem 2rem;
+}
+
+.navbar-item.is-tab,
+.navbar-item.is-tab.is-active {
+  padding-bottom: calc(1rem - 1px);
+}
+
+.navbar-item.is-tab.is-active.navbar-item.has-dropdown {
+  padding-bottom: 0;
+}
+
+.navbar-item.has-dropdown {
+  padding: 0;
+}
+
+.navbar-item.has-dropdown .navbar-link {
+  padding: 1rem 2.5rem;
+}
+
+.navbar-item.has-dropdown:focus .navbar-link,
+.navbar-item.has-dropdown:hover .navbar-link,
+.navbar-item.has-dropdown.is-active .navbar-link {
+  background-color: transparent;
+}
+
+.navbar-item.has-dropdown:hover .navbar-link {
+  background-color: transparent;
+  color: #3273dc;
+}
+
+.navbar-item .navbar-link:hover {
+  background-color: transparent;
+}
+
+.navbar-item.is-mega {
+  position: static;
+}
+
+.navbar-dropdown {
+  cursor: auto;
+  padding: 0;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 0;
+  font-size: 1rem;
+  border-top: 1px solid #dbdbdb;
+}
+
+.navbar-dropdown a.navbar-item {
+  padding: 1rem 2rem;
+  text-transform: capitalize;
+}
+
+.navbar-dropdown a.navbar-item:hover {
+  background-color: transparent;
 }
 

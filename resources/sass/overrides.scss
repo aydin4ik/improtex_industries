@@ -1,0 +1,85 @@
+.navbar{
+    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.16);
+}
+
+.navbar-brand
+    .navbar-item{
+        padding: 1rem 0;
+        img{
+            max-height: 3.75rem;
+        }
+    }
+
+.navbar-start{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-end{
+    margin-left: 0;
+    .navbar-item{
+        padding: 1rem 0.5rem;
+    }
+}
+.navbar-item{
+    text-transform: uppercase;
+    font-weight: $weight-medium;
+    padding: 1rem 2rem;
+}
+
+.navbar-item.is-tab, .navbar-item.is-tab.is-active{
+    padding-bottom: calc(1rem - 1px);
+}
+
+.navbar-item.is-tab.is-active.navbar-item.has-dropdown{
+    padding-bottom: 0;
+}
+
+.navbar-item.has-dropdown{
+    padding: 0;
+}
+
+.navbar-item.has-dropdown
+    .navbar-link{
+        padding: 1rem 2.5rem;
+}
+
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: transparent;
+}
+
+.navbar-item.has-dropdown:hover
+    .navbar-link{
+        background-color: transparent;
+        color: $link;
+}
+
+.navbar-item
+    .navbar-link:hover{
+            background-color: transparent;
+        }
+
+
+.navbar-item.is-mega {
+    position: static;
+  }
+
+.navbar-dropdown{
+    cursor: auto;
+    padding: 0;
+    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.16);
+    border-radius: 0;
+    font-size: 1rem;
+    border-top: 1px solid $grey-lighter;
+}
+
+.navbar-dropdown
+    a.navbar-item{
+        padding: 1rem 2rem;
+        text-transform: capitalize;
+    }
+
+.navbar-dropdown
+    a.navbar-item:hover{
+            background-color: transparent;
+        }
