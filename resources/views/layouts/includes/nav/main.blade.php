@@ -15,58 +15,14 @@
                   <div class="navbar-menu">
                     <div class="navbar-start">
                       {!! menu('main', 'bulma_menu') !!}
-                      {{-- <a class="navbar-item is-tab">Home</a>
-                      <a class="navbar-item is-tab">About</a>
-                      <div class="navbar-item has-dropdown is-hoverable is-mega is-tab">
-                          <a class="navbar-link is-arrowless">
-                            News
-                          </a>
-                  
-                          <div class="navbar-dropdown">
-                            <div class="container">
-                              <div class="navbar-menu">
-                                <div class="navbar-start">
-                                  <a class="navbar-item is-tab">News</a>
-                                  <a class="navbar-item is-tab">Press releases</a>
-                                  <a class="navbar-item is-tab">Project Update</a>
-                                  <a class="navbar-item is-tab">Meetings</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                
-                      <div class="navbar-item has-dropdown is-hoverable is-mega is-tab">
-                        <a class="navbar-link is-arrowless">
-                          Scope of business
-                        </a>
-                
-                        <div class="navbar-dropdown">
-                          <div class="container">
-                            <div class="navbar-menu">
-                              <div class="navbar-start">
-                                <a class="navbar-item is-tab">Workshop services</a>
-                                <a class="navbar-item is-tab">Project design</a>
-                                <a class="navbar-item is-tab">Metal construction</a>
-                                <a class="navbar-item is-tab">Agricultural machinery</a>
-                                <a class="navbar-item is-tab">Truck super structures</a>
-                                <a class="navbar-item is-tab">on/ofshore projects</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="navbar-item is-tab">Products</a>
-                      <a class="navbar-item is-tab">Projects</a>
-                      <a class="navbar-item is-tab">Contacts</a> --}}
                     </div>
                 
                     <div class="navbar-end"> 
-                      <a class="navbar-item"><i class="fas fa-search fa-lg"></i></a>
+                      <nav-search-widget></nav-search-widget>
                       <a class="navbar-item">az</a>
                       <a class="navbar-item">en</a>
                       <a class="navbar-item">ru</a>
+                      
                     </div>
                   </div>
 

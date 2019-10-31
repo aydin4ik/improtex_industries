@@ -23606,3 +23606,11 @@ readers do not read off random characters that represent icons */
   background-color: transparent;
 }
 
+.navbar .input,
+.navbar .taginput .taginput-container.is-focusable,
+.taginput .navbar .taginput-container.is-focusable,
+input:focus,
+input:active {
+  border: none;
+}
+

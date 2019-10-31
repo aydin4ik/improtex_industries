@@ -14,7 +14,14 @@
         <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        @include('layouts/includes/nav/main')
-        @yield('content')
+        <div id="app">
+            @include('layouts/includes/nav/main')
+
+            @yield('content')
+        </div>
+
+        {{-- Scripts --}}
+        <script src="{{ asset('js/app.js')}}"></script>
+        @yield('scripts')
     </body>
 </html>
