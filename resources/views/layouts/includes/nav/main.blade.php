@@ -19,9 +19,10 @@
                 
                     <div class="navbar-end"> 
                       <nav-search-widget></nav-search-widget>
-                      <a class="navbar-item">az</a>
-                      <a class="navbar-item">en</a>
-                      <a class="navbar-item">ru</a>
+                      @foreach (config('localized-routes.supported-locales') as $locale)
+                          
+                      <a class="navbar-item" href="{{route(Route::currentRouteName(), [], true, $locale)}}">{{strtoupper($locale)}}</a>
+                      @endforeach
                       
                     </div>
                   </div>

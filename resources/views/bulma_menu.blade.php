@@ -17,16 +17,15 @@
 
         
     @endphp
-
     @if($originalItem->children->isEmpty())
         @php
-            if(url($item->link()) == url()->current()){
+            if(strtolower(app()->getLocale() . '.' .$item->url) == Route::currentRouteName()){
                 $listItemClass = 'navbar-item is-tab is-active';
             }else{
                 $listItemClass = 'navbar-item is-tab';
             }
         @endphp
-        <a class="{{$listItemClass}}" href="{{ url($item->link()) }}" target="{{ $item->target }}">{{ $item->title }}</a>
+        <a class="{{$listItemClass}}" href="{{ route(strtolower($item->link())) }}" target="{{ $item->target }}">{{ $item->title }}</a>
     @else
         @php
             if(url($item->link()) == url()->current()){

@@ -11,21 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::localized(function() {
+
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('home');
+    
+    Route::get('/about', function () {
+        return view('welcome');
+    })->name('about');
+    
+    Route::get('/news', function () {
+        return view('welcome');
+    });
+     
+    Route::get('/news/project-update', function () {
+        return view('welcome');
+    });
+    
 });
 
-Route::get('/about', function () {
-    return view('welcome');
-});
-
-Route::get('/news', function () {
-    return view('welcome');
-});
-
-Route::get('/news/project-update', function () {
-    return view('welcome');
-});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
