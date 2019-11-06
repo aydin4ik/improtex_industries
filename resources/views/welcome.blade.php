@@ -3,6 +3,8 @@
 
 @section('content')
     @{{ title }}    
+    {{Route::currentRouteName()}}
+    {{Route::currentRouteAction()}}
 @endsection
 
 

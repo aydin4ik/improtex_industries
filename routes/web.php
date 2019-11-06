@@ -21,14 +21,26 @@ Route::localized(function() {
         return view('welcome');
     })->name('about');
     
-    Route::get('/news', function () {
+    Route::get('/news/{category?}', function ($category = null) {
+        return view('welcome')->with('category', $category);
+    })->name('news');
+
+    Route::get('/scope-of-business', function () {
         return view('welcome');
-    });
-     
-    Route::get('/news/project-update', function () {
+    })->name('scope-of-business');
+
+    Route::get('/products', function () {
         return view('welcome');
-    });
-    
+    })->name('products');
+
+    Route::get('/projects', function () {
+        return view('welcome');
+    })->name('projects');
+
+    Route::get('/contacts', function () {
+        return view('welcome');
+    })->name('contacts');
+
 });
 
 
