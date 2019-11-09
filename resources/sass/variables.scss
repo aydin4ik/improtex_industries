@@ -1,1 +1,11 @@
-$navbar-tab-active-border-bottom-width: 1px;
+// Bulma defaults
+$turquoise: #1F8079;
+$orange: #F08700;
+$primary : $turquoise;
+$accent: $orange;
+
+$link: $accent;
+$navbar-item-color: $primary;
+
+$navbar-tab-hover-border-bottom-color: transparent;
+$navbar-tab-active-border-bottom-width: 2px;

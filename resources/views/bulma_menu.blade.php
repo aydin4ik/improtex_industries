@@ -51,7 +51,7 @@
             }
 
             if( url()->current() == url(app()->getLocale() . '/' . $item->url . '/' . $child->url) ){
-                $listItemClass = 'navbar-item is-tab is-active';
+                $listItemClass = 'navbar-item is-tab is-subactive';
             }else{
                 $listItemClass = 'navbar-item is-tab';
             }

@@ -1,8 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="container is-fluid">
             <div class="navbar-brand">
                     <a class="navbar-item" href="https://bulma.io">
-                      <img src="{{ Voyager::image(setting('site.logo')) }}">
+                      <img src="{{ asset('img/logo.jpeg')}}">
                     </a>
                 
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -27,5 +26,4 @@
                     </div>
                   </div>
 
-        </div>
       </nav>
