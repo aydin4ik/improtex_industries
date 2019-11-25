@@ -2,13 +2,22 @@
     box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.16);
 }
 
-.navbar-brand
+.navbar-brand{
     .navbar-item{
-        padding: 0;
         img{
-            max-height: 3.2rem;
+            max-height: 3rem;
         }
     }
+    .navbar-burger{
+        padding: 2.4rem 1.5rem;
+        height: 4.25rem;
+        width: 4.25rem;
+
+        span{
+            height: 2px;
+        }
+    }
+}
 
 .navbar-start{
     margin-right: auto;
@@ -67,11 +76,22 @@
 
 .navbar-dropdown{
     a.navbar-item{
-        padding: 1rem;
+        padding: 1.5rem 1rem;
         text-transform: capitalize;
         font-size: 0.8em;
     }
     a.navbar-item:hover, a.navbar-item.is-subactive{
-        color: $link;
+        color: $accent;
+    }
+}
+
+
+.box{
+    transition: all 0.3s ease;
+
+    &:hover{
+        .link{
+            color: $accent !important;
+        }
     }
 }

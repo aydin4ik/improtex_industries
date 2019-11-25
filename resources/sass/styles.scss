@@ -1,0 +1,195 @@
+.has-left-border-wide{
+    border-left: 15px solid $primary;
+}
+
+.has-left-border-thin{
+    border-left: 3px solid $primary;
+}
+
+.has-bg-striped::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: url('../img/bg-striped.png');
+}
+
+.has-bg-brand::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: url('../img/bg-brand.jpg');
+    opacity: 0.05;
+    background-size: cover;
+}
+
+.has-background-transparent{
+    background: transparent;
+}
+
+.is-absolute{
+    position: absolute;
+    top: -140px;
+}
+
+.is-relative{
+    position: relative;
+}
+
+.is-rounded-small{
+    border-radius: 6px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.is-covered-left::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(to left, rgba(255,0,0,0), $primary);
+    z-index: 20;
+}
+
+.is-covered-right::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), $primary);
+    z-index: 20;
+}
+
+.has-tag{
+    .tag-big{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 2.5rem;
+        margin-top: 2.5rem;
+        z-index: 21;
+        color: white;
+        text-transform: uppercase;
+    }
+    .tag-small{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 1.2rem;
+        background-color: white;
+        color: $primary;
+        padding: 0.2rem 1.2rem;
+        z-index: 21;
+        text-transform: capitalize;
+    }
+}
+
+.link{
+    color: $primary !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none !important;
+    
+    &:hover{
+        color: $accent !important;
+        i{
+            background-color: $accent !important;
+            transform: translateX(15px);
+        }
+    }
+}
+
+.custom-icon-long-arrow{
+    transition: all 0.3s ease;
+    display: inline-block;
+    mask: url(../../public/img/sprites/long-arrow.svg);
+    background-repeat: no-repeat;
+    height: 10px;
+    width: 55px;
+    padding-bottom: 15px;
+    fill: $primary;
+    background-color: $primary;
+}
+
+.has-date{
+    position: relative;
+
+    .date-left{
+        position: absolute;
+        left: -120px;
+        bottom: 65px;
+        transform: rotate(270deg);
+        padding: 0.8rem 3rem;
+        z-index: 22;
+    }
+
+    .date-right{
+        position: absolute;
+        right: -120px;
+        bottom: 65px;
+        transform: rotate(270deg);
+        padding: 0.8rem 3rem;
+        z-index: 22;
+    }
+}
+
+
+img.grayscale{
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.7;
+
+    &:hover{
+        filter: grayscale(0);
+        opacity: 1;
+    }
+}
+
+img.partner{
+    width: auto;
+    height: 60px;
+}
+
+.main-search{
+    width: 100%;
+    input{
+        border: none;
+        border-bottom: 1px solid $primary;
+        background-color: transparent;
+        box-shadow: none;
+        opacity: 0.7;
+        font-size: 3rem !important;
+        text-transform: capitalize;
+        &::placeholder{
+            font-size: 3.5rem;
+            text-transform: capitalize;
+            font-weight: 700;
+            color: $primary;
+            opacity: 0.3;
+        }
+        &:focus{
+            border-bottom: 1px solid $accent;
+            box-shadow: none;
+            opacity: 1;
+        }
+    }
+    .icon{
+        font-size: 2rem !important;
+        cursor: pointer;
+    }
+    
+}
+
+.main-search.is-absolute{
+    position: absolute;
+    top: -55px;
+}

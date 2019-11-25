@@ -13,7 +13,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body>
+    <body class="has-background-white-ter">
         <div id="app">
             @include('layouts/includes/nav/main')
 

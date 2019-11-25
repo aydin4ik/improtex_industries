@@ -9,3 +9,8 @@ $navbar-item-color: $primary;
 
 $navbar-tab-hover-border-bottom-color: transparent;
 $navbar-tab-active-border-bottom-width: 2px;
+
+// box shadows
+$box-link-hover-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.36);
+$box-link-active-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.05);
+$box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.16);

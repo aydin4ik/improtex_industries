@@ -50,7 +50,7 @@
                 $child = $child->translate($options->locale);
             }
 
-            if( url()->current() == url(app()->getLocale() . '/' . $item->url . '/' . $child->url) ){
+            if( url()->current() == url(app()->getLocale() . '/' . $item->url . '/' . $child->url) || url()->current() == url($item->url . '/' . $child->url) ){
                 $listItemClass = 'navbar-item is-tab is-subactive';
             }else{
                 $listItemClass = 'navbar-item is-tab';

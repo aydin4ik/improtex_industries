@@ -20,9 +20,10 @@
                       <nav-search-widget></nav-search-widget>
                       @foreach (config('localized-routes.supported-locales') as $locale)
                           {{-- Have to pass category if isset --}}
-                      <a class="navbar-item" href="{{route(Route::currentRouteName(), ['category' => $category ?? ''], true, $locale)}}">{{strtoupper($locale)}}</a>
+                        @if($locale != app()->getLocale())
+                          <a class="navbar-item" href="{{route(Route::currentRouteName(), ['category' => $category ?? ''], true, $locale)}}">{{strtoupper($locale)}}</a>
+                        @endif
                       @endforeach
-                      
                     </div>
                   </div>
 
