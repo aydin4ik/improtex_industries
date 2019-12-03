@@ -240,15 +240,16 @@
       </div>
     </div>
 
-    <div class="section is-paddingless has-bg-striped p-b-100 is-relative">
+    <div class="section is-paddingless has-bg-striped p-b-200 is-relative">
       <div class="container">
         <div class="field main-search is-absolute">
-            <p class="control has-icons-right">
+            <div class="control has-icons-right">
                 <input type="text" class="input is-large is-radiusless has-text-weight-medium" placeholder="search">
-                <a href="#" class="icon is-right m-t-15">
+                <span href="#" class="icon is-right m-t-15">
                   <i class="fas fa-search"></i>
-                </a>
-            </p>
+                </span>
+                <p class="help is-primary is-family-secondary has-text-weight-bold is-size-6">Did not you find what you were looking for?</p>
+              </div>
         </div>
       </div>
     </div>

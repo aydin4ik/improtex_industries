@@ -193,3 +193,13 @@ img.partner{
     position: absolute;
     top: -55px;
 }
+
+.footer-nav{
+    a{
+        color: $grey-light;
+    }
+
+    a:hover{
+        color: $primary;
+    }
+}

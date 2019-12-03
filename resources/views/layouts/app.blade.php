@@ -8,7 +8,8 @@
 
         @yield('metatags')
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -18,6 +19,9 @@
             @include('layouts/includes/nav/main')
 
             @yield('content')
+
+            @include('layouts/includes/nav/footer')
+
         </div>
 
         {{-- Scripts --}}

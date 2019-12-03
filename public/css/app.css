@@ -1268,7 +1268,7 @@ a.has-text-danger:focus {
 }
 
 .is-family-secondary {
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+  font-family: "Nunito" !important;
 }
 
 .is-family-sans-serif {
@@ -1743,7 +1743,7 @@ a.has-text-danger:focus {
 .box {
   background-color: white;
   border-radius: 6px;
-  box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
   color: #4a4a4a;
   display: block;
   padding: 1.25rem;
@@ -1751,7 +1751,7 @@ a.has-text-danger:focus {
 
 a.box:hover,
 a.box:focus {
-  box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.36);
+  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);
 }
 
 a.box:active {
@@ -24502,5 +24502,13 @@ img.partner {
 .main-search.is-absolute {
   position: absolute;
   top: -55px;
+}
+
+.footer-nav a {
+  color: #b5b5b5;
+}
+
+.footer-nav a:hover {
+  color: #1F8079;
 }
 

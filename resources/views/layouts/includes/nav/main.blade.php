@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                     <a class="navbar-item" href="https://bulma.io">
-                      <img src="{{ asset('img/logo.jpeg')}}">
+                      <img src="{{ asset('img/logo.png')}}">
                     </a>
                 
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,7 +13,7 @@
                 
                   <div class="navbar-menu">
                     <div class="navbar-start">
-                      {!! menu('main', 'bulma_menu') !!}
+                      {!! menu('main', 'layouts.includes.nav.bulma_main') !!}
                     </div>
                 
                     <div class="navbar-end"> 
