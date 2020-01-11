@@ -5,4 +5,5 @@ window.Vue = require('vue');
 import Buefy from 'buefy';
 Vue.use(Buefy);
 
-Vue.component('nav-search-widget', require('./components/navSearchWidget.vue').default);
+
+Vue.component('nav-search-widget', require('./components/menu/navSearchWidget.vue').default);

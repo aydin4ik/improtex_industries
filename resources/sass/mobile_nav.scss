@@ -1,0 +1,115 @@
+.navbar-menu-mobile{
+    position: absolute;
+    top: 77px;
+    right: 0;
+    width: 100vw;
+    border-top: 1px solid $grey-lighter;
+
+    .box{
+        min-height: 100vh;
+
+        .wrapper{
+            overflow-y: scroll;
+            max-height: 600px;
+        }
+
+    }
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  .slide-up-fade-enter-active{
+    transition: all .3s ease;
+  }
+  .slide-up-fade-enter, .slide-up-fade-leave-to {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+
+.mobile-menu{
+    .menu-item.is-active{
+        i{
+            transform: rotate(90deg);
+        }
+    }
+
+    .menu-item{
+        border-bottom: 1px solid $white-ter;
+
+
+        .menu-link{
+            color: $grey-light;
+            font-weight: bold;
+            padding: 0.8rem;
+            padding-left: 1.2rem;
+            display: block;
+            position: relative;
+        }
+
+        .menu-link.is-active{
+            color: $primary;
+        }
+
+        .dropdown-header{
+            position: relative;
+
+            .dropdown-toggle{
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                align-items: center;
+                color: #b5b5b5;
+                display: flex;
+                justify-content: flex-end;
+
+                i{
+                    transform-origin: center;
+                    transition-duration: 86ms;
+                    transition-property: transform;
+                }
+            }
+        }
+
+        .dropdown{
+            list-style: none;
+            display: block;
+            
+
+            a{
+                color: $grey-light;
+                display: block;
+                padding: .5rem;
+                padding-left: 2rem;
+
+            }
+
+            a.is-current{
+                color: $primary;
+            }
+        }
+    }
+
+    .menu-item.has-dropdown{
+        .menu-link.is-active{
+            color: $primary;
+        }
+        .menu-link{
+            color: $grey-light;
+            font-weight: bold;
+            padding: 0.8rem;
+            padding-left: 1.2rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+    }
+}

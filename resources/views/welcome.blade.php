@@ -7,7 +7,7 @@
         <div class="container">
           
           <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
-            <h1 class="title is-uppercase is-size-1 has-text-weight-bold p-t-10 p-b-10 p-l-15">news</h1>
+            <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">news</h1>
           </div>
 
           <div class="tile is-ancestor">
@@ -256,14 +256,3 @@
     
 @endsection
 
-
-@section('scripts')
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                title: '12345'
-            }
-        })
-    </script>
-@endsection

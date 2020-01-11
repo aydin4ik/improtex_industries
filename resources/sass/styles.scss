@@ -41,6 +41,12 @@
     position: relative;
 }
 
+.is-locked{
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+}
+
 .is-rounded-small{
     border-radius: 6px;
     border-bottom-right-radius: 0;
@@ -203,3 +209,4 @@ img.partner{
         color: $primary;
     }
 }
+
