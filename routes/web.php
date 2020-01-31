@@ -19,9 +19,7 @@ Route::localized(function() {
         return view('welcome');
     })->name('home');
     
-    Route::get('/about', function () {
-        return view('welcome');
-    })->name('about');
+    Route::get('/about', 'ShowAbout')->name('about');
     
     Route::get('/news/{category?}', function ($category = null) {
         return view('welcome')->with('category', $category);

@@ -14,9 +14,10 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        @yield('css')
     </head>
-    <body class="has-background-white-ter has-navbar-fixed-top" style="overflow: hidden">
+    <body class="has-background-white-bis has-navbar-fixed-top" style="overflow: hidden">
             <div id="navigation">
                 @include('layouts/includes/nav/main')
             </div>
@@ -29,7 +30,7 @@
 
 
         {{-- Scripts --}}
-        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ mix('js/app.js')}}"></script>
         @yield('scripts')
 
         <script>

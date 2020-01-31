@@ -95,3 +95,15 @@
         }
     }
 }
+
+
+// font-size-addition
+.is-size-huge{
+    font-size: 6.25rem;
+}
+
+// swiper overrides
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: $primary;
+}

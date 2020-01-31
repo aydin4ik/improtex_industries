@@ -53,6 +53,14 @@
     border-bottom-left-radius: 0;
 }
 
+.is-rounded-all{
+    border-radius: 6px;
+}
+
+.is-rotated-90{
+    transform: rotate(-90deg);
+}
+
 .is-covered-left::before{
     content: "";
     position: absolute;
@@ -163,6 +171,13 @@ img.grayscale{
 img.partner{
     width: auto;
     height: 60px;
+    cursor: pointer;
+}
+
+img.partner.is-mobile{
+    width: auto;
+    height: 45px;
+    cursor: pointer;
 }
 
 .main-search{
@@ -210,3 +225,7 @@ img.partner{
     }
 }
 
+.text-rotated-90{
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+}
