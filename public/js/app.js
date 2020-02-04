@@ -1995,6 +1995,312 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      mobileMenuIsOpen: false,
+      searchFieldIsOpen: false,
+      searchFieldwasOpen: false,
+      currentRoute: route().current(),
+      itemsArray: [],
+      initialActiveItem: '',
+      query: '',
+      pressedKey: false,
+      itemClicked: false
+    };
+  },
+  methods: {
+    init: function init() {
+      this.itemsArray = this.menuItems;
+    },
+    setActiveItem: function setActiveItem() {
+      var _this = this;
+
+      this.menuItems.forEach(function (item) {
+        item.children.forEach(function (child) {
+          if (_this.currentUrl == route(_this.currentLocale + '.' + child.route, child.parameters).url()) {
+            child.isActive = true;
+            item.isActive = true;
+          }
+        });
+      });
+    },
+    showOnHover: function showOnHover(index) {
+      var _this2 = this;
+
+      if (!this.mobileMenuIsOpen) {
+        this.itemsArray = this.itemsArray.map(function (item, i) {
+          if (index === i) {
+            item.isActive = true;
+
+            if (_this2.setBackActiveItem) {
+              _this2.searchFieldIsOpen = false;
+            }
+          } else {
+            item.isActive = false;
+          }
+
+          return item;
+        });
+      }
+    },
+    setBackActiveItem: function setBackActiveItem() {
+      var _this3 = this;
+
+      if (!this.itemClicked) {
+        if (!this.mobileMenuIsOpen) {
+          if (this.searchFieldwasOpen) {
+            this.searchFieldIsOpen = true;
+            this.$nextTick(function () {
+              return _this3.$refs.inputField.focus();
+            });
+            this.itemsArray.forEach(function (item) {
+              item.isActive = false;
+            });
+          } else {
+            this.itemsArray.forEach(function (item) {
+              item.isActive = false;
+              _this3.initialActiveItem.isActive = true;
+            });
+          }
+        }
+      }
+    },
+    findInitialActiveItem: function findInitialActiveItem() {
+      this.initialActiveItem = _.find(this.itemsArray, function (item) {
+        return item.isActive == true;
+      });
+    },
+    openSearch: function openSearch(e) {
+      var _this4 = this;
+
+      var el = this.$refs.searchButton;
+      var target = e.target;
+
+      if (el !== target && !el.parentElement.contains(target)) {
+        this.searchFieldIsOpen = false;
+        this.searchFieldwasOpen = false;
+        this.$nextTick(function () {
+          return _this4.$refs.inputField.blur();
+        });
+        this.setBackActiveItem();
+      } else {
+        this.searchFieldIsOpen = true;
+        this.searchFieldwasOpen = true;
+        this.$nextTick(function () {
+          return _this4.$refs.inputField.focus();
+        });
+        this.itemsArray.forEach(function (item) {
+          item.isActive = false;
+        });
+      }
+    },
+    toggleMobileMenu: function toggleMobileMenu() {
+      this.mobileMenuIsOpen = !this.mobileMenuIsOpen;
+
+      if (!this.mobileMenuIsOpen) {
+        this.setBackActiveItem();
+      }
+    },
+    toggleMobileDropdown: function toggleMobileDropdown(index) {
+      this.itemsArray = this.itemsArray.map(function (item, i) {
+        if (index === i) {
+          item.isActive = !item.isActive;
+        } else {
+          item.isActive = false;
+        }
+
+        return item;
+      });
+    },
+    submitForm: function submitForm() {
+      window.location = "/search?q=".concat(this.query);
+    }
+  },
+  computed: {
+    menuItems: function menuItems() {
+      var _this5 = this;
+
+      this.items.forEach(function (item) {
+        if (item.route == null) {
+          item.route = item.url;
+        }
+
+        if (item.children.length > 0) {
+          item.children.forEach(function (child) {
+            if (child.route == null) {
+              child.route = child.url;
+            }
+          });
+        }
+
+        if (_this5.currentRoute == _this5.currentLocale + '.' + item.route) {
+          item.isActive = true;
+        } else {
+          item.isActive = false;
+        }
+      });
+      return this.items;
+    },
+    activeLocales: function activeLocales() {
+      var _this6 = this;
+
+      var locales = this.locales;
+
+      _.remove(locales, function (locale) {
+        return locale['name'] == _this6.currentLocale;
+      });
+
+      return locales;
+    }
+  },
+  props: {
+    logo: String,
+    items: Array,
+    currentUrl: String,
+    currentLocale: String,
+    locales: Array
+  },
+  created: function created() {
+    this.init();
+    this.setActiveItem();
+    this.findInitialActiveItem();
+    document.addEventListener('click', this.openSearch);
+  },
+  destroyed: function destroyed() {
+    document.removeEventListener('click', this.openSearch);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/navSearchWidget.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/menu/navSearchWidget.vue?vue&type=script&lang=js& ***!
@@ -32853,6 +33159,836 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/qs/lib/formats.js":
+/*!****************************************!*\
+  !*** ./node_modules/qs/lib/formats.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var replace = String.prototype.replace;
+var percentTwenties = /%20/g;
+
+module.exports = {
+    'default': 'RFC3986',
+    formatters: {
+        RFC1738: function (value) {
+            return replace.call(value, percentTwenties, '+');
+        },
+        RFC3986: function (value) {
+            return value;
+        }
+    },
+    RFC1738: 'RFC1738',
+    RFC3986: 'RFC3986'
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var stringify = __webpack_require__(/*! ./stringify */ "./node_modules/qs/lib/stringify.js");
+var parse = __webpack_require__(/*! ./parse */ "./node_modules/qs/lib/parse.js");
+var formats = __webpack_require__(/*! ./formats */ "./node_modules/qs/lib/formats.js");
+
+module.exports = {
+    formats: formats,
+    parse: parse,
+    stringify: stringify
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/parse.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/parse.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/qs/lib/utils.js");
+
+var has = Object.prototype.hasOwnProperty;
+
+var defaults = {
+    allowDots: false,
+    allowPrototypes: false,
+    arrayLimit: 20,
+    charset: 'utf-8',
+    charsetSentinel: false,
+    comma: false,
+    decoder: utils.decode,
+    delimiter: '&',
+    depth: 5,
+    ignoreQueryPrefix: false,
+    interpretNumericEntities: false,
+    parameterLimit: 1000,
+    parseArrays: true,
+    plainObjects: false,
+    strictNullHandling: false
+};
+
+var interpretNumericEntities = function (str) {
+    return str.replace(/&#(\d+);/g, function ($0, numberStr) {
+        return String.fromCharCode(parseInt(numberStr, 10));
+    });
+};
+
+// This is what browsers will submit when the ✓ character occurs in an
+// application/x-www-form-urlencoded body and the encoding of the page containing
+// the form is iso-8859-1, or when the submitted form has an accept-charset
+// attribute of iso-8859-1. Presumably also with other charsets that do not contain
+// the ✓ character, such as us-ascii.
+var isoSentinel = 'utf8=%26%2310003%3B'; // encodeURIComponent('&#10003;')
+
+// These are the percent-encoded utf-8 octets representing a checkmark, indicating that the request actually is utf-8 encoded.
+var charsetSentinel = 'utf8=%E2%9C%93'; // encodeURIComponent('✓')
+
+var parseValues = function parseQueryStringValues(str, options) {
+    var obj = {};
+    var cleanStr = options.ignoreQueryPrefix ? str.replace(/^\?/, '') : str;
+    var limit = options.parameterLimit === Infinity ? undefined : options.parameterLimit;
+    var parts = cleanStr.split(options.delimiter, limit);
+    var skipIndex = -1; // Keep track of where the utf8 sentinel was found
+    var i;
+
+    var charset = options.charset;
+    if (options.charsetSentinel) {
+        for (i = 0; i < parts.length; ++i) {
+            if (parts[i].indexOf('utf8=') === 0) {
+                if (parts[i] === charsetSentinel) {
+                    charset = 'utf-8';
+                } else if (parts[i] === isoSentinel) {
+                    charset = 'iso-8859-1';
+                }
+                skipIndex = i;
+                i = parts.length; // The eslint settings do not allow break;
+            }
+        }
+    }
+
+    for (i = 0; i < parts.length; ++i) {
+        if (i === skipIndex) {
+            continue;
+        }
+        var part = parts[i];
+
+        var bracketEqualsPos = part.indexOf(']=');
+        var pos = bracketEqualsPos === -1 ? part.indexOf('=') : bracketEqualsPos + 1;
+
+        var key, val;
+        if (pos === -1) {
+            key = options.decoder(part, defaults.decoder, charset);
+            val = options.strictNullHandling ? null : '';
+        } else {
+            key = options.decoder(part.slice(0, pos), defaults.decoder, charset);
+            val = options.decoder(part.slice(pos + 1), defaults.decoder, charset);
+        }
+
+        if (val && options.interpretNumericEntities && charset === 'iso-8859-1') {
+            val = interpretNumericEntities(val);
+        }
+
+        if (val && options.comma && val.indexOf(',') > -1) {
+            val = val.split(',');
+        }
+
+        if (has.call(obj, key)) {
+            obj[key] = utils.combine(obj[key], val);
+        } else {
+            obj[key] = val;
+        }
+    }
+
+    return obj;
+};
+
+var parseObject = function (chain, val, options) {
+    var leaf = val;
+
+    for (var i = chain.length - 1; i >= 0; --i) {
+        var obj;
+        var root = chain[i];
+
+        if (root === '[]' && options.parseArrays) {
+            obj = [].concat(leaf);
+        } else {
+            obj = options.plainObjects ? Object.create(null) : {};
+            var cleanRoot = root.charAt(0) === '[' && root.charAt(root.length - 1) === ']' ? root.slice(1, -1) : root;
+            var index = parseInt(cleanRoot, 10);
+            if (!options.parseArrays && cleanRoot === '') {
+                obj = { 0: leaf };
+            } else if (
+                !isNaN(index)
+                && root !== cleanRoot
+                && String(index) === cleanRoot
+                && index >= 0
+                && (options.parseArrays && index <= options.arrayLimit)
+            ) {
+                obj = [];
+                obj[index] = leaf;
+            } else {
+                obj[cleanRoot] = leaf;
+            }
+        }
+
+        leaf = obj;
+    }
+
+    return leaf;
+};
+
+var parseKeys = function parseQueryStringKeys(givenKey, val, options) {
+    if (!givenKey) {
+        return;
+    }
+
+    // Transform dot notation to bracket notation
+    var key = options.allowDots ? givenKey.replace(/\.([^.[]+)/g, '[$1]') : givenKey;
+
+    // The regex chunks
+
+    var brackets = /(\[[^[\]]*])/;
+    var child = /(\[[^[\]]*])/g;
+
+    // Get the parent
+
+    var segment = brackets.exec(key);
+    var parent = segment ? key.slice(0, segment.index) : key;
+
+    // Stash the parent if it exists
+
+    var keys = [];
+    if (parent) {
+        // If we aren't using plain objects, optionally prefix keys that would overwrite object prototype properties
+        if (!options.plainObjects && has.call(Object.prototype, parent)) {
+            if (!options.allowPrototypes) {
+                return;
+            }
+        }
+
+        keys.push(parent);
+    }
+
+    // Loop through children appending to the array until we hit depth
+
+    var i = 0;
+    while ((segment = child.exec(key)) !== null && i < options.depth) {
+        i += 1;
+        if (!options.plainObjects && has.call(Object.prototype, segment[1].slice(1, -1))) {
+            if (!options.allowPrototypes) {
+                return;
+            }
+        }
+        keys.push(segment[1]);
+    }
+
+    // If there's a remainder, just add whatever is left
+
+    if (segment) {
+        keys.push('[' + key.slice(segment.index) + ']');
+    }
+
+    return parseObject(keys, val, options);
+};
+
+var normalizeParseOptions = function normalizeParseOptions(opts) {
+    if (!opts) {
+        return defaults;
+    }
+
+    if (opts.decoder !== null && opts.decoder !== undefined && typeof opts.decoder !== 'function') {
+        throw new TypeError('Decoder has to be a function.');
+    }
+
+    if (typeof opts.charset !== 'undefined' && opts.charset !== 'utf-8' && opts.charset !== 'iso-8859-1') {
+        throw new Error('The charset option must be either utf-8, iso-8859-1, or undefined');
+    }
+    var charset = typeof opts.charset === 'undefined' ? defaults.charset : opts.charset;
+
+    return {
+        allowDots: typeof opts.allowDots === 'undefined' ? defaults.allowDots : !!opts.allowDots,
+        allowPrototypes: typeof opts.allowPrototypes === 'boolean' ? opts.allowPrototypes : defaults.allowPrototypes,
+        arrayLimit: typeof opts.arrayLimit === 'number' ? opts.arrayLimit : defaults.arrayLimit,
+        charset: charset,
+        charsetSentinel: typeof opts.charsetSentinel === 'boolean' ? opts.charsetSentinel : defaults.charsetSentinel,
+        comma: typeof opts.comma === 'boolean' ? opts.comma : defaults.comma,
+        decoder: typeof opts.decoder === 'function' ? opts.decoder : defaults.decoder,
+        delimiter: typeof opts.delimiter === 'string' || utils.isRegExp(opts.delimiter) ? opts.delimiter : defaults.delimiter,
+        depth: typeof opts.depth === 'number' ? opts.depth : defaults.depth,
+        ignoreQueryPrefix: opts.ignoreQueryPrefix === true,
+        interpretNumericEntities: typeof opts.interpretNumericEntities === 'boolean' ? opts.interpretNumericEntities : defaults.interpretNumericEntities,
+        parameterLimit: typeof opts.parameterLimit === 'number' ? opts.parameterLimit : defaults.parameterLimit,
+        parseArrays: opts.parseArrays !== false,
+        plainObjects: typeof opts.plainObjects === 'boolean' ? opts.plainObjects : defaults.plainObjects,
+        strictNullHandling: typeof opts.strictNullHandling === 'boolean' ? opts.strictNullHandling : defaults.strictNullHandling
+    };
+};
+
+module.exports = function (str, opts) {
+    var options = normalizeParseOptions(opts);
+
+    if (str === '' || str === null || typeof str === 'undefined') {
+        return options.plainObjects ? Object.create(null) : {};
+    }
+
+    var tempObj = typeof str === 'string' ? parseValues(str, options) : str;
+    var obj = options.plainObjects ? Object.create(null) : {};
+
+    // Iterate over the keys and setup the new object
+
+    var keys = Object.keys(tempObj);
+    for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+        var newObj = parseKeys(key, tempObj[key], options);
+        obj = utils.merge(obj, newObj, options);
+    }
+
+    return utils.compact(obj);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/stringify.js":
+/*!******************************************!*\
+  !*** ./node_modules/qs/lib/stringify.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/qs/lib/utils.js");
+var formats = __webpack_require__(/*! ./formats */ "./node_modules/qs/lib/formats.js");
+var has = Object.prototype.hasOwnProperty;
+
+var arrayPrefixGenerators = {
+    brackets: function brackets(prefix) { // eslint-disable-line func-name-matching
+        return prefix + '[]';
+    },
+    comma: 'comma',
+    indices: function indices(prefix, key) { // eslint-disable-line func-name-matching
+        return prefix + '[' + key + ']';
+    },
+    repeat: function repeat(prefix) { // eslint-disable-line func-name-matching
+        return prefix;
+    }
+};
+
+var isArray = Array.isArray;
+var push = Array.prototype.push;
+var pushToArray = function (arr, valueOrArray) {
+    push.apply(arr, isArray(valueOrArray) ? valueOrArray : [valueOrArray]);
+};
+
+var toISO = Date.prototype.toISOString;
+
+var defaults = {
+    addQueryPrefix: false,
+    allowDots: false,
+    charset: 'utf-8',
+    charsetSentinel: false,
+    delimiter: '&',
+    encode: true,
+    encoder: utils.encode,
+    encodeValuesOnly: false,
+    formatter: formats.formatters[formats['default']],
+    // deprecated
+    indices: false,
+    serializeDate: function serializeDate(date) { // eslint-disable-line func-name-matching
+        return toISO.call(date);
+    },
+    skipNulls: false,
+    strictNullHandling: false
+};
+
+var stringify = function stringify( // eslint-disable-line func-name-matching
+    object,
+    prefix,
+    generateArrayPrefix,
+    strictNullHandling,
+    skipNulls,
+    encoder,
+    filter,
+    sort,
+    allowDots,
+    serializeDate,
+    formatter,
+    encodeValuesOnly,
+    charset
+) {
+    var obj = object;
+    if (typeof filter === 'function') {
+        obj = filter(prefix, obj);
+    } else if (obj instanceof Date) {
+        obj = serializeDate(obj);
+    } else if (generateArrayPrefix === 'comma' && isArray(obj)) {
+        obj = obj.join(',');
+    }
+
+    if (obj === null) {
+        if (strictNullHandling) {
+            return encoder && !encodeValuesOnly ? encoder(prefix, defaults.encoder, charset) : prefix;
+        }
+
+        obj = '';
+    }
+
+    if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || utils.isBuffer(obj)) {
+        if (encoder) {
+            var keyValue = encodeValuesOnly ? prefix : encoder(prefix, defaults.encoder, charset);
+            return [formatter(keyValue) + '=' + formatter(encoder(obj, defaults.encoder, charset))];
+        }
+        return [formatter(prefix) + '=' + formatter(String(obj))];
+    }
+
+    var values = [];
+
+    if (typeof obj === 'undefined') {
+        return values;
+    }
+
+    var objKeys;
+    if (isArray(filter)) {
+        objKeys = filter;
+    } else {
+        var keys = Object.keys(obj);
+        objKeys = sort ? keys.sort(sort) : keys;
+    }
+
+    for (var i = 0; i < objKeys.length; ++i) {
+        var key = objKeys[i];
+
+        if (skipNulls && obj[key] === null) {
+            continue;
+        }
+
+        if (isArray(obj)) {
+            pushToArray(values, stringify(
+                obj[key],
+                typeof generateArrayPrefix === 'function' ? generateArrayPrefix(prefix, key) : prefix,
+                generateArrayPrefix,
+                strictNullHandling,
+                skipNulls,
+                encoder,
+                filter,
+                sort,
+                allowDots,
+                serializeDate,
+                formatter,
+                encodeValuesOnly,
+                charset
+            ));
+        } else {
+            pushToArray(values, stringify(
+                obj[key],
+                prefix + (allowDots ? '.' + key : '[' + key + ']'),
+                generateArrayPrefix,
+                strictNullHandling,
+                skipNulls,
+                encoder,
+                filter,
+                sort,
+                allowDots,
+                serializeDate,
+                formatter,
+                encodeValuesOnly,
+                charset
+            ));
+        }
+    }
+
+    return values;
+};
+
+var normalizeStringifyOptions = function normalizeStringifyOptions(opts) {
+    if (!opts) {
+        return defaults;
+    }
+
+    if (opts.encoder !== null && opts.encoder !== undefined && typeof opts.encoder !== 'function') {
+        throw new TypeError('Encoder has to be a function.');
+    }
+
+    var charset = opts.charset || defaults.charset;
+    if (typeof opts.charset !== 'undefined' && opts.charset !== 'utf-8' && opts.charset !== 'iso-8859-1') {
+        throw new TypeError('The charset option must be either utf-8, iso-8859-1, or undefined');
+    }
+
+    var format = formats['default'];
+    if (typeof opts.format !== 'undefined') {
+        if (!has.call(formats.formatters, opts.format)) {
+            throw new TypeError('Unknown format option provided.');
+        }
+        format = opts.format;
+    }
+    var formatter = formats.formatters[format];
+
+    var filter = defaults.filter;
+    if (typeof opts.filter === 'function' || isArray(opts.filter)) {
+        filter = opts.filter;
+    }
+
+    return {
+        addQueryPrefix: typeof opts.addQueryPrefix === 'boolean' ? opts.addQueryPrefix : defaults.addQueryPrefix,
+        allowDots: typeof opts.allowDots === 'undefined' ? defaults.allowDots : !!opts.allowDots,
+        charset: charset,
+        charsetSentinel: typeof opts.charsetSentinel === 'boolean' ? opts.charsetSentinel : defaults.charsetSentinel,
+        delimiter: typeof opts.delimiter === 'undefined' ? defaults.delimiter : opts.delimiter,
+        encode: typeof opts.encode === 'boolean' ? opts.encode : defaults.encode,
+        encoder: typeof opts.encoder === 'function' ? opts.encoder : defaults.encoder,
+        encodeValuesOnly: typeof opts.encodeValuesOnly === 'boolean' ? opts.encodeValuesOnly : defaults.encodeValuesOnly,
+        filter: filter,
+        formatter: formatter,
+        serializeDate: typeof opts.serializeDate === 'function' ? opts.serializeDate : defaults.serializeDate,
+        skipNulls: typeof opts.skipNulls === 'boolean' ? opts.skipNulls : defaults.skipNulls,
+        sort: typeof opts.sort === 'function' ? opts.sort : null,
+        strictNullHandling: typeof opts.strictNullHandling === 'boolean' ? opts.strictNullHandling : defaults.strictNullHandling
+    };
+};
+
+module.exports = function (object, opts) {
+    var obj = object;
+    var options = normalizeStringifyOptions(opts);
+
+    var objKeys;
+    var filter;
+
+    if (typeof options.filter === 'function') {
+        filter = options.filter;
+        obj = filter('', obj);
+    } else if (isArray(options.filter)) {
+        filter = options.filter;
+        objKeys = filter;
+    }
+
+    var keys = [];
+
+    if (typeof obj !== 'object' || obj === null) {
+        return '';
+    }
+
+    var arrayFormat;
+    if (opts && opts.arrayFormat in arrayPrefixGenerators) {
+        arrayFormat = opts.arrayFormat;
+    } else if (opts && 'indices' in opts) {
+        arrayFormat = opts.indices ? 'indices' : 'repeat';
+    } else {
+        arrayFormat = 'indices';
+    }
+
+    var generateArrayPrefix = arrayPrefixGenerators[arrayFormat];
+
+    if (!objKeys) {
+        objKeys = Object.keys(obj);
+    }
+
+    if (options.sort) {
+        objKeys.sort(options.sort);
+    }
+
+    for (var i = 0; i < objKeys.length; ++i) {
+        var key = objKeys[i];
+
+        if (options.skipNulls && obj[key] === null) {
+            continue;
+        }
+        pushToArray(keys, stringify(
+            obj[key],
+            key,
+            generateArrayPrefix,
+            options.strictNullHandling,
+            options.skipNulls,
+            options.encode ? options.encoder : null,
+            options.filter,
+            options.sort,
+            options.allowDots,
+            options.serializeDate,
+            options.formatter,
+            options.encodeValuesOnly,
+            options.charset
+        ));
+    }
+
+    var joined = keys.join(options.delimiter);
+    var prefix = options.addQueryPrefix === true ? '?' : '';
+
+    if (options.charsetSentinel) {
+        if (options.charset === 'iso-8859-1') {
+            // encodeURIComponent('&#10003;'), the "numeric entity" representation of a checkmark
+            prefix += 'utf8=%26%2310003%3B&';
+        } else {
+            // encodeURIComponent('✓')
+            prefix += 'utf8=%E2%9C%93&';
+        }
+    }
+
+    return joined.length > 0 ? prefix + joined : '';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/utils.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/utils.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var has = Object.prototype.hasOwnProperty;
+var isArray = Array.isArray;
+
+var hexTable = (function () {
+    var array = [];
+    for (var i = 0; i < 256; ++i) {
+        array.push('%' + ((i < 16 ? '0' : '') + i.toString(16)).toUpperCase());
+    }
+
+    return array;
+}());
+
+var compactQueue = function compactQueue(queue) {
+    while (queue.length > 1) {
+        var item = queue.pop();
+        var obj = item.obj[item.prop];
+
+        if (isArray(obj)) {
+            var compacted = [];
+
+            for (var j = 0; j < obj.length; ++j) {
+                if (typeof obj[j] !== 'undefined') {
+                    compacted.push(obj[j]);
+                }
+            }
+
+            item.obj[item.prop] = compacted;
+        }
+    }
+};
+
+var arrayToObject = function arrayToObject(source, options) {
+    var obj = options && options.plainObjects ? Object.create(null) : {};
+    for (var i = 0; i < source.length; ++i) {
+        if (typeof source[i] !== 'undefined') {
+            obj[i] = source[i];
+        }
+    }
+
+    return obj;
+};
+
+var merge = function merge(target, source, options) {
+    if (!source) {
+        return target;
+    }
+
+    if (typeof source !== 'object') {
+        if (isArray(target)) {
+            target.push(source);
+        } else if (target && typeof target === 'object') {
+            if ((options && (options.plainObjects || options.allowPrototypes)) || !has.call(Object.prototype, source)) {
+                target[source] = true;
+            }
+        } else {
+            return [target, source];
+        }
+
+        return target;
+    }
+
+    if (!target || typeof target !== 'object') {
+        return [target].concat(source);
+    }
+
+    var mergeTarget = target;
+    if (isArray(target) && !isArray(source)) {
+        mergeTarget = arrayToObject(target, options);
+    }
+
+    if (isArray(target) && isArray(source)) {
+        source.forEach(function (item, i) {
+            if (has.call(target, i)) {
+                var targetItem = target[i];
+                if (targetItem && typeof targetItem === 'object' && item && typeof item === 'object') {
+                    target[i] = merge(targetItem, item, options);
+                } else {
+                    target.push(item);
+                }
+            } else {
+                target[i] = item;
+            }
+        });
+        return target;
+    }
+
+    return Object.keys(source).reduce(function (acc, key) {
+        var value = source[key];
+
+        if (has.call(acc, key)) {
+            acc[key] = merge(acc[key], value, options);
+        } else {
+            acc[key] = value;
+        }
+        return acc;
+    }, mergeTarget);
+};
+
+var assign = function assignSingleSource(target, source) {
+    return Object.keys(source).reduce(function (acc, key) {
+        acc[key] = source[key];
+        return acc;
+    }, target);
+};
+
+var decode = function (str, decoder, charset) {
+    var strWithoutPlus = str.replace(/\+/g, ' ');
+    if (charset === 'iso-8859-1') {
+        // unescape never throws, no try...catch needed:
+        return strWithoutPlus.replace(/%[0-9a-f]{2}/gi, unescape);
+    }
+    // utf-8
+    try {
+        return decodeURIComponent(strWithoutPlus);
+    } catch (e) {
+        return strWithoutPlus;
+    }
+};
+
+var encode = function encode(str, defaultEncoder, charset) {
+    // This code was originally written by Brian White (mscdex) for the io.js core querystring library.
+    // It has been adapted here for stricter adherence to RFC 3986
+    if (str.length === 0) {
+        return str;
+    }
+
+    var string = typeof str === 'string' ? str : String(str);
+
+    if (charset === 'iso-8859-1') {
+        return escape(string).replace(/%u[0-9a-f]{4}/gi, function ($0) {
+            return '%26%23' + parseInt($0.slice(2), 16) + '%3B';
+        });
+    }
+
+    var out = '';
+    for (var i = 0; i < string.length; ++i) {
+        var c = string.charCodeAt(i);
+
+        if (
+            c === 0x2D // -
+            || c === 0x2E // .
+            || c === 0x5F // _
+            || c === 0x7E // ~
+            || (c >= 0x30 && c <= 0x39) // 0-9
+            || (c >= 0x41 && c <= 0x5A) // a-z
+            || (c >= 0x61 && c <= 0x7A) // A-Z
+        ) {
+            out += string.charAt(i);
+            continue;
+        }
+
+        if (c < 0x80) {
+            out = out + hexTable[c];
+            continue;
+        }
+
+        if (c < 0x800) {
+            out = out + (hexTable[0xC0 | (c >> 6)] + hexTable[0x80 | (c & 0x3F)]);
+            continue;
+        }
+
+        if (c < 0xD800 || c >= 0xE000) {
+            out = out + (hexTable[0xE0 | (c >> 12)] + hexTable[0x80 | ((c >> 6) & 0x3F)] + hexTable[0x80 | (c & 0x3F)]);
+            continue;
+        }
+
+        i += 1;
+        c = 0x10000 + (((c & 0x3FF) << 10) | (string.charCodeAt(i) & 0x3FF));
+        out += hexTable[0xF0 | (c >> 18)]
+            + hexTable[0x80 | ((c >> 12) & 0x3F)]
+            + hexTable[0x80 | ((c >> 6) & 0x3F)]
+            + hexTable[0x80 | (c & 0x3F)];
+    }
+
+    return out;
+};
+
+var compact = function compact(value) {
+    var queue = [{ obj: { o: value }, prop: 'o' }];
+    var refs = [];
+
+    for (var i = 0; i < queue.length; ++i) {
+        var item = queue[i];
+        var obj = item.obj[item.prop];
+
+        var keys = Object.keys(obj);
+        for (var j = 0; j < keys.length; ++j) {
+            var key = keys[j];
+            var val = obj[key];
+            if (typeof val === 'object' && val !== null && refs.indexOf(val) === -1) {
+                queue.push({ obj: obj, prop: key });
+                refs.push(val);
+            }
+        }
+    }
+
+    compactQueue(queue);
+
+    return value;
+};
+
+var isRegExp = function isRegExp(obj) {
+    return Object.prototype.toString.call(obj) === '[object RegExp]';
+};
+
+var isBuffer = function isBuffer(obj) {
+    if (!obj || typeof obj !== 'object') {
+        return false;
+    }
+
+    return !!(obj.constructor && obj.constructor.isBuffer && obj.constructor.isBuffer(obj));
+};
+
+var combine = function combine(a, b) {
+    return [].concat(a, b);
+};
+
+module.exports = {
+    arrayToObject: arrayToObject,
+    assign: assign,
+    combine: combine,
+    compact: compact,
+    decode: decode,
+    encode: encode,
+    isBuffer: isBuffer,
+    isRegExp: isRegExp,
+    merge: merge
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -42046,6 +43182,488 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", [_vm._v(_vm._s(_vm.value))])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    {
+      staticClass: "navbar is-fixed-top",
+      attrs: { role: "navigation", "aria-label": "main navigation" }
+    },
+    [
+      _c("div", { staticClass: "navbar-brand" }, [
+        _c("a", { staticClass: "navbar-item", attrs: { href: "/" } }, [
+          _c("img", { attrs: { src: _vm.logo } })
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            ref: "burgerButton",
+            staticClass: "navbar-burger burger",
+            class: _vm.mobileMenuIsOpen ? "is-active" : false,
+            attrs: {
+              role: "button",
+              "aria-label": "menu",
+              "aria-expanded": "false",
+              "data-target": "navbarBasicExample"
+            },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.toggleMobileMenu($event)
+              }
+            }
+          },
+          [
+            _c("span", { attrs: { "aria-hidden": "true" } }),
+            _vm._v(" "),
+            _c("span", { attrs: { "aria-hidden": "true" } }),
+            _vm._v(" "),
+            _c("span", { attrs: { "aria-hidden": "true" } })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "navbar-menu" }, [
+        _c(
+          "div",
+          { staticClass: "navbar-start" },
+          _vm._l(_vm.itemsArray, function(item, index) {
+            return _c(
+              "div",
+              { key: index, staticStyle: { display: "inline-flex" } },
+              [
+                !item.children.length > 0
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "navbar-item is-tab",
+                        class: item.isActive ? "is-active" : "",
+                        attrs: {
+                          href: _vm.route(_vm.currentLocale + "." + item.route)
+                        },
+                        on: {
+                          mouseover: function($event) {
+                            return _vm.showOnHover(index)
+                          },
+                          mouseleave: function($event) {
+                            return _vm.setBackActiveItem($event)
+                          },
+                          click: function($event) {
+                            _vm.itemClicked = true
+                          }
+                        }
+                      },
+                      [_vm._v(" " + _vm._s(item.title))]
+                    )
+                  : _c(
+                      "div",
+                      {
+                        staticClass:
+                          "navbar-item has-dropdown is-hoverable is-mega is-tab",
+                        class: item.isActive ? "is-active" : "",
+                        on: {
+                          mouseover: function($event) {
+                            return _vm.showOnHover(index)
+                          },
+                          mouseleave: function($event) {
+                            return _vm.setBackActiveItem($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "navbar-link is-arrowless",
+                            attrs: {
+                              href: _vm.route(
+                                _vm.currentLocale + "." + item.route
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.itemClicked = true
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.title))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "navbar-dropdown" }, [
+                          _c("div", { staticClass: "container" }, [
+                            _c("div", { staticClass: "navbar-menu" }, [
+                              _c(
+                                "div",
+                                { staticClass: "navbar-start" },
+                                _vm._l(item.children, function(child, index) {
+                                  return _c(
+                                    "a",
+                                    {
+                                      key: index,
+                                      staticClass: "navbar-item is-tab",
+                                      class: child.isActive
+                                        ? "is-subactive"
+                                        : "",
+                                      attrs: {
+                                        href: _vm.route(
+                                          _vm.currentLocale + "." + child.route,
+                                          child.parameters
+                                        )
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.itemClicked = true
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(child.title))]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "navbar-end" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "navbar-item has-dropdown is-mega",
+                class: _vm.searchFieldIsOpen ? "is-active" : false
+              },
+              [
+                _c("a", { ref: "searchButton", staticClass: "navbar-item" }, [
+                  _c("i", { staticClass: "fas fa-search fa-lg" })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "navbar-dropdown",
+                    staticStyle: { padding: "14px" }
+                  },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.submitForm($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "columns" },
+                            [
+                              _c("div", { staticClass: "column is-11" }, [
+                                _c("div", { staticClass: "field" }, [
+                                  _c("div", { staticClass: "control" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.query,
+                                          expression: "query"
+                                        }
+                                      ],
+                                      ref: "inputField",
+                                      staticClass:
+                                        "input has-text-centered is-static is-capitalized has-text-weight-medium",
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Type your text here"
+                                      },
+                                      domProps: { value: _vm.query },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.query = $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "transition",
+                                { attrs: { name: "slide-fade" } },
+                                [
+                                  _vm.query.length > 0
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "column is-narrow" },
+                                        [
+                                          _c("div", { staticClass: "field" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "control" },
+                                              [
+                                                _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-white is-uppercase",
+                                                    attrs: { type: "submit" }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      { staticClass: "icon" },
+                                                      [
+                                                        _c("i", {
+                                                          staticClass:
+                                                            "fas fa-search fa-lg"
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.activeLocales, function(locale, index) {
+              return _c(
+                "a",
+                {
+                  key: index,
+                  staticClass: "navbar-item is-uppercase",
+                  attrs: { href: locale.route }
+                },
+                [
+                  _vm._v(
+                    "\r\n                " +
+                      _vm._s(locale.name) +
+                      "\r\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.mobileMenuIsOpen
+          ? _c("div", { staticClass: "navbar-menu-mobile" }, [
+              _c("div", { staticClass: "box is-radiusless is-paddingless" }, [
+                _c("div", { staticClass: "wrapper" }, [
+                  _c(
+                    "div",
+                    { staticClass: "search p-t-10 p-b-10 p-l-10 p-r-10" },
+                    [
+                      _c("input", {
+                        staticClass: "input is-medium",
+                        attrs: { type: "text", placeholder: "Search" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "aside",
+                    { staticClass: "mobile-menu" },
+                    [
+                      _vm._l(_vm.itemsArray, function(item, i) {
+                        return _c("div", { key: i }, [
+                          !item.children.length > 0
+                            ? _c("div", { staticClass: "menu-item" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "menu-link",
+                                    class: item.isActive ? "is-active" : "",
+                                    attrs: {
+                                      href: _vm.route(
+                                        _vm.currentLocale + "." + item.route
+                                      )
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(item.title))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticClass: "menu-item has-dropdown",
+                                  class: item.isActive ? "is-active" : ""
+                                },
+                                [
+                                  _c(
+                                    "header",
+                                    { staticClass: "dropdown-header" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "dropdown-toggle p-r-15",
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.toggleMobileDropdown(i)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-angle-right"
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "menu-link",
+                                          class: item.isActive
+                                            ? "is-active"
+                                            : "",
+                                          attrs: { href: item.url }
+                                        },
+                                        [_vm._v(_vm._s(item.title))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "transition",
+                                    { attrs: { name: "slide-up-fade" } },
+                                    [
+                                      item.isActive
+                                        ? _c(
+                                            "ul",
+                                            { staticClass: "dropdown" },
+                                            _vm._l(item.children, function(
+                                              child,
+                                              i
+                                            ) {
+                                              return _c("li", { key: i }, [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "is-capitalized",
+                                                    class: child.isActive
+                                                      ? "is-current"
+                                                      : "",
+                                                    attrs: {
+                                                      href: _vm.route(
+                                                        _vm.currentLocale +
+                                                          "." +
+                                                          child.route,
+                                                        child.parameters
+                                                      )
+                                                    }
+                                                  },
+                                                  [_vm._v(_vm._s(child.title))]
+                                                )
+                                              ])
+                                            }),
+                                            0
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "tabs is-fullwidth p-t-5 p-b-5 has-text-weight-bold"
+                        },
+                        [
+                          _c(
+                            "ul",
+                            _vm._l(_vm.locales, function(locale, index) {
+                              return _c("li", { key: index }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "has-text-grey-light is-uppercase",
+                                    attrs: { href: locale.route }
+                                  },
+                                  [_vm._v(_vm._s(locale.name))]
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54575,16 +56193,28 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
-/* harmony import */ var vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-awesome-swiper */ "./node_modules/vue-awesome-swiper/dist/vue-awesome-swiper.js");
-/* harmony import */ var vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var ziggy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ziggy */ "./vendor/tightenco/ziggy/src/js/route.js");
+/* harmony import */ var _ziggy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ziggy */ "./resources/js/ziggy.js");
+/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
+/* harmony import */ var vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-awesome-swiper */ "./node_modules/vue-awesome-swiper/dist/vue-awesome-swiper.js");
+/* harmony import */ var vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_3__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-Vue.use(buefy__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-Vue.use(vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.mixin({
+  methods: {
+    route: function route(name, params, absolute) {
+      return Object(ziggy__WEBPACK_IMPORTED_MODULE_0__["default"])(name, params, absolute, _ziggy__WEBPACK_IMPORTED_MODULE_1__["Ziggy"]);
+    }
+  }
+});
+
+Vue.use(buefy__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+Vue.use(vue_awesome_swiper__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.component('main-menu', __webpack_require__(/*! ./components/menu/mainMenu.vue */ "./resources/js/components/menu/mainMenu.vue")["default"]);
 Vue.component('nav-search-widget', __webpack_require__(/*! ./components/menu/navSearchWidget.vue */ "./resources/js/components/menu/navSearchWidget.vue")["default"]);
 Vue.component('modal-widget', __webpack_require__(/*! ./components/modalWidget.vue */ "./resources/js/components/modalWidget.vue")["default"]);
 Vue.component('counter-widget', __webpack_require__(/*! ./components/counterWidget.vue */ "./resources/js/components/counterWidget.vue")["default"]);
@@ -54760,6 +56390,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_counterWidget_vue_vue_type_template_id_198d49b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_counterWidget_vue_vue_type_template_id_198d49b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/menu/mainMenu.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/menu/mainMenu.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainMenu.vue?vue&type=template&id=7628d92d&scoped=true& */ "./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true&");
+/* harmony import */ var _mainMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainMenu.vue?vue&type=script&lang=js& */ "./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _mainMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7628d92d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/menu/mainMenu.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mainMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./mainMenu.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/mainMenu.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mainMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./mainMenu.vue?vue&type=template&id=7628d92d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/mainMenu.vue?vue&type=template&id=7628d92d&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mainMenu_vue_vue_type_template_id_7628d92d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -55164,6 +56863,1136 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/ziggy.js":
+/*!*******************************!*\
+  !*** ./resources/js/ziggy.js ***!
+  \*******************************/
+/*! exports provided: Ziggy */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ziggy", function() { return Ziggy; });
+var Ziggy = {
+  namedRoutes: {
+    "en.menu": {
+      "uri": "menu",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.home": {
+      "uri": "\/",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.about": {
+      "uri": "about",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.news": {
+      "uri": "news\/{category?}\/{post?}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.scope.index": {
+      "uri": "scope",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.scope.show": {
+      "uri": "scope\/{scope}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.products": {
+      "uri": "products",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.projects": {
+      "uri": "projects",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "en.contacts": {
+      "uri": "contacts",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.menu": {
+      "uri": "ru\/menu",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.home": {
+      "uri": "ru",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.about": {
+      "uri": "ru\/about",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.news": {
+      "uri": "ru\/news\/{category?}\/{post?}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.scope.index": {
+      "uri": "ru\/scope",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.scope.show": {
+      "uri": "ru\/scope\/{scope}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.products": {
+      "uri": "ru\/products",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.projects": {
+      "uri": "ru\/projects",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "ru.contacts": {
+      "uri": "ru\/contacts",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.menu": {
+      "uri": "az\/menu",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.home": {
+      "uri": "az",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.about": {
+      "uri": "az\/about",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.news": {
+      "uri": "az\/news\/{category?}\/{post?}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.scope.index": {
+      "uri": "az\/scope",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.scope.show": {
+      "uri": "az\/scope\/{scope}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.products": {
+      "uri": "az\/products",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.projects": {
+      "uri": "az\/projects",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "az.contacts": {
+      "uri": "az\/contacts",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.login": {
+      "uri": "admin\/login",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.postlogin": {
+      "uri": "admin\/login",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.hooks": {
+      "uri": "admin\/hooks",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.hooks.enable": {
+      "uri": "admin\/hooks\/{name}\/enable",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.hooks.disable": {
+      "uri": "admin\/hooks\/{name}\/disable",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.hooks.update": {
+      "uri": "admin\/hooks\/{name}\/update",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.hooks.install": {
+      "uri": "admin\/hooks",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.hooks.uninstall": {
+      "uri": "admin\/hooks\/{name}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.dashboard": {
+      "uri": "admin",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.logout": {
+      "uri": "admin\/logout",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.upload": {
+      "uri": "admin\/upload",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.profile": {
+      "uri": "admin\/profile",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.order": {
+      "uri": "admin\/users\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.users.action": {
+      "uri": "admin\/users\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.users.restore": {
+      "uri": "admin\/users\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.relation": {
+      "uri": "admin\/users\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.media.remove": {
+      "uri": "admin\/users\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.users.index": {
+      "uri": "admin\/users",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.create": {
+      "uri": "admin\/users\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.store": {
+      "uri": "admin\/users",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.users.show": {
+      "uri": "admin\/users\/{user}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.edit": {
+      "uri": "admin\/users\/{user}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.users.update": {
+      "uri": "admin\/users\/{user}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.users.destroy": {
+      "uri": "admin\/users\/{user}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.menus.order": {
+      "uri": "admin\/menus\/{menu}\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.menus.action": {
+      "uri": "admin\/menus\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.menus.restore": {
+      "uri": "admin\/menus\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.relation": {
+      "uri": "admin\/menus\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.media.remove": {
+      "uri": "admin\/menus\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.menus.index": {
+      "uri": "admin\/menus",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.create": {
+      "uri": "admin\/menus\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.store": {
+      "uri": "admin\/menus",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.menus.show": {
+      "uri": "admin\/menus\/{menu}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.edit": {
+      "uri": "admin\/menus\/{menu}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.update": {
+      "uri": "admin\/menus\/{menu}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.menus.destroy": {
+      "uri": "admin\/menus\/{menu}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.roles.order": {
+      "uri": "admin\/roles\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.roles.action": {
+      "uri": "admin\/roles\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.roles.restore": {
+      "uri": "admin\/roles\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.relation": {
+      "uri": "admin\/roles\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.media.remove": {
+      "uri": "admin\/roles\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.roles.index": {
+      "uri": "admin\/roles",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.create": {
+      "uri": "admin\/roles\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.store": {
+      "uri": "admin\/roles",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.roles.show": {
+      "uri": "admin\/roles\/{role}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.edit": {
+      "uri": "admin\/roles\/{role}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.roles.update": {
+      "uri": "admin\/roles\/{role}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.roles.destroy": {
+      "uri": "admin\/roles\/{role}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.categories.order": {
+      "uri": "admin\/categories\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.categories.action": {
+      "uri": "admin\/categories\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.categories.restore": {
+      "uri": "admin\/categories\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.relation": {
+      "uri": "admin\/categories\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.media.remove": {
+      "uri": "admin\/categories\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.categories.index": {
+      "uri": "admin\/categories",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.create": {
+      "uri": "admin\/categories\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.store": {
+      "uri": "admin\/categories",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.categories.show": {
+      "uri": "admin\/categories\/{category}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.edit": {
+      "uri": "admin\/categories\/{category}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.categories.update": {
+      "uri": "admin\/categories\/{category}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.categories.destroy": {
+      "uri": "admin\/categories\/{category}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.posts.order": {
+      "uri": "admin\/posts\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.posts.action": {
+      "uri": "admin\/posts\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.posts.restore": {
+      "uri": "admin\/posts\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.relation": {
+      "uri": "admin\/posts\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.media.remove": {
+      "uri": "admin\/posts\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.posts.index": {
+      "uri": "admin\/posts",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.create": {
+      "uri": "admin\/posts\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.store": {
+      "uri": "admin\/posts",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.posts.show": {
+      "uri": "admin\/posts\/{post}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.edit": {
+      "uri": "admin\/posts\/{post}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.posts.update": {
+      "uri": "admin\/posts\/{post}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.posts.destroy": {
+      "uri": "admin\/posts\/{post}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.pages.order": {
+      "uri": "admin\/pages\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.pages.action": {
+      "uri": "admin\/pages\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.pages.restore": {
+      "uri": "admin\/pages\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.relation": {
+      "uri": "admin\/pages\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.media.remove": {
+      "uri": "admin\/pages\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.pages.index": {
+      "uri": "admin\/pages",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.create": {
+      "uri": "admin\/pages\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.store": {
+      "uri": "admin\/pages",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.pages.show": {
+      "uri": "admin\/pages\/{page}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.edit": {
+      "uri": "admin\/pages\/{page}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.pages.update": {
+      "uri": "admin\/pages\/{page}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.pages.destroy": {
+      "uri": "admin\/pages\/{page}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.about.order": {
+      "uri": "admin\/about\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.about.action": {
+      "uri": "admin\/about\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.about.restore": {
+      "uri": "admin\/about\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.relation": {
+      "uri": "admin\/about\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.media.remove": {
+      "uri": "admin\/about\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.about.index": {
+      "uri": "admin\/about",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.create": {
+      "uri": "admin\/about\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.store": {
+      "uri": "admin\/about",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.about.show": {
+      "uri": "admin\/about\/{about}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.edit": {
+      "uri": "admin\/about\/{about}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.about.update": {
+      "uri": "admin\/about\/{about}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.about.destroy": {
+      "uri": "admin\/about\/{about}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.features.order": {
+      "uri": "admin\/features\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.features.action": {
+      "uri": "admin\/features\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.features.restore": {
+      "uri": "admin\/features\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.relation": {
+      "uri": "admin\/features\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.media.remove": {
+      "uri": "admin\/features\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.features.index": {
+      "uri": "admin\/features",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.create": {
+      "uri": "admin\/features\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.store": {
+      "uri": "admin\/features",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.features.show": {
+      "uri": "admin\/features\/{feature}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.edit": {
+      "uri": "admin\/features\/{feature}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.features.update": {
+      "uri": "admin\/features\/{feature}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.features.destroy": {
+      "uri": "admin\/features\/{feature}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.slides.order": {
+      "uri": "admin\/slides\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.slides.action": {
+      "uri": "admin\/slides\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.slides.restore": {
+      "uri": "admin\/slides\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.relation": {
+      "uri": "admin\/slides\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.media.remove": {
+      "uri": "admin\/slides\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.slides.index": {
+      "uri": "admin\/slides",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.create": {
+      "uri": "admin\/slides\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.store": {
+      "uri": "admin\/slides",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.slides.show": {
+      "uri": "admin\/slides\/{slide}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.edit": {
+      "uri": "admin\/slides\/{slide}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.slides.update": {
+      "uri": "admin\/slides\/{slide}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.slides.destroy": {
+      "uri": "admin\/slides\/{slide}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.certificates.order": {
+      "uri": "admin\/certificates\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.certificates.action": {
+      "uri": "admin\/certificates\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.certificates.restore": {
+      "uri": "admin\/certificates\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.relation": {
+      "uri": "admin\/certificates\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.media.remove": {
+      "uri": "admin\/certificates\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.certificates.index": {
+      "uri": "admin\/certificates",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.create": {
+      "uri": "admin\/certificates\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.store": {
+      "uri": "admin\/certificates",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.certificates.show": {
+      "uri": "admin\/certificates\/{certificate}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.edit": {
+      "uri": "admin\/certificates\/{certificate}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.certificates.update": {
+      "uri": "admin\/certificates\/{certificate}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.certificates.destroy": {
+      "uri": "admin\/certificates\/{certificate}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.partners.order": {
+      "uri": "admin\/partners\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.partners.action": {
+      "uri": "admin\/partners\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.partners.restore": {
+      "uri": "admin\/partners\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.relation": {
+      "uri": "admin\/partners\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.media.remove": {
+      "uri": "admin\/partners\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.partners.index": {
+      "uri": "admin\/partners",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.create": {
+      "uri": "admin\/partners\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.store": {
+      "uri": "admin\/partners",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.partners.show": {
+      "uri": "admin\/partners\/{partner}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.edit": {
+      "uri": "admin\/partners\/{partner}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.partners.update": {
+      "uri": "admin\/partners\/{partner}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.partners.destroy": {
+      "uri": "admin\/partners\/{partner}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.scopes.order": {
+      "uri": "admin\/scopes\/order",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.scopes.action": {
+      "uri": "admin\/scopes\/action",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.scopes.restore": {
+      "uri": "admin\/scopes\/{id}\/restore",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.relation": {
+      "uri": "admin\/scopes\/relation",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.media.remove": {
+      "uri": "admin\/scopes\/remove",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.scopes.index": {
+      "uri": "admin\/scopes",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.create": {
+      "uri": "admin\/scopes\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.store": {
+      "uri": "admin\/scopes",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.scopes.show": {
+      "uri": "admin\/scopes\/{scope}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.edit": {
+      "uri": "admin\/scopes\/{scope}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.scopes.update": {
+      "uri": "admin\/scopes\/{scope}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.scopes.destroy": {
+      "uri": "admin\/scopes\/{scope}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.menus.builder": {
+      "uri": "admin\/menus\/{menu}\/builder",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.menus.item.destroy": {
+      "uri": "admin\/menus\/{menu}\/item\/{id}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.menus.item.add": {
+      "uri": "admin\/menus\/{menu}\/item",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.menus.item.update": {
+      "uri": "admin\/menus\/{menu}\/item",
+      "methods": ["PUT"],
+      "domain": null
+    },
+    "voyager.settings.index": {
+      "uri": "admin\/settings",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.settings.store": {
+      "uri": "admin\/settings",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.settings.update": {
+      "uri": "admin\/settings",
+      "methods": ["PUT"],
+      "domain": null
+    },
+    "voyager.settings.delete": {
+      "uri": "admin\/settings\/{id}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.settings.move_up": {
+      "uri": "admin\/settings\/{id}\/move_up",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.settings.move_down": {
+      "uri": "admin\/settings\/{id}\/move_down",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.settings.delete_value": {
+      "uri": "admin\/settings\/{id}\/delete_value",
+      "methods": ["PUT"],
+      "domain": null
+    },
+    "voyager.media.index": {
+      "uri": "admin\/media",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.media.files": {
+      "uri": "admin\/media\/files",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.new_folder": {
+      "uri": "admin\/media\/new_folder",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.delete": {
+      "uri": "admin\/media\/delete_file_folder",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.move": {
+      "uri": "admin\/media\/move_file",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.rename": {
+      "uri": "admin\/media\/rename_file",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.upload": {
+      "uri": "admin\/media\/upload",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.media.crop": {
+      "uri": "admin\/media\/crop",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.bread.index": {
+      "uri": "admin\/bread",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.bread.create": {
+      "uri": "admin\/bread\/{table}\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.bread.store": {
+      "uri": "admin\/bread",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.bread.edit": {
+      "uri": "admin\/bread\/{table}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.bread.update": {
+      "uri": "admin\/bread\/{id}",
+      "methods": ["PUT"],
+      "domain": null
+    },
+    "voyager.bread.delete": {
+      "uri": "admin\/bread\/{id}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.bread.relationship": {
+      "uri": "admin\/bread\/relationship",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.bread.delete_relationship": {
+      "uri": "admin\/bread\/delete_relationship\/{id}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.database.index": {
+      "uri": "admin\/database",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.database.create": {
+      "uri": "admin\/database\/create",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.database.store": {
+      "uri": "admin\/database",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.database.show": {
+      "uri": "admin\/database\/{database}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.database.edit": {
+      "uri": "admin\/database\/{database}\/edit",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.database.update": {
+      "uri": "admin\/database\/{database}",
+      "methods": ["PUT", "PATCH"],
+      "domain": null
+    },
+    "voyager.database.destroy": {
+      "uri": "admin\/database\/{database}",
+      "methods": ["DELETE"],
+      "domain": null
+    },
+    "voyager.compass.index": {
+      "uri": "admin\/compass",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "voyager.compass.post": {
+      "uri": "admin\/compass",
+      "methods": ["POST"],
+      "domain": null
+    },
+    "voyager.voyager_assets": {
+      "uri": "admin\/voyager-assets",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    }
+  },
+  baseUrl: 'http://localhost/',
+  baseProtocol: 'http',
+  baseDomain: 'localhost',
+  basePort: false,
+  defaultParameters: []
+};
+
+if (typeof window.Ziggy !== 'undefined') {
+  for (var name in window.Ziggy.namedRoutes) {
+    Ziggy.namedRoutes[name] = window.Ziggy.namedRoutes[name];
+  }
+}
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -55183,6 +58012,328 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./vendor/tightenco/ziggy/src/js/UrlBuilder.js":
+/*!*****************************************************!*\
+  !*** ./vendor/tightenco/ziggy/src/js/UrlBuilder.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var UrlBuilder =
+/*#__PURE__*/
+function () {
+  function UrlBuilder(name, absolute, ziggyObject) {
+    _classCallCheck(this, UrlBuilder);
+
+    this.name = name;
+    this.ziggy = ziggyObject;
+    this.route = this.ziggy.namedRoutes[this.name];
+
+    if (typeof this.name === 'undefined') {
+      throw new Error('Ziggy Error: You must provide a route name');
+    } else if (typeof this.route === 'undefined') {
+      throw new Error("Ziggy Error: route '".concat(this.name, "' is not found in the route list"));
+    }
+
+    this.absolute = typeof absolute === 'undefined' ? true : absolute;
+    this.domain = this.setDomain();
+    this.path = this.route.uri.replace(/^\//, '');
+  }
+
+  _createClass(UrlBuilder, [{
+    key: "setDomain",
+    value: function setDomain() {
+      if (!this.absolute) return '/';
+      if (!this.route.domain) return this.ziggy.baseUrl.replace(/\/?$/, '/');
+      var host = (this.route.domain || this.ziggy.baseDomain).replace(/\/+$/, '');
+      if (this.ziggy.basePort && host.replace(/\/+$/, '') === this.ziggy.baseDomain.replace(/\/+$/, '')) host = this.ziggy.baseDomain + ':' + this.ziggy.basePort;
+      return this.ziggy.baseProtocol + '://' + host + '/';
+    }
+  }, {
+    key: "construct",
+    value: function construct() {
+      return this.domain + this.path;
+    }
+  }]);
+
+  return UrlBuilder;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (UrlBuilder);
+
+/***/ }),
+
+/***/ "./vendor/tightenco/ziggy/src/js/route.js":
+/*!************************************************!*\
+  !*** ./vendor/tightenco/ziggy/src/js/route.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return route; });
+/* harmony import */ var _UrlBuilder__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UrlBuilder */ "./vendor/tightenco/ziggy/src/js/UrlBuilder.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Router =
+/*#__PURE__*/
+function (_String) {
+  _inherits(Router, _String);
+
+  function Router(name, params, absolute) {
+    var _this;
+
+    var customZiggy = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+    _classCallCheck(this, Router);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Router).call(this));
+    _this.name = name;
+    _this.absolute = absolute;
+    _this.ziggy = customZiggy ? customZiggy : Ziggy;
+    _this.urlBuilder = _this.name ? new _UrlBuilder__WEBPACK_IMPORTED_MODULE_0__["default"](name, absolute, _this.ziggy) : null;
+    _this.template = _this.urlBuilder ? _this.urlBuilder.construct() : '';
+    _this.urlParams = _this.normalizeParams(params);
+    _this.queryParams = {};
+    _this.hydrated = '';
+    return _this;
+  }
+
+  _createClass(Router, [{
+    key: "normalizeParams",
+    value: function normalizeParams(params) {
+      if (typeof params === 'undefined') return {}; // If you passed in a string or integer, wrap it in an array
+
+      params = _typeof(params) !== 'object' ? [params] : params; // If the tags object contains an ID and there isn't an ID param in the
+      // url template, they probably passed in a single model object and we should
+      // wrap this in an array. This could be slightly dangerous and I want to find
+      // a better solution for this rare case.
+
+      if (params.hasOwnProperty('id') && this.template.indexOf('{id}') == -1) {
+        params = [params.id];
+      }
+
+      this.numericParamIndices = Array.isArray(params);
+      return Object.assign({}, params);
+    }
+  }, {
+    key: "with",
+    value: function _with(params) {
+      this.urlParams = this.normalizeParams(params);
+      return this;
+    }
+  }, {
+    key: "withQuery",
+    value: function withQuery(params) {
+      Object.assign(this.queryParams, params);
+      return this;
+    }
+  }, {
+    key: "hydrateUrl",
+    value: function hydrateUrl() {
+      var _this2 = this;
+
+      if (this.hydrated) return this.hydrated;
+      var hydrated = this.template.replace(/{([^}]+)}/gi, function (tag, i) {
+        var keyName = _this2.trimParam(tag),
+            defaultParameter,
+            tagValue;
+
+        if (_this2.ziggy.defaultParameters.hasOwnProperty(keyName)) {
+          defaultParameter = _this2.ziggy.defaultParameters[keyName];
+        } // If a default parameter exists, and a value wasn't
+        // provided for it manually, use the default value
+
+
+        if (defaultParameter && !_this2.urlParams[keyName]) {
+          delete _this2.urlParams[keyName];
+          return defaultParameter;
+        } // We were passed an array, shift the value off the
+        // object and return that value to the route
+
+
+        if (_this2.numericParamIndices) {
+          _this2.urlParams = Object.values(_this2.urlParams);
+          tagValue = _this2.urlParams.shift();
+        } else {
+          tagValue = _this2.urlParams[keyName];
+          delete _this2.urlParams[keyName];
+        } // The type of the value is undefined; is this param
+        // optional or not
+
+
+        if (typeof tagValue === 'undefined') {
+          if (tag.indexOf('?') === -1) {
+            throw new Error("Ziggy Error: '" + keyName + "' key is required for route '" + _this2.name + "'");
+          } else {
+            return '';
+          }
+        } // If an object was passed and has an id, return it
+
+
+        if (tagValue.id) {
+          return encodeURIComponent(tagValue.id);
+        }
+
+        return encodeURIComponent(tagValue);
+      });
+
+      if (this.urlBuilder != null && this.urlBuilder.path !== '') {
+        hydrated = hydrated.replace(/\/+$/, '');
+      }
+
+      this.hydrated = hydrated;
+      return this.hydrated;
+    }
+  }, {
+    key: "matchUrl",
+    value: function matchUrl() {
+      var windowUrl = window.location.hostname + (window.location.port ? ':' + window.location.port : '') + window.location.pathname; // Strip out optional parameters
+
+      var optionalTemplate = this.template.replace(/(\/\{[^\}]*\?\})/g, '/').replace(/(\{[^\}]*\})/gi, '[^/?]+').replace(/\/?$/, '').split('://')[1];
+      var searchTemplate = this.template.replace(/(\{[^\}]*\})/gi, '[^/?]+').split('://')[1];
+      var urlWithTrailingSlash = windowUrl.replace(/\/?$/, '/');
+      var regularSearch = new RegExp('^' + searchTemplate + '/$').test(urlWithTrailingSlash);
+      var optionalSearch = new RegExp('^' + optionalTemplate + '/$').test(urlWithTrailingSlash);
+      return regularSearch || optionalSearch;
+    }
+  }, {
+    key: "constructQuery",
+    value: function constructQuery() {
+      if (Object.keys(this.queryParams).length === 0 && Object.keys(this.urlParams).length === 0) {
+        return '';
+      }
+
+      var remainingParams = Object.assign(this.urlParams, this.queryParams);
+      return Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(remainingParams, {
+        encodeValuesOnly: true,
+        skipNulls: true,
+        addQueryPrefix: true,
+        arrayFormat: 'indices'
+      });
+    }
+  }, {
+    key: "current",
+    value: function current() {
+      var _this3 = this;
+
+      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var routeNames = Object.keys(this.ziggy.namedRoutes);
+      var currentRoute = routeNames.filter(function (name) {
+        if (_this3.ziggy.namedRoutes[name].methods.indexOf('GET') === -1) {
+          return false;
+        }
+
+        return new Router(name, undefined, undefined, _this3.ziggy).matchUrl();
+      })[0];
+
+      if (name) {
+        var pattern = new RegExp('^' + name.replace('*', '.*').replace('.', '.') + '$', 'i');
+        return pattern.test(currentRoute);
+      }
+
+      return currentRoute;
+    }
+  }, {
+    key: "check",
+    value: function check(name) {
+      var routeNames = Object.keys(this.ziggy.namedRoutes);
+      return routeNames.includes(name);
+    }
+  }, {
+    key: "extractParams",
+    value: function extractParams(uri, template, delimiter) {
+      var _this4 = this;
+
+      var uriParts = uri.split(delimiter);
+      var templateParts = template.split(delimiter);
+      return templateParts.reduce(function (params, param, i) {
+        return param.indexOf('{') === 0 && param.indexOf('}') !== -1 && uriParts[i] ? Object.assign(params, _defineProperty({}, _this4.trimParam(param), uriParts[i])) : params;
+      }, {});
+    }
+  }, {
+    key: "parse",
+    value: function parse() {
+      this["return"] = this.hydrateUrl() + this.constructQuery();
+    }
+  }, {
+    key: "url",
+    value: function url() {
+      this.parse();
+      return this["return"];
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.url();
+    }
+  }, {
+    key: "trimParam",
+    value: function trimParam(param) {
+      return param.replace(/{|}|\?/g, '');
+    }
+  }, {
+    key: "valueOf",
+    value: function valueOf() {
+      return this.url();
+    }
+  }, {
+    key: "params",
+    get: function get() {
+      var namedRoute = this.ziggy.namedRoutes[this.current()];
+      return Object.assign(this.extractParams(window.location.hostname, namedRoute.domain || '', '.'), this.extractParams(window.location.pathname.slice(1), namedRoute.uri, '/'));
+    }
+  }]);
+
+  return Router;
+}(_wrapNativeSuper(String));
+
+function route(name, params, absolute, customZiggy) {
+  return new Router(name, params, absolute, customZiggy);
+}
 
 /***/ }),
 

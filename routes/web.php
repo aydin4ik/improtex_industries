@@ -19,15 +19,16 @@ Route::localized(function() {
         return view('welcome');
     })->name('home');
     
-    Route::get('/about', 'ShowAbout')->name('about');
-    
-    Route::get('/news/{category?}', function ($category = null) {
-        return view('welcome')->with('category', $category);
+    Route::get('about', 'ShowAbout')->name('about');
+
+    Route::get('news', function () {
+        return view('welcome');
     })->name('news');
 
-    Route::get('/scope-of-business', function () {
-        return view('welcome');
-    })->name('scope-of-business');
+    Route::resource('scope', 'ScopeController')->only([
+        'index', 'show'
+    ]);
+
 
     Route::get('/products', function () {
         return view('welcome');
@@ -40,6 +41,9 @@ Route::localized(function() {
     Route::get('/contacts', function () {
         return view('welcome');
     })->name('contacts');
+
+    Route::post('/search', 'SearchFormController@submit');
+    Route::get('/search', 'SearchFormController@submit');
 
 });
 

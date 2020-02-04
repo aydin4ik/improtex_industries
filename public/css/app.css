@@ -3468,7 +3468,7 @@ fieldset[disabled] .button {
 
 .content blockquote {
   background-color: whitesmoke;
-  border-left: 5px solid #dbdbdb;
+  border-left: 5px solid #1F8079;
   padding: 1.25em 1.5em;
 }
 
@@ -26174,6 +26174,11 @@ img.partner.is-mobile {
   max-height: 600px;
 }
 
+.navbar-menu-mobile .menu-item.has-dropdown.is-active {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
 .slide-fade-enter-active,
 .slide-fade-leave-active {
   -webkit-transition: all 0.3s ease;
@@ -26194,8 +26199,8 @@ img.partner.is-mobile {
 
 .slide-up-fade-enter,
 .slide-up-fade-leave-to {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  -webkit-transform: translateY(-50px);
+          transform: translateY(-50px);
   opacity: 0;
 }
 

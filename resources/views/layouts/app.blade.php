@@ -17,9 +17,70 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @yield('css')
     </head>
+    @php
+        $menu = menu('main', '_json');
+        $menuItems = [];
+
+        if (Voyager::translatable($menu)) {
+        $menu = $menu->load('translations');
+    }
+    @endphp
+
+    @foreach ($menu as $item)
+        @php
+            $originalItem = $item;
+
+            if (Voyager::translatable($item)) {
+                $item = $item->translate(app()->getLocale());
+            }
+
+            $originalItem->title = $item->title;
+
+        @endphp
+
+        @if(! $originalItem->children->isEmpty())
+            @foreach ($originalItem->children as $child)
+                @php
+                    $originalChild = $child;
+
+                    if (Voyager::translatable($child)) {
+                        $child = $child->translate(app()->getLocale());
+                    }
+
+                    $originalChild->title = $child->title;
+                @endphp
+            @endforeach
+        @else
+            
+        @endif
+        @php
+            $menuItems[] = $originalItem;
+        @endphp
+    @endforeach
+
+    @php
+        $locales = config('localized-routes.supported-locales');
+        $localeItems = [];
+    @endphp
+    @foreach ($locales as $locale)
+        @php
+            $route = route(Route::current()->getName(), Route::current()->parameters(), true, $locale);
+
+            $localeItems[] = [
+                'name' => $locale,
+                'route' => $route,
+            ];
+        @endphp
+    @endforeach
     <body class="has-background-white-bis has-navbar-fixed-top" style="overflow: hidden">
             <div id="navigation">
-                @include('layouts/includes/nav/main')
+                <main-menu 
+                    :items="{{ json_encode($menuItems) }}"
+                    :current-locale="{{ json_encode(app()->getLocale()) }}"
+                    :locales="{{ json_encode($localeItems) }}"
+                    :current-url={{ json_encode(url()->current()) }}
+                    :logo="{{ json_encode(asset('img/logo.png')) }}"
+                    ></main-menu>
             </div>
 
             <div id="app">
@@ -35,69 +96,7 @@
 
         <script>
             var nav = new Vue({
-                el: '#navigation',
-                data: {
-                    menu: [],
-                    locales: {!! json_encode(config('localized-routes.supported-locales')) !!},
-                    currentLocale: {!! json_encode(app()->getLocale()) !!},
-                    currentUrl: {!! json_encode(url()->current()) !!},
-                    mobileMenuIsOpen: false,
-
-                },
-                mounted () {
-                    axios
-                        .get('/menu')
-                        .then(response => (this.menu = response.data , this.init()))
-                },
-                methods: {
-                    init () {
-                        this.menu.forEach(item => {  
-                            item.open = false;
-                            item.title = item.title[this.currentLocale];
-                            item.url = item.url[this.currentLocale];
-                            if(this.currentUrl === item.url){
-                                item.class= 'is-active';
-                            }
-                            if( Array.isArray(item.children) && item.children.length ) {
-                                item.hasChildren = true;
-                                if(this.currentUrl === item.url){
-                                    item.open= true;
-                                }
-                                item.children.forEach(child => {
-                                    child.title = child.title[this.currentLocale];
-                                    child.url = child.url[this.currentLocale];
-                                    if(this.currentUrl === child.url){
-                                        child.class= 'is-current';
-                                        item.class= 'is-active';
-                                        item.open = true;
-                                    }
-                                })
-                            }else{
-                                item.hasChildren = false;
-                            }
-                        });                        
-                        return this.menu;
-                    },
-                    onBurgerClick () {
-                        this.mobileMenuIsOpen = !this.mobileMenuIsOpen;
-                    },
-
-                    onMobileDropdownClick (index) {
-                        this.menu = this.menu.map((item, i) => {
-                            if(index === i){
-                                item.open = !item.open;
-                            }else{
-                                item.open = false;
-                            }
-                            if(item.open){
-                                item.class = 'is-active';
-                            }else{
-                                item.class = '';
-                            }
-                            return item;
-                        });
-                    }
-                }
+                el: '#navigation'
             });
         </script>
     </body>

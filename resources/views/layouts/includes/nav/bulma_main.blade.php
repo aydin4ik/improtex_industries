@@ -1,8 +1,10 @@
+{{-- @todo copy hrefs to links if url is used as route --}}
 @php
 
     if (Voyager::translatable($items)) {
         $items = $items->load('translations');
     }
+
 
 @endphp
 
@@ -14,28 +16,38 @@
             $item = $item->translate($options->locale);
         }
 
+        if( app()->getLocale() . '.' .$item->route == Route::currentRouteName() ){
+            $item->class = 'navbar-item has-dropdown is-hoverable is-mega is-tab is-active';
+        }else{
+            $item->class = 'navbar-item has-dropdown is-hoverable is-mega is-tab';
+        }
+
+
+
         
     @endphp
     @if($originalItem->children->isEmpty())
         
         @php
-            if( strtolower(app()->getLocale() . '.' .$item->url) == Route::currentRouteName() ){
+            if( app()->getLocale() . '.' .$item->route == Route::currentRouteName() ){
                 $listItemClass = 'navbar-item is-tab is-active';
             }else{
                 $listItemClass = 'navbar-item is-tab';
             }
         @endphp
-        <a class="{{$listItemClass}}" href="{{ route(strtolower($item->link())) }}" target="{{ $item->target }}">{{ $item->title }}</a>
+        @if (Route::has(app()->getLocale() . '.' .$item->route))
+            <a class="{{$listItemClass}}" href="{{ route($item->route, json_decode($item->parameters, true) , true, null) }}" target="{{ $item->target }}">{{ $item->title }}</a>
+        @else
+            <a class="{{$listItemClass}}"  target="{{ $item->target }}">{{ $item->title }}</a>
+        @endif
     @else
-        @php
-            if( strtolower(app()->getLocale() . '.' .$item->url) == Route::currentRouteName() ){
-                $listItemClass = 'navbar-item has-dropdown is-hoverable is-mega is-tab is-active';
-            }else{
-                $listItemClass = 'navbar-item has-dropdown is-hoverable is-mega is-tab';
-            }
-        @endphp
-            <div class="{{$listItemClass}}">
-            <a class="navbar-link is-arrowless" href="{{ route(strtolower($item->link())) }}" target="{{ $item->target }}">{{ $item->title }}</a>
+            
+            <div class="{{$originalItem->class}}">
+            @if (Route::has(app()->getLocale() . '.' .$item->route))
+                <a class="navbar-link is-arrowless" href="{{ route($item->route, json_decode($item->parameters, true) , true, null) }}" target="{{ $item->target }}">{{ $item->title }}</a>
+            @else
+                <a class="navbar-link is-arrowless"  target="{{ $item->target }}">{{ $item->title }}</a>
+            @endif
             <div class="navbar-dropdown">
                 <div class="container">
                     <div class="navbar-menu">
@@ -50,15 +62,22 @@
                 $child = $child->translate($options->locale);
             }
 
-            if( url()->current() == url(app()->getLocale() . '/' . $item->url . '/' . $child->url) || url()->current() == url($item->url . '/' . $child->url) ){
-                $listItemClass = 'navbar-item is-tab is-subactive';
+            if( app()->getLocale() . '.' .$child->route == Route::currentRouteName() ){
+                $parentItemClass = 'navbar-item has-dropdown is-hoverable is-mega is-tab is-active';
+                $childItemClass = 'navbar-item is-tab is-subactive';
             }else{
-                $listItemClass = 'navbar-item is-tab';
+                $childItemClass = 'navbar-item is-tab';
+                $parentItemClass = 'navbar-item has-dropdown is-hoverable is-mega is-tab';
             }
         @endphp
-            <a class="{{$listItemClass}}" href="{{ route($item->url, ['category' => $child->url], true, null) }}" target="{{ $child->target }}">{{ $child->title }}</a>
+        @if (Route::has(app()->getLocale() . '.' .$child->route))
+            <a class="{{$childItemClass}}" href="{{ route($child->route, json_decode($child->parameters, true) , true, null) }}" target="{{ $child->target }}">{{ $child->title }}</a>
+            {{ $originalItem->class }}
+        @else
+            <a class="{{$childItemClass}}" target="{{ $child->target }}">{{ $child->title }}</a>
+        @endif
         @endforeach
-
+        
         </div>
         </div>
         </div>
