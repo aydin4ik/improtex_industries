@@ -135,6 +135,11 @@
             init () {
                 this.itemsArray = this.menuItems
             },
+            resetActiveItems () {
+                this.itemsArray.forEach(item => {
+                    item.isActive = false;
+                });
+            },
             setActiveItem () {
                 this.menuItems.forEach(item => {
                     item.children.forEach(child => {
@@ -161,19 +166,21 @@
                 }
             },
             setBackActiveItem () {
-                if(! this.itemClicked){
-                    if(! this.mobileMenuIsOpen){
-                        if(this.searchFieldwasOpen){
-                            this.searchFieldIsOpen = true
-                            this.$nextTick(() => this.$refs.inputField.focus())
-                            this.itemsArray.forEach(item => {
-                                item.isActive = false;
-                            });
-                        }else{
-                            this.itemsArray.forEach(item => {
-                                item.isActive = false
-                                this.initialActiveItem.isActive = true
-                            })
+                if (typeof(this.currentRoute) == "undefined" && !this.searchFieldwasOpen){
+                    this.resetActiveItems();
+                }else{
+                    if(! this.itemClicked){
+                        if(! this.mobileMenuIsOpen){
+                            if(this.searchFieldwasOpen){
+                                this.searchFieldIsOpen = true
+                                this.$nextTick(() => this.$refs.inputField.focus())
+                                this.resetActiveItems();
+                            }else{
+                                this.itemsArray.forEach(item => {
+                                    item.isActive = false
+                                    this.initialActiveItem.isActive = true
+                                })
+                            }
                         }
                     }
                 }

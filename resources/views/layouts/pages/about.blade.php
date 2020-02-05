@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div class="section has-bg-striped m-t-100 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
+<div class="section has-bg-striped m-t-100 p-t-100 is-relative has-background-white-bis is-hidden-mobile">
     <div class="container">
         <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
             <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">about us</h1>
@@ -53,53 +53,48 @@
 
     <div class="container">
         <div class="columns is-centered">
-            <div class="column is-9 is-absolute left-100 top_80">
-                <div class="notification is-primary">
-                    <h2 class="title is-size-2 m-b-50">
-                        {{ $about->title }}
-                    </h2>
-                    <h4 class="subtitle is-size-4">
-                        {{ $about->subtitle }}
-                    </h4>
-                </div>
-            </div>
-            <div class="column is-10-desktop is-12-fullhd">
-                <div class="box p-t-150 p-l-50 p-r-50 p-b-300">
-                    
-                    <div class="columns">
-                        <div class="column is-9">
-                            <div class="is-invisible">
-                                <div class="notification is-primary">
-                                    <h2 class="title is-size-2">
-                                        {{ $about->title }}
-                                    </h2>
-                                    <h4 class="subtitle">
-                                        {{ $about->subtitle }}
-                                    </h4>
-                                </div>
+            
+            <div class="column is-11">
+                <div class="box p-t-100 p-l-50 p-r-50 p-b-100">
+                    <div class="columns is-centered">
+                        <div class="column is-11">
+                            <div class="notification is-primary">
+                                <h2 class="title is-size-1 m-b-50">
+                                    {{ $about->title }}
+                                </h2>
+                                <h4 class="subtitle is-size-4 has-text-weight-light">
+                                    {{ $about->subtitle }}
+                                </h4>
                             </div>
                         </div>
+                        <div class="column is-4"></div>
                     </div>
 
-                    <div class="columns">
-                        <div class="column is-three-fifths">
+                    <div class="columns m-t-50">
+                        <div class="column is-6">
                             <div class="content">
                                 {!! nl2br(e($about->body)) !!}
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-                
-            </div>
-            <div class="column is-7 is-absolute right-250 top_400">
-                <figure class="image is-3by2">
-                    <img class="is-rounded-all" src="{{ Voyager::image( $about->image ) }}">
-                </figure>
-                <h6 class="title is-size-6 is-absolute right-150 top_250 is-rotated-90">
-                    <span class="has-text-primary has-text-weight-bold">improtex industries</span>
-                    <span class="has-text-black">/ image name</span> 
-                </h6>
+                        <div class="column is-12    ">
+                            <div class="columns is-vcentered">
+                                <div class="column is-7">
+                                    <figure class="image is-3by2">
+                                        <img class="is-rounded-all" src="{{ Voyager::image( $about->image ) }}">
+                                    </figure>                            
+                                </div>
+                                <div class="column is-narrow">
+                                    <h6 class="title is-size-6 text-rotated-90">
+                                        <span class="has-text-primary has-text-weight-bold">improtex industries</span>
+                                        <span class="has-text-black">/ image name</span> 
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>                    
+                </div>                
             </div>
         </div>
         
@@ -113,18 +108,18 @@
 <div class="section has-background-white-bis is-hidden-mobile">
     <div class="container-fluid">
 
-        <div class="columns is-relative m-t-100 is-centered is-multiline is-mobile" id="counters" ref="counters">
+        <div class="columns is-relative is-centered is-multiline is-mobile" id="counters" ref="counters">
             @foreach ($features as $feature)
             @php
             if (Voyager::translatable($feature)) {
                 $feature = $feature->translate(app()->getLocale());
             }
             @endphp
-            <div class="column is-one-quarter-desktop has-text-centered">
+            <div class="column is-4 has-text-centered">
                 <div>
                     <p class="heading">
                         <span class="is-size-huge has-text-weight-bold has-text-primary">
-                            <counter-widget :end-value="{{ $feature->qty }}" :anim-duration="2000" ref="counter-widget"/>
+                            <counter-widget :end-value="{{ $feature->qty }}" :anim-duration="1400" ref="counter-widget"/>
                         </span>
                         <span class="is-size-1 is-lowercase has-text-weight-bold">{{ $feature->measure }}</span>
                     </p>

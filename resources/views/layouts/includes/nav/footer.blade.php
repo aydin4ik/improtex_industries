@@ -2,7 +2,7 @@
     <div class="container">
         <div class="level m-b-100">
             <div class="level-item">
-                <img src="{{ asset('img/logo.png')}}" alt="Company logo" class="image">
+                <img src="{{ asset('img/logo.png')}}" alt="Company logo" class="image" style="width: 125px">
             </div>
           </div>
     </div>

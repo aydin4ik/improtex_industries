@@ -99,11 +99,25 @@
 
 // font-size-addition
 .is-size-huge{
-    font-size: 6.25rem;
+    font-size: 5.5rem;
 }
 
 // swiper overrides
 .swiper-pagination-bullet-active {
     opacity: 1;
     background: $primary;
+}
+
+
+// content images
+.content{
+    img{
+        border-radius: 6px;
+        margin: 15px;
+    }
+}
+
+blockquote{
+    font-style: italic
+    ;
 }

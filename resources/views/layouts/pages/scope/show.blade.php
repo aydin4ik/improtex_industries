@@ -1,23 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+    if (Voyager::translatable($scope)) {
+        $originalScope = $scope;
+        $scope = $scope->translate(app()->getLocale());
+    }
+@endphp
 <div class="section has-bg-striped m-t-50 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
     <div class="container">
-        <div class="box p-b-150">
-            <div class="header m-t-50">
-                <h1 class="subtitle is-size-2 is-capitalized has-text-centered has-text-weight-bold">
-                    {{ $scope->title}}
-                </h1>
-            </div>
 
-            <div class="preview m-t-50">
-                <div class="columns is-centered">
-                    <div class="column is-10">
-                        <figure class="image is-2by1">
-                            <img class="is-rounded-all" src="{{ Voyager::image( $scope->image ) }}" alt="{{ $scope->title }}">
-                        </figure>
-                    </div>
-                </div>                
+        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
+            <h1 class="title is-uppercase is-size-3 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $scope->title }}</h1>
+        </div>
+
+        <div class="box is-paddingless p-b-150">
+
+            <div class="preview">
+                <figure class="image is-2by1">
+                    <img class="is-rounded-small" src="{{ Voyager::image( $scope->image ) }}" alt="{{ $scope->title }}">
+                </figure>
             </div>
 
             <div class="content m-t-50">
@@ -37,7 +39,7 @@
                         <div class="date is-pulled-left">
                             <span>
                                 <i class="far fa-calendar-alt"></i>
-                                {{ $scope->created_at->diffForHumans() }}
+                                {{ $originalScope->created_at->diffForHumans() }}
                             </span>
                         </div>
                         <div class="social is-pulled-right">

@@ -28,6 +28,7 @@ class ScopeController extends Controller
      */
     public function show(Scope $scope)
     {
+
         return view('layouts.pages.scope.show',[
             'scope' => $scope
         ]);

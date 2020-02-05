@@ -2140,6 +2140,11 @@ __webpack_require__.r(__webpack_exports__);
     init: function init() {
       this.itemsArray = this.menuItems;
     },
+    resetActiveItems: function resetActiveItems() {
+      this.itemsArray.forEach(function (item) {
+        item.isActive = false;
+      });
+    },
     setActiveItem: function setActiveItem() {
       var _this = this;
 
@@ -2174,21 +2179,23 @@ __webpack_require__.r(__webpack_exports__);
     setBackActiveItem: function setBackActiveItem() {
       var _this3 = this;
 
-      if (!this.itemClicked) {
-        if (!this.mobileMenuIsOpen) {
-          if (this.searchFieldwasOpen) {
-            this.searchFieldIsOpen = true;
-            this.$nextTick(function () {
-              return _this3.$refs.inputField.focus();
-            });
-            this.itemsArray.forEach(function (item) {
-              item.isActive = false;
-            });
-          } else {
-            this.itemsArray.forEach(function (item) {
-              item.isActive = false;
-              _this3.initialActiveItem.isActive = true;
-            });
+      if (typeof this.currentRoute == "undefined" && !this.searchFieldwasOpen) {
+        this.resetActiveItems();
+      } else {
+        if (!this.itemClicked) {
+          if (!this.mobileMenuIsOpen) {
+            if (this.searchFieldwasOpen) {
+              this.searchFieldIsOpen = true;
+              this.$nextTick(function () {
+                return _this3.$refs.inputField.focus();
+              });
+              this.resetActiveItems();
+            } else {
+              this.itemsArray.forEach(function (item) {
+                item.isActive = false;
+                _this3.initialActiveItem.isActive = true;
+              });
+            }
           }
         }
       }
