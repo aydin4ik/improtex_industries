@@ -2179,7 +2179,7 @@ __webpack_require__.r(__webpack_exports__);
     setBackActiveItem: function setBackActiveItem() {
       var _this3 = this;
 
-      if (typeof this.currentRoute == "undefined" && !this.searchFieldwasOpen) {
+      if (typeof this.initialActiveItem == "undefined" && !this.searchFieldwasOpen) {
         this.resetActiveItems();
       } else {
         if (!this.itemClicked) {

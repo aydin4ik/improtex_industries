@@ -29,10 +29,9 @@ Route::localized(function() {
         'index', 'show'
     ]);
 
-
-    Route::get('/products', function () {
-        return view('welcome');
-    })->name('products');
+    Route::resource('products', 'ProductController')->only([
+        'index', 'show'
+    ]);
 
     Route::get('/projects', function () {
         return view('welcome');

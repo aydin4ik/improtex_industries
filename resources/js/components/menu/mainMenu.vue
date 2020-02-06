@@ -166,7 +166,7 @@
                 }
             },
             setBackActiveItem () {
-                if (typeof(this.currentRoute) == "undefined" && !this.searchFieldwasOpen){
+                if (typeof(this.initialActiveItem) == "undefined" && !this.searchFieldwasOpen){
                     this.resetActiveItems();
                 }else{
                     if(! this.itemClicked){

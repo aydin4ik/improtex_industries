@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Scope;
+use App\Product;
 use Illuminate\Http\Request;
 
-class ScopeController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,22 +14,22 @@ class ScopeController extends Controller
      */
     public function index()
     {
-        return view('layouts.pages.scope.index', 
+        return view('layouts.pages.product.index', 
         [   
-            'scopes' => Scope::orderBy('order', 'asc')->get(),
+            'products' => Product::orderBy('order', 'asc')->get(),
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Scope  $scope
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Scope $scope)
+    public function show(Product $product)
     {
-        return view('layouts.pages.scope.show',[
-            'scope' => $scope
+        return view('layouts.pages.product.show',[
+            'product' => $product
         ]);
     }
 }
