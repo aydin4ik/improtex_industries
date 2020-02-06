@@ -2,6 +2,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 import route from 'ziggy'
 import { Ziggy } from './ziggy'
 
@@ -16,6 +17,9 @@ Vue.use(Buefy);
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(VueAwesomeSwiper);
+
+var SocialSharing = require('vue-social-sharing');
+Vue.use(SocialSharing);
 
 
 Vue.component('main-menu', require('./components/menu/mainMenu.vue').default);

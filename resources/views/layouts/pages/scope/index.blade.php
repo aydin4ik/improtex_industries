@@ -35,7 +35,7 @@
         <div class="columns is-multiline is-centered">
             @foreach ($scopes as $scope)
                 <div class="column is-4">
-                    <a class="box is-paddingless is-radiusless" href="#">
+                    <a class="box is-paddingless is-radiusless" href="{{ route('scope.show', $scope->slug, true, null) }}">
                         <figure class="image is-5by3">
                             <img src="{{ Voyager::image( $scope->image ) }}">
                         </figure>

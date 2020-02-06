@@ -117,7 +117,18 @@
     }
 }
 
+.content.is-mobile{
+    img{
+        margin: 0;
+        border-radius: 0;
+        margin-bottom: 10px;
+    }
+
+    blockquote{
+        border-left: 3px solid $primary;
+    }
+}
+
 blockquote{
     font-style: italic
-    ;
 }

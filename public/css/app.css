@@ -24338,6 +24338,16 @@ button.swiper-pagination-bullet {
   margin: 15px;
 }
 
+.content.is-mobile img {
+  margin: 0;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+.content.is-mobile blockquote {
+  border-left: 3px solid #1F8079;
+}
+
 blockquote {
   font-style: italic;
 }
