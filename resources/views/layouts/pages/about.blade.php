@@ -76,7 +76,7 @@
                                 {!! nl2br(e($about->body)) !!}
                             </div>
                         </div>
-                        <div class="column is-12    ">
+                        <div class="column is-12">
                             <div class="columns is-vcentered">
                                 <div class="column is-7">
                                     <figure class="image is-3by2">

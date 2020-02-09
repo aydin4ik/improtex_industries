@@ -33,9 +33,13 @@ Route::localized(function() {
         'index', 'show'
     ]);
 
-    Route::get('/projects', function () {
-        return view('welcome');
-    })->name('projects');
+    Route::resource('projects', 'ProjectController')->only([
+        'index', 'show'
+    ]);
+
+    Route::post('projects' , 'ProjectController@load');
+
+
 
     Route::get('/contacts', function () {
         return view('welcome');

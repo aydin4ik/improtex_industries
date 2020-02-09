@@ -2,9 +2,9 @@
 
 @section('content')
 @php
-    if (Voyager::translatable($product)) {
-        $originalProduct = $product;
-        $product = $product->translate(app()->getLocale());
+    if (Voyager::translatable($project)) {
+        $originalproject = $project;
+        $project = $project->translate(app()->getLocale());
     }
 @endphp
 <div id="post">
@@ -13,22 +13,39 @@
         <div class="container">
 
             <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-                <h1 class="title is-uppercase is-size-3 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $product->title }}</h1>
+                <h1 class="title is-uppercase is-size-3 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $project->title }}</h1>
             </div>
 
             <div class="box is-paddingless p-b-150">
 
                 <div class="preview">
                     <figure class="image is-2by1">
-                        <img class="is-rounded-small" src="{{ Voyager::image( $product->image ) }}" alt="{{ $product->title }}">
+                        <img class="is-rounded-small" src="{{ Voyager::image( $project->image ) }}" alt="{{ $project->title }}">
                     </figure>
                 </div>
 
+                
+
                 <div class="content m-t-50">
                     <div class="columns is-centered">
+                        
                         <div class="column is-10">
-                            <article>
-                                {!! $product->body !!}
+                            <div class="details is-clearfix">
+                                <div class="keys is-pulled-left has-text-weight-light">
+                                    <p class="m-b-0 is-size-4">scope</p>
+                                    <p class="m-b-0 is-size-4">contractor</p>
+                                    <p class="m-b-0 is-size-4">status</p>
+                                    <p class="m-b-0 is-size-4">date</p>
+                                </div>
+                                <div class="values m-l-200 has-text-weight-medium is-capitalized">
+                                    <p class="m-b-0 is-size-4">{{ $project->scope }}</p>
+                                    <p class="m-b-0 is-size-4">{{ $project->contractor }}</p>
+                                    <p class="m-b-0 is-size-4">{{ $project->progress }}</p>
+                                    <p class="m-b-0 is-size-4">{{ Carbon::parse($project->start_date)->translatedFormat('d F Y') }} / {{ Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</p>
+                                </div>
+                            </div>
+                            <article class="m-t-50">
+                                {!! $project->body !!}
                             </article>
                         </div>
                     </div>
@@ -41,7 +58,7 @@
                             <div class="date is-pulled-left">
                                 <span>
                                     <i class="far fa-calendar-alt"></i>
-                                    {{ $originalProduct->created_at->diffForHumans() }}
+                                    {{ $originalproject->created_at->diffForHumans() }}
                                 </span>
                             </div>
                             <div class="social is-pulled-right">
@@ -52,9 +69,9 @@
                                     <div class="column">
                                         <social-sharing class="is-inline"
                                             url="{{ url()->current() }}"
-                                            title="{{ $product->title }}"
-                                            description="{{ $product->excerpt }}"
-                                            quote="{{ $product->excerpt }}"
+                                            title="{{ $project->title }}"
+                                            description="{{ $project->excerpt }}"
+                                            quote="{{ $project->excerpt }}"
                                             inline-template>
                                             <div>
                                                 <network network="vk">
@@ -105,16 +122,16 @@
 
     <div class="has-bg-striped is-relative has-background-white-bis p-t-50 is-hidden-desktop">
         <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-            <h1 class="title is-uppercase is-size-6-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $product->title }}</h1>
+            <h1 class="title is-uppercase is-size-6-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $project->title }}</h1>
         </div>
 
         <div class="preview">
             <figure class="image is-5by3 m-t-20">
-                <img src="{{ Voyager::image( $product->image ) }}">
+                <img src="{{ Voyager::image( $project->image ) }}">
             </figure>
             <div class="notification is-primary is-radiusless is-capitalized has-text-weight-bold p-t-10 p-b-10 p-l-10 p-r-10 is-size-7 m-b-0">
                 <span>
-                    {{ $product->title }}
+                    {{ $project->title }}
                 </span>
                 <span class="is-pulled-right">
                     <i class="fas fa-info-circle"></i>
@@ -125,7 +142,7 @@
         <div class="box is-relative is-radiusless">      
             <div class="content is-mobile is-relative is-small">
                 <article>
-                    {!! $product->body !!}
+                    {!! $project->body !!}
                 </article>
             </div>
 
@@ -137,7 +154,7 @@
                         <span class="icon">
                             <i class="far fa-calendar-alt"></i>
                         </span>
-                        <span>{{ $originalProduct->created_at->diffForHumans() }}</span>
+                        <span>{{ $originalproject->created_at->diffForHumans() }}</span>
                     </div>
                     <div class="column has-text-right">
                         <div class="social">
@@ -155,9 +172,9 @@
                 <transition name="slide-up-fade">
                     <div class="notification" ref="social-mobile" v-if="showSocial">
                         <social-sharing url="{{ url()->current() }}"
-                            title="{{ $product->title }}"
-                            description="{{ $product->excerpt }}"
-                            quote="{{ $product->excerpt }}"
+                            title="{{ $project->title }}"
+                            description="{{ $project->excerpt }}"
+                            quote="{{ $project->excerpt }}"
                             inline-template>
                             <div>
                                 <div class="columns is-mobile is-centered">

@@ -7,7 +7,7 @@
             <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">scope of business</h1>
         </div>
 
-        <div class="columns is-multiline is-centered">
+        <div class="columns is-multiline">
             @foreach ($scopes as $scope)
                 <div class="column is-4">
                     <a class="box is-paddingless" href="{{ route('scope.show', $scope->slug, true, null) }}">
@@ -15,7 +15,7 @@
                             <img class="is-rounded-small" src="{{ Voyager::image( $scope->image ) }}">
                         </figure>
                         <article class="notification is-white p-l-50 p-r-50">
-                            <h4 class="title is-5">{{ $scope->title }}</h4>
+                            <h4 class="title is-5 is-capitalized">{{ $scope->title }}</h4>
                             <h6 class="subtitle is-6 has-text-grey-light m-t-10">{{ $scope->excerpt }}</h6>
                             <h6 class="link is-size-6">learn more</h6>
                         </article>
