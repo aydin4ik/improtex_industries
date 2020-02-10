@@ -21,9 +21,10 @@ Route::localized(function() {
     
     Route::get('about', 'ShowAbout')->name('about');
 
-    Route::get('news', function () {
-        return view('welcome');
-    })->name('news');
+    Route::get('news', 'PostController@index')->name('news.index');
+    Route::get('news/{category}', 'PostController@category')->name('news.category');
+    Route::get('news/{category}/{post}', 'PostController@show')->name('news.show');
+    Route::post('news' , 'PostController@load');
 
     Route::resource('scope', 'ScopeController')->only([
         'index', 'show'

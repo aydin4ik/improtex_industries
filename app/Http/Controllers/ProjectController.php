@@ -17,7 +17,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where('status', 'PUBLISHED')
-                            ->orderBy('created_at', 'ASC')
+                            ->orderBy('created_at', 'DESC')
                             ->limit(4)
                             ->offset(0)
                             ->with('translations')
@@ -55,7 +55,7 @@ class ProjectController extends Controller
         }
 
         $projects = Project::where('status', 'PUBLISHED')
-                            ->orderBy('created_at', 'ASC')
+                            ->orderBy('created_at', 'DESC')
                             ->limit(4)
                             ->offset($offset)
                             ->get();
