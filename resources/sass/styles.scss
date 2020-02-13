@@ -38,7 +38,6 @@
 
 .is-absolute{
     position: absolute;
-    top: -140px;
 }
 
 .is-relative{
@@ -119,6 +118,20 @@
     
     &:hover{
         color: $accent !important;
+    }
+}
+
+.link.is-prev{
+    &:hover{
+        i{
+            background-color: $accent !important;
+            transform: translateX(-15px);
+        }
+    }
+}
+
+.link.is-next{
+    &:hover{
         i{
             background-color: $accent !important;
             transform: translateX(15px);
@@ -126,7 +139,7 @@
     }
 }
 
-.custom-icon-long-arrow{
+.custom-icon-long-arrow-right{
     transition: all 0.3s ease;
     display: inline-block;
     mask: url(../../public/img/sprites/long-arrow.svg);
@@ -134,6 +147,19 @@
     height: 10px;
     width: 55px;
     padding-bottom: 15px;
+    fill: $primary;
+    background-color: $primary;
+}
+
+.custom-icon-long-arrow-left{
+    transition: all 0.3s ease;
+    display: inline-block;
+    mask: url(../../public/img/sprites/long-arrow-left.svg);
+    background-repeat: no-repeat;
+    height: 10px;
+    width: 55px;
+    padding-bottom: 13px;
+    margin-bottom: 2px;
     fill: $primary;
     background-color: $primary;
 }
@@ -207,11 +233,13 @@ img.partner.is-mobile{
             opacity: 1;
         }
     }
-    .icon{
-        font-size: 2rem !important;
-        cursor: pointer;
+    button{
+        border: none;
+        background: transparent;
+        margin-top: 32px;
+        font-size: 2.2rem;
     }
-    
+        
 }
 
 .main-search.is-absolute{

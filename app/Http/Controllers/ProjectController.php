@@ -77,8 +77,20 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $prev = Project::where('id', '<', $project->id)
+        ->where('status', 'PUBLISHED')
+        ->orderBy('id', 'DESC')
+        ->first();
+
+        $next = Project::where('id', '>', $project->id)
+        ->where('status', 'PUBLISHED')
+        ->orderBy('id')
+        ->first();
+
         return view('layouts.pages.project.show',[
-            'project' => $project
+            'project' => $project,
+            'prev' => $prev,
+            'next' => $next
         ]);
     }
 

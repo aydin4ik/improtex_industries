@@ -15,9 +15,7 @@ Route::localized(function() {
 
     Route::get('/menu', 'API\menuController@index')->name('menu');
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
     
     Route::get('about', 'ShowAbout')->name('about');
 

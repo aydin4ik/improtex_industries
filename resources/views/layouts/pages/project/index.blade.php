@@ -4,7 +4,7 @@
 <div id="projects">
     <div class="section has-bg-striped m-t-100 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
-            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
+            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
                 <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">projects</h1>
             </div>
 
@@ -14,8 +14,8 @@
                             
                             <article class="p-l-20 p-r-20 p-t-20 p-b-20  is-relative" style="z-index: 21">
                                 <h6 class="subtitle is-size-6 has-text-weight-bold has-text-white is-uppercase">@{{ item.date }}</h6>
-                                <h4 class="title is-3 m-t-150 has-text-weight-medium has-text-white is-capitalized">@{{ item.title }}</h4>
-                                <h6 class="subtitle is-4 m-t-10 has-text-white is-uppercase">@{{ item.scope }}</h6>
+                                <h4 class="title is-5 m-t-150 has-text-weight-medium has-text-white is-capitalized">@{{ item.title }}</h4>
+                                <h6 class="subtitle is-6 m-t-10 has-text-white is-uppercase">@{{ item.scope }}</h6>
                                 <h6 class="is-white subtitle is-size-6 has-text-weight-bold has-text-white is-uppercase">learn more</h6>
                             </article>
                             <figure class="image is-2by1 is-covered-left is-absolute left-0 top-0" style="width:100%; height:100%">

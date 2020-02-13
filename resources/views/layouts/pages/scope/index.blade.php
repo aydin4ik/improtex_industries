@@ -3,7 +3,7 @@
 @section('content')
 <div class="section has-bg-striped m-t-200 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
     <div class="container">
-        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
+        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
             <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">scope of business</h1>
         </div>
 

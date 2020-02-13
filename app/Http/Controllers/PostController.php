@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
 use Carbon;
 
@@ -31,6 +32,9 @@ class PostController extends Controller
         $posts = $posts->each(function ($post, $key) {
 
             $post->image = Voyager::image( $post->image );
+
+            $post->title = Str::limit($post->title, 100); 
+            $post->excerpt = Str::limit($post->excerpt, 200); 
 
             $post->date = Carbon::parse($post->created_at)->translatedFormat('d F Y');
             
@@ -64,6 +68,8 @@ class PostController extends Controller
 
         $posts = $posts->each(function ($post, $key) {
             $post->image = Voyager::image( $post->image );
+            $post->title = Str::limit($post->title, 100); 
+            $post->excerpt = Str::limit($post->excerpt, 200); 
 
             $post->date = $post->created_at->toFormattedDateString();
         });
@@ -97,6 +103,9 @@ class PostController extends Controller
 
             $post->image = Voyager::image( $post->image );
 
+            $post->title = Str::limit($post->title, 100); 
+            $post->excerpt = Str::limit($post->excerpt, 200); 
+
             $post->date = Carbon::parse($post->created_at)->translatedFormat('d F Y');
             
             $post->url = route('news.show', [$post->category, $post->slug]);
@@ -115,8 +124,20 @@ class PostController extends Controller
      */
     public function show(Category $category, Post $post)
     {
+        $prev = Post::where('id', '<', $post->id)
+        ->where('status', 'PUBLISHED')
+        ->orderBy('id', 'DESC')
+        ->first();
+
+        $next = Post::where('id', '>', $post->id)
+        ->where('status', 'PUBLISHED')
+        ->orderBy('id')
+        ->first();
+
         return view('layouts.pages.post.show',[
-            'post' => $post
+            'post' => $post,
+            'prev' => $prev,
+            'next' => $next
         ]);
     }
 

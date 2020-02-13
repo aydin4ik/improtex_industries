@@ -46,7 +46,7 @@
 
 <div class="section has-bg-striped m-t-100 p-t-100 is-relative has-background-white-bis is-hidden-mobile">
     <div class="container">
-        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
+        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
             <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">about us</h1>
         </div>
     </div>
@@ -182,7 +182,7 @@
 <div class="has-background-white-bis" id="certificates">
     <div class="section has-bg-striped is-relative m-t-100 p-t-100 is-hidden-mobile">
         <div class="container">
-            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
+            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
                 <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">CERTIFICATES</h1>
             </div>
         </div>
