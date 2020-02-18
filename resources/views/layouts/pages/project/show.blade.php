@@ -30,19 +30,19 @@
                     <div class="columns is-centered">
                         
                         <div class="column is-10">
-                            <div class="details is-clearfix">
-                                <div class="keys is-pulled-left has-text-weight-light">
-                                    <p class="m-b-0 is-size-5">scope</p>
-                                    <p class="m-b-0 is-size-5">contractor</p>
-                                    <p class="m-b-0 is-size-5">status</p>
-                                    <p class="m-b-0 is-size-5">date</p>
-                                </div>
-                                <div class="values m-l-200 has-text-weight-medium is-capitalized">
-                                    <p class="m-b-0 is-size-5">{{ $project->scope }}</p>
-                                    <p class="m-b-0 is-size-5">{{ $project->contractor }}</p>
-                                    <p class="m-b-0 is-size-5">{{ $project->progress }}</p>
-                                    <p class="m-b-0 is-size-5">{{ Carbon::parse($project->start_date)->translatedFormat('d F Y') }} / {{ Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</p>
-                                </div>
+                            <div class="details">
+                                <p class="m-b-0 is-size-6">scope</p>
+                                <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->scope }}</p>
+                                <hr class="m-t-5 m-b-5">
+                                <p class="m-b-0 is-size-6">contractor</p>
+                                <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->contractor }}</p>
+                                <hr class="m-t-5 m-b-5">
+                                <p class="m-b-0 is-size-6">status</p>
+                                <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->progress }}</p>
+                                <hr class="m-t-5 m-b-5">
+                                <p class="m-b-0 is-size-6">date</p>
+                                <p class="m-b-0 is-size-6 has-text-weight-medium">{{ Carbon::parse($project->start_date)->translatedFormat('d F Y') }} / {{ Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</p>
+                                <hr class="m-t-5 m-b-5">
                             </div>
                             <article class="m-t-50">
                                 {!! $project->body !!}

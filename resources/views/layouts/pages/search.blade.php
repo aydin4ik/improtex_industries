@@ -1,71 +1,113 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="setion m-t-100">
-        <div class="container">
-            <h3 class="title is-size-3">Search results for:</h3>
-            <h3 class="subtitle is-size-3">{{ $results }}</h3>
-            <div class="tabs is-medium">
-                <ul>
-                  <li class="is-active"><a>News (3)</a></li>
-                  <li><a>Projects (0)</a></li>
+<div id="search">
+  <div class="setion m-t-100 is-hidden-mobile">
+    <div class="container">
+        <h3 class="subtitle is-size-3">Search results for: <strong>{{ $results }}</strong></h3>
+          <tab-component>
+            <tab name="News ({{$posts->count()}})" :selected="posts.length">
+              @foreach ($posts as $post)
+                <a class="box is-paddingless is-clipped" href="{{ route('news.show', [$post->category, $post->slug]) }}">
+                  <div class="columns">
+                    <div class="column is-2">
+                      <figure class="image is-5by4">
+                        <img src="{{ Voyager::image( $post->image ) }}">
+                      </figure>
+                    </div>
+                    <div class="column">
+                      <article class="p-t-15 p-b-15 p-r-15">
+                        <p class="title is-size-6">{{ Str::limit($post->title, 200) }}</p>
+                        <p class="subtitle is-size-6 m-t-5">{{ Str::limit($post->excerpt, 200) }}</p>
+                      </article>
+                    </div>
+                  </div>
+                </a>
+              @endforeach
+            </tab>
+            <tab name="Projects ({{$projects->count()}})" :selected="!posts.length && projects.length > 0">
+              @foreach ($projects as $project)
+                <a class="box is-paddingless is-clipped" href="{{ route('projects.show', $project->slug) }}">
+                  <div class="columns">
+                    <div class="column is-2">
+                      <figure class="image is-5by4">
+                        <img src="{{ Voyager::image( $project->image ) }}">
+                      </figure>
+                    </div>
+                    <div class="column">
+                      <article class="p-t-15 p-b-15">
+                        <p class="title is-size-6">{{ Str::limit($project->title, 200) }}</p>
+                        <p class="subtitle is-size-6">{{ Str::limit($project->scope, 200) }}</p>
+                        <p class="subtitle is-size-6">{{ Str::limit($project->excerpt, 200) }}</p>
+                      </article>
+                    </div>
+                  </div>
+                </a>
+              @endforeach
+            </tab>
+          </tab-component>
 
-                </ul>
-              </div>
-            <div class="box">
-                <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                      </p>
-                    </figure>
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                          <br>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias natus eius id voluptate alias? Magnam animi officia sed quo doloremque nostrum voluptatem, excepturi repellendus est quam non placeat iure quis!
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-            </div>
-            <div class="box">
-                <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                      </p>
-                    </figure>
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                          <br>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-            </div>
-            <div class="box">
-                <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                      </p>
-                    </figure>
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                          <br>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-            </div>
-        </div>
+          <div class="notification is-danger has-text-centered" v-if="!posts.length && !projects.length">
+            <p>
+              sorry, there is no result for <strong>{{ $results }}</strong>
+            </p>
+          </div>
+      </div>
+  </div>
+
+  <div class="section is-hidden-desktop">
+    <h3 class="subtitle is-size-7">Search results for: <strong>{{ $results }}</strong></h3>
+  </div>
+
+  <div class="is-hidden-desktop">
+    <tab-component>
+      <tab name="News ({{$posts->count()}})" :selected="posts.length">
+        @foreach ($posts as $post)
+          <a class="box is-radiusless is-paddingless" href="{{ route('news.show', [$post->category, $post->slug]) }}">
+            <figure class="image is-5by4">
+              <img src="{{ Voyager::image( $post->image ) }}">
+            </figure>
+            <article class="p-t-20 p-b-20 p-l-20 p-r-20">
+              <p class="title is-size-7">{{ Str::limit($post->title, 200) }}</p>
+              <p class="subtitle is-size-7">{{ Str::limit($post->excerpt, 200) }}</p>
+            </article>
+          </a>
+        @endforeach
+      </tab>
+      <tab name="Projects ({{$projects->count()}})" :selected="!posts.length && projects.length > 0">
+        @foreach ($projects as $project)
+          <a class="box is-radiusless is-paddingless" href="{{ route('projects.show', $project->slug) }}">
+            <figure class="image is-5by4">
+              <img src="{{ Voyager::image( $project->image ) }}">
+            </figure>
+            <article class="p-t-20 p-b-20 p-l-20 p-r-20">
+              <p class="title is-size-7">{{ Str::limit($project->title, 200) }}</p>
+              <p class="subtitle is-size-7">{{ Str::limit($project->scope, 200) }}</p>
+              <p class="subtitle is-size-7">{{ Str::limit($project->excerpt, 200) }}</p>
+            </article>
+          </a>
+        @endforeach
+      </tab>
+    </tab-component>
+
+    <div class="notification is-danger has-text-centered is-radiusless is-size-7" v-if="!posts.length && !projects.length">
+      <p>
+        sorry, there is no result for  <br> " <strong>{{ $results }} </strong> "
+      </p>
     </div>
+  </div>
+</div>
+    
+@endsection
+
+@section('scripts')
+    <script>
+      var search = new Vue({
+        el: '#search',
+        data: {
+          projects: {!! $projects !!},
+          posts: {!! $posts !!},
+        }
+      })
+    </script>
 @endsection

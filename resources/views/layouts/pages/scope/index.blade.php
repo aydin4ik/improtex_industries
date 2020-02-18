@@ -16,7 +16,7 @@
                         </figure>
                         <article class="notification is-white p-l-50 p-r-50">
                             <h4 class="title is-5 is-capitalized">{{ $scope->title }}</h4>
-                            <h6 class="subtitle is-6 has-text-grey-light m-t-10">{{ $scope->excerpt }}</h6>
+                            <h6 class="subtitle is-6 has-text-grey-light m-t-10">{{ Str::limit($scope->excerpt, 200) }}</h6>
                             <h6 class="link is-size-6">learn more</h6>
                         </article>
                     </a>

@@ -30,3 +30,4 @@ Vue.component('slider-widget', require('./components/sliderWidget.vue').default)
 Vue.component('slider-mobile', require('./components/sliderMobile.vue').default);
 Vue.component('thumb-gallery', require('./components/thumbGallery.vue').default);
 Vue.component('certificate-slider-mobile', require('./components/certificateSliderMobile.vue').default);
+Vue.component('tab-component', require('./components/tabComponent.vue').default);

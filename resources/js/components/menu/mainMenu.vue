@@ -76,7 +76,9 @@
             <div class="box is-radiusless is-paddingless">
                 <div class="wrapper">
                     <div class="search p-t-10 p-b-10 p-l-10 p-r-10">
-                    <input class="input is-medium" type="text" placeholder="Search">
+                        <form @submit.prevent="submitForm">
+                            <input class="input is-medium" type="search" placeholder="Search" v-model="query">
+                        </form>
                     </div>
 
                     <aside class="mobile-menu">
@@ -226,7 +228,9 @@
                 })
             },
             submitForm () {
-                window.location = `/search?q=${this.query}`;
+                if( this.query ){
+                    window.location = `/search?q=${this.query}`;
+                }
             }
         },
         computed: {

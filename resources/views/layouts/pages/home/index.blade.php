@@ -221,8 +221,15 @@
         @endforeach
 
       @endisset
-  
+      <div class="level m-t-20">
+        <div class="level-item">
+          <a href="{{ route('news.index') }}" class="link is-size-4 is-capitalized">see all news <i class="custom-icon-long-arrow"></i></a>    
+        </div>
+      </div>
+
     </div>
+
+    
 
   {{-- Mobile posts end--}}
 
@@ -231,7 +238,7 @@
     <div class="section has-bg-brand p-t-100 p-b-200 is-relative is-hidden-mobile">
       <div class="container">
 
-          <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless">
+          <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
             <h1 class="title is-uppercase is-size-1 has-text-weight-bold p-t-10 p-b-10 p-l-15">projects</h1>
           </div>
 
@@ -334,28 +341,7 @@
       </div>
     </div>
 
-    <div class="section is-paddingless has-bg-striped p-b-200 is-relative is-hidden-mobile">
-      <div class="container">
-        <form method="POST" action="/search">
-          <div class="field main-search has-addons">
-            @csrf
-            <div class="control is-expanded">
-                <input type="text" name="query" class="input is-large is-radiusless has-text-weight-medium" placeholder="search" required>
-                <p class="help is-primary is-family-secondary has-text-weight-bold is-size-6">Did not you find what you were looking for?</p>
-            </div>
-            <div class="control">
-              <button type="submit" class="button">
-                <span class="icon">
-                  <i class="fas fa-search"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </form>
-
-        
-      </div>
-    </div>
+    @include('layouts.includes.search')
 
     {{-- Mobile Projects start --}}
 
@@ -407,7 +393,14 @@
 
       @endisset
 
+      <div class="level m-t-20">
+        <div class="level-item">
+          <a href="{{ route('projects.index')}}" class="link is-size-4 is-capitalized">see all projects <i class="custom-icon-long-arrow"></i></a>    
+        </div>
+      </div>
     </div>
+
+
 
     {{-- Partner Mobile Start --}}
 <div class="has-background-white-bis is-hidden-desktop m-t-50 m-b-50">

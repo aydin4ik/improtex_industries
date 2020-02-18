@@ -38,6 +38,37 @@
         </div>
     </div>
 
+    <div class="has-bg-striped p-t-50 is-relative is-hidden-desktop">
+        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
+          <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">projects</h1>
+        </div>
+
+        <a class="box is-paddingless is-radiusless has-tag is-relative" v-for="project in projects" :href="project.url">
+            <figure class="image is-5by3">
+                <img :src="project.image">
+            </figure>
+            <article class="notification is-white">
+              <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">@{{ project.date }}</h6>
+              <h4 class="title is-6">@{{ project.title }}</h4>
+              <h6 class="subtitle is-7 has-text-grey-light">@{{ project.scope }}</h6>
+              <h6 class="subtitle is-7 has-text-grey-light">@{{ project.excerpt }}</h6>
+            </article>
+          </a>
+
+
+          <div class="level m-t-20 is-relative">
+            <div class="level-item">
+                <a href="#" class="link is-size-5 is-capitalized" @click.prevent="load" v-if="! completed">load more <i class="custom-icon-long-arrow"></i></a>
+                    
+                <transition name="slide-down">
+                    <div class="notification is-primary" v-if="completed">
+                        <span class="title is-size-7">No more data found</span>
+                    </div>
+                </transition>
+            </div>
+        </div>
+    </div>
+
 
 </div>
     

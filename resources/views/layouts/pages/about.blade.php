@@ -260,6 +260,9 @@
     </div>
 </div>
 {{-- Partner Desktop End --}}
+
+@include('layouts.includes.search')
+
 {{-- Partner Mobile Start --}}
 <div class="has-background-white-bis is-hidden-desktop m-t-25">
     <div class="container">

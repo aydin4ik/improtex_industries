@@ -41,7 +41,7 @@
                         </figure>
                         <article class="notification is-white p-l-15 p-r-15">
                             <h4 class="title is-6">{{ $product->title }}</h4>
-                            <h6 class="subtitle is-7 has-text-grey-light m-b-5">{{ $product->excerpt }}</h6>
+                            <h6 class="subtitle is-7 has-text-grey-light m-b-5">{{ Str::limit($product->excerpt, 200) }}</h6>
                             <h6 class="link is-size-7">learn more</h6>
                         </article>
                     </a>
