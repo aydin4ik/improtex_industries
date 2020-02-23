@@ -111,7 +111,7 @@
 }
 
 .link{
-    color: $primary !important;
+    color: $primary;
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: none !important;
@@ -135,6 +135,25 @@
         i{
             background-color: $accent !important;
             transform: translateX(15px);
+        }
+    }
+}
+
+.link.is-inactive{
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.link.is-white{
+    color: fff;
+
+    i{
+        background-color: #fff;
+    }
+
+    &:hover{
+        i{
+            background-color: #fff !important;
         }
     }
 }
@@ -260,4 +279,22 @@ img.partner.is-mobile{
 .text-rotated-90{
     writing-mode: tb-rl;
     transform: rotate(-180deg);
+}
+
+
+
+form.contact{
+    input, textarea{
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid $grey-light;
+        background-color: $white-bis;
+        box-shadow: none;
+    }
+
+    input:focus, textarea:focus{
+        border: none;
+        border-bottom: 2px solid $primary;
+        box-shadow: none;
+    }
 }

@@ -26269,7 +26269,7 @@ blockquote {
 }
 
 .link {
-  color: #1F8079 !important;
+  color: #1F8079;
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none !important;
@@ -26289,6 +26289,23 @@ blockquote {
   background-color: #F08700 !important;
   -webkit-transform: translateX(15px);
           transform: translateX(15px);
+}
+
+.link.is-inactive {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.link.is-white {
+  color: fff;
+}
+
+.link.is-white i {
+  background-color: #fff;
+}
+
+.link.is-white:hover i {
+  background-color: #fff !important;
 }
 
 .custom-icon-long-arrow-right {
@@ -26456,6 +26473,22 @@ img.partner.is-mobile {
           writing-mode: tb-rl;
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
+}
+
+form.contact input,
+form.contact textarea {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #b5b5b5;
+  background-color: #fafafa;
+  box-shadow: none;
+}
+
+form.contact input:focus,
+form.contact textarea:focus {
+  border: none;
+  border-bottom: 2px solid #1F8079;
+  box-shadow: none;
 }
 
 .slide-fade-enter-active,

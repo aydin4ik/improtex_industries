@@ -40,9 +40,8 @@ Route::localized(function() {
 
 
 
-    Route::get('/contacts', function () {
-        return view('welcome');
-    })->name('contacts');
+    Route::get('/contacts', 'ContactController@index')->name('contacts');
+    Route::post('/contacts', 'ContactController@submit');
 
     Route::post('/search', 'SearchFormController@submit');
     Route::get('/search', 'SearchFormController@submit');
