@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ ucfirst(__('general.about')) }} / Improtex Industries
+@endsection
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
 @endsection
@@ -7,7 +11,7 @@
 @section('content')
 <div class="has-bg-striped is-relative has-background-white-bis p-t-50 is-hidden-desktop">
     <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">about us</h1>
+        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.about') }}</h1>
     </div>
     <div class="columns is-mobile">
         <div class="column is-11">
@@ -47,7 +51,7 @@
 <div class="section has-bg-striped m-t-100 p-t-100 is-relative has-background-white-bis is-hidden-mobile">
     <div class="container">
         <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
-            <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">about us</h1>
+            <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.about') }}</h1>
         </div>
     </div>
 
@@ -132,7 +136,7 @@
 </div>
 {{-- Counters end --}}
 {{-- Counters Mobile --}}
-<h6 class="subtitle is-size-6 is-capitalized has-text-weight-normal has-text-centered m-t-25 is-hidden-desktop">features and statistics</h6>
+<h6 class="subtitle is-size-6 is-capitalized has-text-weight-normal has-text-centered m-t-25 is-hidden-desktop">{{ __('general.features') }}</h6>
 <div class="columns is-relative is-centered is-multiline is-mobile is-hidden-desktop" id="counters-mobile" ref="counters">
     @foreach ($features as $feature)
     @php
@@ -183,7 +187,7 @@
     <div class="section has-bg-striped is-relative m-t-100 p-t-100 is-hidden-mobile">
         <div class="container">
             <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
-                <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">CERTIFICATES</h1>
+                <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.certificates') }}</h1>
             </div>
         </div>
         <div class="container">
@@ -224,7 +228,7 @@
     </div>
     <div class="m-t-25 is-hidden-desktop">
         <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-            <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">certificates</h1>
+            <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.certificates') }}</h1>
         </div>
         <certificate-slider-mobile :slide-images="{{ $certificates }}"></certificate-slider-mobile>
     </div>
@@ -232,7 +236,7 @@
 {{-- Partners Desktop start --}}
 <div class="section p-b-100 has-background-white-bis is-hidden-mobile">
     <div class="container">
-        <h6 class="title is-size-5 is-uppercase has-text-weight-normal has-text-centered">factory's main partners</h6>
+        <h6 class="title is-size-5 is-uppercase has-text-weight-normal has-text-centered m-b-50">{{ __('general.partners') }}</h6>
         <div class="columns is-multiline is-centered">
             @foreach ($partners as $partner)
                 @if ($partner->category == 'partner')
@@ -245,7 +249,7 @@
             @endforeach
         </div>
 
-        <h6 class="title is-size-5 is-uppercase has-text-weight-normal has-text-centered m-t-50">factory's technical capacities</h6>
+        <h6 class="title is-size-5 is-uppercase has-text-weight-normal has-text-centered m-t-50 m-b-50">{{ __('general.capacities') }}</h6>
         <div class="columns is-multiline is-centered">
             @foreach ($partners as $partner)
                 @if ($partner->category == 'manufacturer')

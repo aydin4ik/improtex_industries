@@ -1,12 +1,31 @@
 @extends('layouts.app')
 
-@section('content')
 @php
     if (Voyager::translatable($product)) {
         $originalProduct = $product;
         $product = $product->translate(app()->getLocale());
     }
 @endphp
+
+@section('title')
+    {{ ucfirst($product->title) }} / Improtex Industries
+@endsection
+
+@section('metatags')
+    <meta property="og:title" content="{{ $product->title }}">
+    <meta property="og:description" content="{{ $product->excerpt }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="{{ app()->getLocale() }}_{{ strtoupper(app()->getLocale()) }}">
+    <meta property="og:site_name" content="Improtex Industries">
+    <meta property="article:published_time" content="{{ $product->created_at }}">
+    <meta property="og:image" content="{{ Voyager::image( $product->image ) }}">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="550">
+@endsection
+
+@section('content')
+
 <div id="post">
 
     <div class="section has-bg-striped p-t-50 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
@@ -47,7 +66,7 @@
                             <div class="social is-pulled-right">
                                 <div class="columns is-vcentered">
                                     <div class="column is-narrow">
-                                        <span>share this on</span>
+                                        <span>{{ __('general.share') }}</span>
                                     </div>
                                     <div class="column">
                                         <social-sharing class="is-inline"
@@ -142,7 +161,7 @@
                     <div class="column has-text-right">
                         <div class="social">
                             <button class="button is-white" @click="showSocial = true">
-                                <span class="is-capitalized is-size-7">поделиться</span>
+                                <span class="is-capitalized is-size-7">{{ __('general.share') }}</span>
                                 <span class="icon is-size-6">
                                     <i class="fas fa-share"></i>
                                 </span>

@@ -20,12 +20,12 @@
         <div class="level has-text-weight-bold has-text-primary">
             <div class="level-left">
                 <div class="level-item">
-                    <p>Improtex Industries MMC © 2019</p>
+                    <p>Improtex Industries MMC © {{ Carbon::now()->translatedFormat('Y') }}</p>
                 </div>
             </div>
             <div class="level-right">
                 <div class="level-item">
-                    <p>Metal Konstruksiya zavodu</p>
+                    <p class="is-capitalized">{{ __('general.factory') }}</p>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" :href="route(currentLocale + '.home')">
         <img :src="logo">
       </a>
 
@@ -43,7 +43,7 @@
                                 <div class="column is-11">
                                     <div class="field">
                                         <div class="control">
-                                            <input class="input has-text-centered is-static is-capitalized has-text-weight-medium" type="text" placeholder="Type your text here" ref="inputField" v-model="query">
+                                            <input class="input has-text-centered is-static is-capitalized has-text-weight-medium" type="text" :placeholder="placeholder" ref="inputField" v-model="query">
                                         </div>
                                     </div>
                                 </div>
@@ -268,6 +268,7 @@
             currentUrl: String,
             currentLocale: String,
             locales: Array,
+            placeholder: String,
         },
         created() {
             this.init()
@@ -281,7 +282,3 @@
         
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

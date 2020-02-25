@@ -4,8 +4,8 @@
         <div class="field main-search has-addons">
           @csrf
           <div class="control is-expanded">
-              <input type="text" name="query" class="input is-large is-radiusless has-text-weight-medium" placeholder="search" required>
-              <p class="help is-primary is-family-secondary has-text-weight-bold is-size-6">Did not you find what you were looking for?</p>
+              <input type="text" name="query" class="input is-large is-radiusless has-text-weight-medium p-l-0" placeholder="{{ __('general.search') }}" required>
+              <p class="help is-primary is-family-secondary has-text-weight-bold is-size-6">{{ __('general.searchTip') }}</p>
           </div>
           <div class="control">
             <button type="submit" class="button">

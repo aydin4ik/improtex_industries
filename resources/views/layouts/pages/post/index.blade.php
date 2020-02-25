@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ ucfirst(__('general.news')) }} / Improtex Industries
+@endsection
+
 @section('content')
 <div id="posts">
     <div class="section has-bg-striped m-t-200 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
             <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
-                <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">news</h1>
+                <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.news') }}</h1>
             </div>
 
             <div class="columns is-multiline">
@@ -17,7 +21,7 @@
                                         <h6 class="subtitle is-size-6 has-text-weight-bold is-uppercase">@{{ post.date }}</h6>
                                         <h4 class="title is-5 m-t-20 has-text-weight-medium is-capitalized">@{{ post.title }}</h4>
                                         <h6 class="subtitle is-6 m-t-20 has-text-grey has-text-weight-medium">@{{ post.excerpt }}</h6>
-                                        <h6 class="is-white subtitle is-size-6 has-text-weight-bold is-uppercase is-absolute bottom_20 left_40">learn more</h6>
+                                        <h6 class="is-white subtitle is-size-6 has-text-weight-bold is-uppercase is-absolute bottom_20 left_40">{{ __('general.more') }}</h6>
                                     </article>
                                 </div>
                                 <div class="column is-4 p-t-25 p-b-25">
@@ -33,11 +37,11 @@
             </div>
             <div class="level m-t-50">
                 <div class="level-item">
-                    <a href="#" class="link is-size-3 is-capitalized" @click.prevent="load" v-if="! completed">load more <i class="custom-icon-long-arrow"></i></a>
+                    <a href="#" class="link is-size-3 is-capitalized" @click.prevent="load" v-if="! completed">{{ __('general.loadMore') }} <i class="custom-icon-long-arrow"></i></a>
                         
                     <transition name="slide-down">
                         <div class="notification is-primary" v-if="completed">
-                            <span class="title is-size-5">No more data found</span>
+                            <span class="title is-size-5">{{ __('general.noMoreData') }}</span>
                         </div>
                     </transition>
                 </div>
@@ -64,11 +68,11 @@
 
           <div class="level m-t-20 is-relative">
             <div class="level-item">
-                <a href="#" class="link is-size-5 is-capitalized" @click.prevent="load" v-if="! completed">load more <i class="custom-icon-long-arrow"></i></a>
+                <a href="#" class="link is-size-5 is-capitalized" @click.prevent="load" v-if="! completed">{{ __('general.loadMore') }} <i class="custom-icon-long-arrow"></i></a>
                     
                 <transition name="slide-down">
                     <div class="notification is-primary" v-if="completed">
-                        <span class="title is-size-7">No more data found</span>
+                        <span class="title is-size-7">{{ __('general.noMoreData') }}</span>
                     </div>
                 </transition>
             </div>

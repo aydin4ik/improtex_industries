@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ ucfirst(__('general.homepage')) }} / Improtex Industries
+@endsection
 
 @section('content')
 
@@ -7,7 +10,7 @@
         <div class="container">
           
           <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
-            <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">news</h1>
+            <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.news') }}</h1>
           </div>
 
           <div class="tile is-ancestor is-centered">
@@ -29,7 +32,7 @@
                           <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalBigPost->created_at->translatedFormat('d M Y') }}</h6>
                           <h4 class="title is-size-6 m-t-20 has-text-weight-semi-bold">{{ Str::limit($bigPost->title, 120) }}</h4>
                           <h6 class="subtitle has-text-grey-light m-t-20 has-text-weight-normal">{{ Str::limit($bigPost->excerpt, 220) }}</h6>
-                          <h5 class="link is-size-6">learn more</h5>
+                          <h5 class="link is-size-6">{{ __('general.more') }}</h5>
                       </div>
                     </article>
                   </a>
@@ -65,7 +68,7 @@
                                 <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
                                 <h4 class="title m-t-20">{{ Str::limit($post->title, 120) }}</h4>
                                 <h6 class="subtitle has-text-grey-light m-t-20">{{ Str::limit($post->excerpt, 220) }}</h6>
-                                <h5 class="link is-size-6">learn more</h5>
+                                <h5 class="link is-size-6">{{ __('general.more') }}</h5>
                             </div>
                           </article>
                         </a>
@@ -165,7 +168,7 @@
 
             <div class="level m-t-50">
               <div class="level-item">
-                <a href="{{ route('news.index') }}" class="link is-size-3 is-capitalized">see all news <i class="custom-icon-long-arrow"></i></a>    
+                <a href="{{ route('news.index') }}" class="link is-next is-size-3 is-capitalized">{{ __('general.seeAllNews') }} <i class="custom-icon-long-arrow-right"></i></a>    
               </div>
             </div>
             
@@ -177,9 +180,9 @@
 
     {{-- Mobile posts start--}}
     
-    <div class="has-bg-striped p-t-50 is-relative is-hidden-desktop">
+    <div class="has-bg-striped p-t-50 p-b-20 is-relative is-hidden-desktop">
       <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">news</h1>
+        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.news') }}</h1>
       </div>
 
       @isset($bigPost)
@@ -221,9 +224,9 @@
         @endforeach
 
       @endisset
-      <div class="level m-t-20">
+      <div class="level m-t-20 is-relative">
         <div class="level-item">
-          <a href="{{ route('news.index') }}" class="link is-size-4 is-capitalized">see all news <i class="custom-icon-long-arrow"></i></a>    
+          <a href="{{ route('news.index') }}" class="link is-size-4 is-capitalized">{{ __('general.seeAllNews') }} <i class="custom-icon-long-arrow"></i></a>    
         </div>
       </div>
 
@@ -239,7 +242,7 @@
       <div class="container">
 
           <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
-            <h1 class="title is-uppercase is-size-1 has-text-weight-bold p-t-10 p-b-10 p-l-15">projects</h1>
+            <h1 class="title is-uppercase is-size-1 has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.projects') }}</h1>
           </div>
 
       </div>
@@ -267,7 +270,7 @@
                             <h4 class="title m-t-20 is-size-5 is-uppercase">{{ Str::limit($project1->title, 80) }}</h4>
                             <h6 class="subtitle has-text-grey-light m-t-20">{{ Str::limit($project1->scope, 80) }}</h6>
                             <h6 class="subtitle has-text-grey-light m-t-20">{{ Str::limit($project1->excerpt, 200) }}</h6>
-                            <h5 class="link is-size-6">learn more</h5>
+                            <h5 class="link is-size-6">{{ __('general.more') }}</h5>
                         </div>
                       </article>
                   </div>
@@ -299,7 +302,7 @@
                               <h4 class="title m-t-20 is-uppercase">{{ Str::limit($project2->title, 80) }}</h4>
                               <h6 class="subtitle has-text-grey-light m-t-20">{{ Str::limit($project2->scope, 80) }}</h6>
                               <h6 class="subtitle has-text-grey-light m-t-20">{{ Str::limit($project2->excerpt, 200) }}</h6>
-                              <h5 class="link is-size-6">learn more</h5>
+                              <h5 class="link is-size-6">{{ __('general.more') }}</h5>
                           </div>
                         </article>
                     </div>
@@ -315,7 +318,7 @@
       <div class="container">
           <div class="level m-t-50">
               <div class="level-item">
-                <a href="{{ route('projects.index')}}" class="link is-size-3 is-capitalized">see all projects <i class="custom-icon-long-arrow"></i></a>    
+                <a href="{{ route('projects.index')}}" class="link is-next is-size-3 is-capitalized">{{ __('general.seeAllProjects') }} <i class="custom-icon-long-arrow-right"></i></a>    
               </div>
             </div>
       </div>
@@ -323,7 +326,7 @@
       <div class="container">
         <div class="level m-t-100">
           <div class="level-item">
-            <h6 class="title is-size-5 is-uppercase has-text-weight-normal">factory's main partners</h6>
+            <h6 class="title is-size-5 is-uppercase has-text-weight-normal m-b-25">{{ __('general.partners') }}</h6>
           </div>
         </div>
 
@@ -347,7 +350,7 @@
 
     <div class="has-bg-brand p-t-50 is-relative is-hidden-desktop">
       <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">Projects</h1>
+        <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.projects') }}</h1>
       </div>
       @isset($project1)
           
@@ -393,9 +396,9 @@
 
       @endisset
 
-      <div class="level m-t-20">
+      <div class="level m-t-20 is-relative">
         <div class="level-item">
-          <a href="{{ route('projects.index')}}" class="link is-size-4 is-capitalized">see all projects <i class="custom-icon-long-arrow"></i></a>    
+          <a href="{{ route('projects.index')}}" class="link is-size-4 is-capitalized">{{ __('general.seeAllProjects') }} <i class="custom-icon-long-arrow"></i></a>    
         </div>
       </div>
     </div>

@@ -64,11 +64,13 @@
     @endphp
     @foreach ($locales as $locale)
         @php
-            $route = route(Route::current()->getName(), Route::current()->parameters(), true, $locale);
+            if(Route::current()){
+                $route = route(Route::current()->getName(), Route::current()->parameters(), true, $locale) ?? '';
+            }
 
             $localeItems[] = [
                 'name' => $locale,
-                'route' => $route,
+                'route' => $route ?? '',
             ];
         @endphp
     @endforeach
@@ -80,6 +82,7 @@
                     :locales="{{ json_encode($localeItems) }}"
                     :current-url={{ json_encode(url()->current()) }}
                     :logo="{{ json_encode(asset('img/logo.png')) }}"
+                    :placeholder="{{ json_encode( __('general.searchPlaceholder')) }}"
                     ></main-menu>
             </div>
 

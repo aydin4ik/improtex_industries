@@ -1,12 +1,31 @@
 @extends('layouts.app')
 
-@section('content')
 @php
     if (Voyager::translatable($project)) {
         $originalproject = $project;
         $project = $project->translate(app()->getLocale());
     }
 @endphp
+
+@section('title')
+    {{ ucfirst($project->title) }} / Improtex Industries
+@endsection
+
+@section('metatags')
+    <meta property="og:title" content="{{ $project->title }}">
+    <meta property="og:description" content="{{ $project->excerpt }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="{{ app()->getLocale() }}_{{ strtoupper(app()->getLocale()) }}">
+    <meta property="og:site_name" content="Improtex Industries">
+    <meta property="article:published_time" content="{{ $project->created_at }}">
+    <meta property="og:image" content="{{ Voyager::image( $project->image ) }}">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="550">
+@endsection
+
+@section('content')
+
 <div id="post">
 
     <div class="section has-bg-striped p-t-50 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
@@ -31,16 +50,16 @@
                         
                         <div class="column is-10">
                             <div class="details">
-                                <p class="m-b-0 is-size-6">scope</p>
+                                <p class="m-b-0 is-size-6">{{ __('general.projectScope') }}</p>
                                 <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->scope }}</p>
                                 <hr class="m-t-5 m-b-5">
-                                <p class="m-b-0 is-size-6">contractor</p>
+                                <p class="m-b-0 is-size-6">{{ __('general.projectContractor') }}</p>
                                 <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->contractor }}</p>
                                 <hr class="m-t-5 m-b-5">
-                                <p class="m-b-0 is-size-6">status</p>
+                                <p class="m-b-0 is-size-6">{{ __('general.projectStatus') }}</p>
                                 <p class="m-b-0 is-size-6 has-text-weight-medium">{{ $project->progress }}</p>
                                 <hr class="m-t-5 m-b-5">
-                                <p class="m-b-0 is-size-6">date</p>
+                                <p class="m-b-0 is-size-6">{{ __('general.projectDate') }}</p>
                                 <p class="m-b-0 is-size-6 has-text-weight-medium">{{ Carbon::parse($project->start_date)->translatedFormat('d F Y') }} / {{ Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</p>
                                 <hr class="m-t-5 m-b-5">
                             </div>
@@ -64,7 +83,7 @@
                             <div class="social is-pulled-right">
                                 <div class="columns is-vcentered">
                                     <div class="column is-narrow">
-                                        <span>share this on</span>
+                                        <span>{{ __('general.share') }}</span>
                                     </div>
                                     <div class="column">
                                         <social-sharing class="is-inline"
@@ -124,7 +143,7 @@
                         @if ($prev)
                             <a href="{{ route('projects.show', $prev->slug) }}" class="link is-prev is-size-3 is-capitalized">
                                 <i class="custom-icon-long-arrow-left"></i>
-                                <span>previous project</span>
+                                <span>{{ __('general.prevProject') }}</span>
                             </a>
                         @endif
                     </div>
@@ -133,7 +152,7 @@
                     <div class="level-item">
                         @if ($next)
                             <a href="{{ route('projects.show', $next->slug) }}" class="link is-next is-size-3 is-capitalized">
-                                <span>next project</span>
+                                <span>{{ __('general.nextProject') }}</span>
                                 <i class="custom-icon-long-arrow-right"></i>
                             </a>
                         @endif
@@ -165,16 +184,16 @@
 
         <div class="box is-relative is-radiusless">      
             <div class="details">
-                    <p class="m-b-0 is-size-7">scope</p>
+                    <p class="m-b-0 is-size-7">{{ __('general.projectScope') }}</p>
                     <p class="m-b-0 is-size-7 has-text-weight-medium">{{ $project->scope }}</p>
                     <hr class="m-t-5 m-b-5">
-                    <p class="m-b-0 is-size-7">contractor</p>
+                    <p class="m-b-0 is-size-7">{{ __('general.projectContractor') }}</p>
                     <p class="m-b-0 is-size-7 has-text-weight-medium">{{ $project->contractor }}</p>
                     <hr class="m-t-5 m-b-5">
-                    <p class="m-b-0 is-size-7">status</p>
+                    <p class="m-b-0 is-size-7">{{ __('general.projectStatus') }}</p>
                     <p class="m-b-0 is-size-7 has-text-weight-medium">{{ $project->progress }}</p>
                     <hr class="m-t-5 m-b-5">
-                    <p class="m-b-0 is-size-7">date</p>
+                    <p class="m-b-0 is-size-7">{{ __('general.projectDate') }}</p>
                     <p class="m-b-0 is-size-7 has-text-weight-medium">{{ Carbon::parse($project->start_date)->translatedFormat('d F Y') }} / {{ Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</p>
                     <hr class="m-t-5 m-b-5">
             </div>
@@ -197,7 +216,7 @@
                     <div class="column has-text-right">
                         <div class="social">
                             <button class="button is-white" @click="showSocial = true">
-                                <span class="is-capitalized is-size-7">поделиться</span>
+                                <span class="is-capitalized is-size-7">{{ __('general.share') }}</span>
                                 <span class="icon is-size-6">
                                     <i class="fas fa-share"></i>
                                 </span>
