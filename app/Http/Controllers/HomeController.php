@@ -12,27 +12,17 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $bigPost = Post::where('status', 'PUBLISHED')
-        ->orderBy('created_at', 'ASC')
-        ->first();
-
-        $mediumPosts = Post::where('id', '>', $bigPost->id)
-        ->where('status', 'PUBLISHED')
-        ->orderBy('created_at', 'ASC')
-        ->limit(2)
+        $posts = Post::where('status', 'PUBLISHED')
+        ->orderBy('created_at', 'DESC')
+        ->limit(7)
         ->offset(0)
         ->get();
 
-        $lastMediumPost = $mediumPosts->last();
-
-
-        $smallPosts = Post::where('id', '>', $lastMediumPost->id)
-        ->where('status', 'PUBLISHED')
-        ->orderBy('created_at', 'ASC')
-        ->limit(4)
-        ->offset(0)
-        ->get();
-
+        
+        $bigPost = $posts->first();
+        $mediumPosts = $posts->slice(1, 2);
+        $smallPosts = $posts->slice(3);
+        // dd($posts
 
         $project1 = Project::where('status', 'PUBLISHED')
         ->orderBy('created_at', 'ASC')

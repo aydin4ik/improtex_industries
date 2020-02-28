@@ -8,12 +8,24 @@
           <tab-component>
             <tab name="{{ __('general.news') }} ({{$posts->count()}})" :selected="posts.length">
               @foreach ($posts as $post)
+              @php
+                if (Voyager::translatable($post)) {
+                  $originalPost = $post;
+                  $post = $post->translate(app()->getLocale());
+                }
+              @endphp
                 <a class="box is-paddingless is-clipped" href="{{ route('news.show', [$post->category, $post->slug]) }}">
                   <div class="columns">
                     <div class="column is-2">
-                      <figure class="image is-5by4">
-                        <img src="{{ Voyager::image( $post->image ) }}">
-                      </figure>
+                      @if ($originalPost->image)
+                              <figure class="image is-5by4">
+                                <img src={{ Voyager::image( $originalPost->thumbnail('square') ) }}>
+                              </figure>
+                            @else
+                              <figure class="image is-5by4">
+                                <img src={{ asset('img/no-image.png') }}>   
+                              </figure>
+                            @endif
                     </div>
                     <div class="column">
                       <article class="p-t-15 p-b-15 p-r-15">

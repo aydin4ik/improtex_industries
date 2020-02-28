@@ -2,8 +2,9 @@
 
 @php
     if (Voyager::translatable($post)) {
-        $originalpost = $post;
+        $originalPost = $post;
         $post = $post->translate(app()->getLocale());
+        $category = $post->category->getTranslatedAttribute('name', app()->getLocale());
     }
 @endphp
 
@@ -30,19 +31,20 @@
 
 <div id="post">
 
-    <div class="section has-bg-striped p-t-50 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
+    <div class="section has-bg-striped p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
-
-            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-                <h1 class="title is-uppercase is-size-3 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $post->title }}</h1>
-            </div>
-
             <div class="box is-paddingless p-b-150">
 
                 <div class="preview">
-                    <figure class="image is-2by1">
-                        <img class="is-rounded-small" src="{{ Voyager::image( $post->image ) }}" alt="{{ $post->title }}">
-                    </figure>
+                    @if ($originalPost->image)
+                        <figure class="image is-2by1">
+                        <img class="is-rounded-small" src="{{ Voyager::image( $originalPost->thumbnail('huge') ) }}" alt="{{ $post->title }}">
+                        </figure>
+                    @else
+                        <figure class="image is-2by1">
+                        <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                        </figure>
+                    @endif
                 </div>
 
                 
@@ -50,6 +52,11 @@
                 <div class="content m-t-50">
                     <div class="columns is-centered">
                         <div class="column is-10">
+                            <h1 class="title is-size-4">
+                                {{ $post->title}}
+                            </h1>
+                            <span class="tag is-info is-light">{{ $category }}</span>
+                            <hr>
                             <article class="m-t-50">
                                 {!! $post->body !!}
                             </article>
@@ -64,7 +71,7 @@
                             <div class="date is-pulled-left">
                                 <span>
                                     <i class="far fa-calendar-alt"></i>
-                                    {{ $originalpost->created_at->diffForHumans() }}
+                                    {{ $originalPost->created_at->diffForHumans() }}
                                 </span>
                             </div>
                             <div class="social is-pulled-right">
@@ -183,7 +190,7 @@
                         <span class="icon">
                             <i class="far fa-calendar-alt"></i>
                         </span>
-                        <span>{{ $originalpost->created_at->diffForHumans() }}</span>
+                        <span>{{ $originalPost->created_at->diffForHumans() }}</span>
                     </div>
                     <div class="column has-text-right">
                         <div class="social">

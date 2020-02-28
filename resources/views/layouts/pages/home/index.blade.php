@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ ucfirst(__('general.homepage')) }} / Improtex Industries
+    {{ __('general.homepage') }} / Improtex Industries
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
           <div class="notification has-background-transparent is-radiusless has-left-border-wide is-absolute is-paddingless top-140">
             <h1 class="title is-uppercase is-size-1 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.news') }}</h1>
           </div>
-
+          
           <div class="tile is-ancestor is-centered">
             @isset($bigPost)
             <div class="tile is-parent">
@@ -20,13 +20,20 @@
                   if (Voyager::translatable($bigPost)) {
                     $originalBigPost = $bigPost;
                     $bigPost = $bigPost->translate(app()->getLocale());
+                    $category = $bigPost->category->getTranslatedAttribute('name', app()->getLocale());
                   }
                 @endphp
                 <a class="tile is-child box is-paddingless has-tag is-clipped is-relative" href="{{ route('news.show', [$bigPost->category, $bigPost->slug]) }}">
-                    <span class="tag-big has-text-weight-medium">{{ $bigPost->category->name }}</span>
-                    <figure class="image is-3by2 is-covered-left">
-                        <img class="is-rounded-small" src={{ Voyager::image( $bigPost->image ) }}>
-                    </figure>
+                    <span class="tag-big has-text-weight-medium">{{ $category }}</span>
+                      @if ($originalBigPost->image)
+                        <figure class="image is-3by2 is-covered-left">
+                          <img class="is-rounded-small" src={{ Voyager::image( $originalBigPost->thumbnail('big') ) }}>
+                        </figure>
+                      @else
+                        <figure class="image is-3by2">
+                          <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                        </figure>
+                      @endif
                     <article class="notification is-white is-radiusless p-l-40">
                       <div class="content m-t-40 p-l-25 has-left-border-thin">
                           <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalBigPost->created_at->translatedFormat('d M Y') }}</h6>
@@ -49,20 +56,27 @@
                   <div class="tile">
                   
                   @if ($mediumPosts->count() < 2)
-                    <div class="tile is-parent is-vertical">
+                    <div class="tile is-parent is-vertical is-12">
                       @foreach ($mediumPosts as $post)
                         @php
                           if (Voyager::translatable($post)) {
                             $originalPost = $post;
                             $post = $post->translate(app()->getLocale());
+                            $category = $post->category->getTranslatedAttribute('name', app()->getLocale());
                           }
                         @endphp
                             
-                        <a class="tile is-child box is-paddingless has-tag is-clipped" href="{{ route('news.show', [$post->category, $post->slug]) }}">
-                          <span class="tag-big has-text-weight-medium">{{ $post->category->name }}</span>
-                          <figure class="image is-3by2 is-covered-left">
-                              <img class="is-rounded-small" src={{ Voyager::image( $post->image ) }}>
-                          </figure>
+                        <a class="tile is-child box is-paddingless has-tag is-clipped is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
+                          <span class="tag-big has-text-weight-medium">{{ $category }}</span>
+                          @if ($originalPost->image)
+                        <figure class="image is-3by2 is-covered-left">
+                          <img class="is-rounded-small" src={{ Voyager::image( $originalPost->thumbnail('big') ) }}>
+                        </figure>
+                      @else
+                        <figure class="image is-3by2">
+                          <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                        </figure>
+                      @endif
                           <article class="notification is-white is-radiusless p-l-40">
                             <div class="content m-t-40 p-l-25 has-left-border-thin">
                                 <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
@@ -83,13 +97,20 @@
                         if (Voyager::translatable($post)) {
                           $originalPost = $post;
                           $post = $post->translate(app()->getLocale());
+                          $category = $post->category->getTranslatedAttribute('name', app()->getLocale());
                         }
                       @endphp
                       <a class="tile is-child box is-paddingless has-tag is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
-                        <span class="tag-small has-text-weight-medium is-size-7">{{ $post->category->name }}</span>
-                        <figure class="image is-5by3">
-                            <img class="is-rounded-small" src="{{ Voyager::image( $post->image ) }}">
-                        </figure>
+                        <span class="tag-small has-text-weight-medium is-size-7">{{ $category }}</span>
+                        @if ($originalPost->image)
+                          <figure class="image is-3by2">
+                            <img class="is-rounded-small" src={{ Voyager::image( $originalPost->thumbnail('medium') ) }}>
+                          </figure>
+                        @else
+                          <figure class="image is-3by2">
+                            <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                          </figure>
+                      @endif
                         <article class="notification is-white">
                           <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
                           <h4 class="title is-6">{{ Str::limit($post->title, 80) }}</h4>
@@ -110,14 +131,21 @@
                           if (Voyager::translatable($post)) {
                             $originalPost = $post;
                             $post = $post->translate(app()->getLocale());
+                            $category = $post->category->getTranslatedAttribute('name', app()->getLocale());
                           }
                         @endphp
                         @if ( $smallPosts->count() == 1) 
                           <a class="tile is-child box is-paddingless has-tag is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
-                            <span class="tag-small has-text-weight-medium is-size-7">{{ $post->category->name }}</span>
-                            <figure class="image is-1by1">
-                                <img class="is-rounded-small" src="{{ Voyager::image( $post->image ) }}">
-                            </figure>
+                            <span class="tag-small has-text-weight-medium is-size-7">{{ $category }}</span>
+                            @if ($originalPost->image)
+                              <figure class="image is-1by1">
+                                <img class="is-rounded-small" src={{ Voyager::image( $originalPost->thumbnail('square') ) }}>
+                              </figure>
+                            @else
+                              <figure class="image is-3by2">
+                                <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                              </figure>
+                            @endif
                             <article class="notification is-white">
                               <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
                               <h4 class="title is-6">{{ Str::limit( $post->title, 120) }}</h4>
@@ -127,10 +155,16 @@
                         @endif
                         @if ($smallPosts->count() == 2)
                           <a class="tile is-child box is-paddingless has-tag is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
-                            <span class="tag-small has-text-weight-medium is-size-7">{{ $post->category->name }}</span>
-                            <figure class="image is-2by1">
-                                <img class="is-rounded-small" src="{{ Voyager::image( $post->image ) }}">
-                            </figure>
+                            <span class="tag-small has-text-weight-medium is-size-7">{{ $category }}</span>
+                            @if ($originalPost->image)
+                              <figure class="image is-2by1">
+                                <img class="is-rounded-small" src={{ Voyager::image( $originalPost->thumbnail('big') ) }}>
+                              </figure>
+                            @else
+                              <figure class="image is-2by1">
+                                <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+                              </figure>
+                            @endif
                             <article class="notification is-white">
                               <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
                               <h4 class="title is-6">{{ Str::limit($post->title, 80) }}</h4>
@@ -139,7 +173,7 @@
                           </a>
                         @endif
                         @if ($smallPosts->count() > 2)
-                          <a class="tile is-child box">
+                          <a class="tile is-child box" href="{{ route('news.show', [$post->category, $post->slug]) }}">
                             <div class="columns">
                               <div class="column">
                                 <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
@@ -147,9 +181,15 @@
                                 <h6 class="subtitle is-7 has-text-grey-light">{{ Str::limit($post->excerpt, 80) }}</h6>
                               </div>
                               <div class="column is-one-third">
-                                <figure class="image is-square">
-                                  <img src="{{ Voyager::image( $post->image ) }}">
-                                </figure>
+                                @if ($originalPost->image)
+                                  <figure class="image is-1by1">
+                                    <img class="is-rounded-all" src={{ Voyager::image( $originalPost->thumbnail('small') ) }}>
+                                  </figure>
+                                @else
+                                  <figure class="image is-1by1">
+                                    <img class="is-rounded-all" src={{ asset('images/no-image.svg') }}>   
+                                  </figure>
+                                @endif
                               </div>
                             </div>
                           </a>
@@ -189,9 +229,15 @@
           
         <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('news.show', [$bigPost->category, $bigPost->slug]) }}">
           <span class="tag-small has-text-weight-medium is-size-7">{{ $bigPost->category->name }}</span>
-          <figure class="image is-5by3">
-              <img src="{{ Voyager::image( $bigPost->image ) }}">
-          </figure>
+          @if ($originalBigPost->image)
+            <figure class="image is-3by2 is-covered-left">
+              <img class="is-rounded-small" src={{ Voyager::image( $originalBigPost->thumbnail('big') ) }}>
+            </figure>
+          @else
+            <figure class="image is-3by2">
+              <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+            </figure>
+          @endif
           <article class="notification is-white">
             <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalBigPost->created_at->translatedFormat('d M Y') }}</h6>
             <h4 class="title is-6">{{ Str::limit($bigPost->title, 80) }}</h4>

@@ -70,7 +70,7 @@ class PostController extends Controller
             $post->image = Voyager::image( $post->image );
             $post->title = Str::limit($post->title, 100); 
             $post->excerpt = Str::limit($post->excerpt, 200); 
-
+            $post->url = route('news.show', [$post->category, $post->slug]);
             $post->date = $post->created_at->toFormattedDateString();
         });
 

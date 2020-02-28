@@ -11,6 +11,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    // page titles
+    'homepage' => 'Home Page',
+
+
 
     'more' => 'learn more',
     'loadMore' => 'load more',

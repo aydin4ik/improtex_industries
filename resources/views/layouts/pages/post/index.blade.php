@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+{{-- no image set for vue--}}
+
+@php
+    $noImage = asset('images/no-image.svg');
+@endphp
+
 <div id="posts">
     <div class="section has-bg-striped m-t-200 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
@@ -26,7 +32,8 @@
                                 </div>
                                 <div class="column is-4 p-t-25 p-b-25">
                                     <figure class="image is-5by3 " style="width:100%; height:100%">
-                                        <img class="is-rounded-all" :src="post.image">
+                                        <img class="is-rounded-all" :src="post.image" v-if="post.image">
+                                        <img class="is-rounded-all" :src="noImage" v-else>
                                     </figure>
                                 </div>
                             </div>
@@ -90,6 +97,7 @@
         el: '#posts',
         data: {
             posts: {!! $posts !!},
+            noImage: {!! json_encode($noImage) !!},
             completed: false,
 
         },
