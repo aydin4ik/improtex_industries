@@ -24,14 +24,19 @@ class HomeController extends Controller
         $smallPosts = $posts->slice(3);
         // dd($posts
 
-        $project1 = Project::where('status', 'PUBLISHED')
-        ->orderBy('created_at', 'ASC')
-        ->first();
+        $projects = Project::where('status', 'PUBLISHED')
+        ->orderBy('created_at', 'DESC')
+        ->limit(2)
+        ->offset(0)
+        ->get();
 
-        $project2 = Project::where('id', '>', $project1->id)
-        ->where('status', 'PUBLISHED')
-        ->orderBy('created_at', 'ASC')
-        ->first();
+        $project1 = $projects->first();
+        
+        if($projects->count() > 1){
+            $project2 = $projects->last();
+        }else{
+            $project2 = null;
+        }
 
         return view('layouts.pages.home.index',[
             // posts

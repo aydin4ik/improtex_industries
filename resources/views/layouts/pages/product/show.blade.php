@@ -28,24 +28,30 @@
 
 <div id="post">
 
-    <div class="section has-bg-striped p-t-50 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
+    <div class="section has-bg-striped p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
-
-            <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-                <h1 class="title is-uppercase is-size-3 is-size-4-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $product->title }}</h1>
-            </div>
 
             <div class="box is-paddingless p-b-150">
 
                 <div class="preview">
-                    <figure class="image is-2by1">
-                        <img class="is-rounded-small" src="{{ Voyager::image( $product->image ) }}" alt="{{ $product->title }}">
-                    </figure>
+                    @if ($originalProduct->image)
+                        <figure class="image is-2by1">
+                        <img class="is-rounded-small" src={{ Voyager::image( $originalProduct->thumbnail('huge') ) }}>
+                        </figure>
+                    @else
+                        <figure class="image is-2by1">
+                        <img src={{ asset('images/no-image.svg') }}>   
+                        </figure>
+                    @endif
                 </div>
 
                 <div class="content m-t-50">
                     <div class="columns is-centered">
                         <div class="column is-10">
+                            <h1 class="title is-size-4">
+                                {{ $product->title}}
+                            </h1>
+                            <hr>
                             <article>
                                 {!! $product->body !!}
                             </article>
@@ -122,15 +128,17 @@
         </div>
     </div>
 
-    <div class="has-bg-striped is-relative has-background-white-bis p-t-50 is-hidden-desktop">
-        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-            <h1 class="title is-uppercase is-size-6-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $product->title }}</h1>
-        </div>
-
+    <div class="has-bg-striped is-relative has-background-white-bis p-t-25 is-hidden-desktop">
         <div class="preview">
-            <figure class="image is-5by3 m-t-20">
-                <img src="{{ Voyager::image( $product->image ) }}">
-            </figure>
+            @if ($originalProduct->image)
+                <figure class="image is-2by1">
+                <img src={{ Voyager::image( $originalProduct->thumbnail('huge') ) }}>
+                </figure>
+            @else
+                <figure class="image is-2by1">
+                <img src={{ asset('images/no-image.svg') }}>   
+                </figure>
+            @endif
             <div class="notification is-primary is-radiusless is-capitalized has-text-weight-bold p-t-10 p-b-10 p-l-10 p-r-10 is-size-7 m-b-0">
                 <span>
                     {{ $product->title }}
@@ -233,3 +241,4 @@
 </script>
     
 @endsection
+

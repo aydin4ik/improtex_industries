@@ -156,15 +156,18 @@
         </div>
     </div>
 
-    <div class="has-bg-striped is-relative has-background-white-bis p-t-50 is-hidden-desktop">
-        <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
-            <h1 class="title is-uppercase is-size-6-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ $post->title }}</h1>
-        </div>
+    <div class="has-bg-striped is-relative has-background-white-bis p-t-0 is-hidden-desktop">
 
         <div class="preview">
-            <figure class="image is-5by3 m-t-20">
-                <img src="{{ Voyager::image( $post->image ) }}">
-            </figure>
+            @if ($originalPost->image)
+                <figure class="image is-5by3 m-t-20">
+                    <img src={{ Voyager::image( $originalPost->thumbnail('big') ) }}>
+                </figure>
+            @else
+                <figure class="image is-5by3 m-t-30">
+                    <img src={{ asset('images/no-image.svg') }}>   
+                </figure>
+            @endif
             <div class="notification is-primary is-radiusless is-capitalized has-text-weight-bold p-t-10 p-b-10 p-l-10 p-r-10 is-size-7 m-b-0">
                 <span>
                     {{ $post->title }}

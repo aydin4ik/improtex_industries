@@ -4,11 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Traits\Translatable;
+use TCG\Voyager\Traits\Resizable;
+
 
 
 
 class About extends Model
 {
+    // Allow resizable images.
+        use Resizable;
+    
     // Make Model translatable.
     use Translatable;
 
@@ -24,6 +29,6 @@ class About extends Model
      *
      * @var array
      */
-    protected $translatable = ['title', 'subtitle', 'body'];
+    protected $translatable = ['title', 'subtitle', 'body', 'image_title', 'image_description'];
 
 }

@@ -23,21 +23,16 @@ class PostController extends Controller
                             ->orderBy('created_at', 'DESC')
                             ->limit(4)
                             ->offset(0)
-                            ->with('translations')
                             ->get();
 
-
-        $posts = $posts->translate(app()->getLocale());
-        
         $posts = $posts->each(function ($post, $key) {
 
-            $post->image = Voyager::image( $post->image );
-
+            $post->image = Voyager::image( $post->thumbnail('big'));
+            $post->title = $post->getTranslatedAttribute('title', app()->getLocale());
+            $post->excerpt = $post->getTranslatedAttribute('excerpt', app()->getLocale());
             $post->title = Str::limit($post->title, 100); 
             $post->excerpt = Str::limit($post->excerpt, 200); 
-
-            $post->date = Carbon::parse($post->created_at)->translatedFormat('d F Y');
-            
+            $post->date = Carbon::parse($post->created_at)->translatedFormat('d F Y');            
             $post->url = route('news.show', [$post->category, $post->slug]);
 
             return $post;
@@ -61,17 +56,25 @@ class PostController extends Controller
         }
 
         $posts = Post::where('status', 'PUBLISHED')
-                            ->orderBy('created_at', 'DESC')
-                            ->limit(4)
-                            ->offset($offset)
-                            ->get();
+        ->orderBy('created_at', 'DESC')
+        ->limit(4)
+        ->offset($offset)
+        ->get();
 
-        $posts = $posts->each(function ($post, $key) {
-            $post->image = Voyager::image( $post->image );
+        $posts = $posts->each(function ($post, $key) use(&$request) {  
+
+            $locale = $request->locale;
+
+            $post->image = Voyager::image( $post->thumbnail('big'));
+
+            $post->title = $post->getTranslatedAttribute('title', $locale);
+            $post->excerpt = $post->getTranslatedAttribute('excerpt', $locale);
             $post->title = Str::limit($post->title, 100); 
             $post->excerpt = Str::limit($post->excerpt, 200); 
-            $post->url = route('news.show', [$post->category, $post->slug]);
-            $post->date = $post->created_at->toFormattedDateString();
+            $post->date = Carbon::parse($post->created_at)->translatedFormat('d F Y');            
+            $post->url = route('news.show', [$post->category, $post->slug], true, $request->locale);
+
+            return $post;
         });
 
         return $posts;
@@ -90,7 +93,7 @@ class PostController extends Controller
         
         $posts = $category->posts()
                             ->where('status', 'PUBLISHED')
-                            ->orderBy('created_at', 'ASC')
+                            ->orderBy('created_at', 'DESC')
                             ->limit(4)
                             ->offset(0)
                             ->with('translations')

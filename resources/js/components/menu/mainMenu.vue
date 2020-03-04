@@ -91,7 +91,7 @@
                                     <a class="dropdown-toggle p-r-15"  @click.prevent="toggleMobileDropdown(i)">
                                     <i class="fas fa-angle-right"></i>
                                     </a>
-                                    <a  class="menu-link" :class="item.isActive ? 'is-active': ''" :href="item.url">{{ item.title }}</a>
+                                    <a  class="menu-link" :class="item.isActive ? 'is-active': ''" :href="route(currentLocale + '.' + item.route)">{{ item.title }}</a>
                                 </header>
                                 <transition name="slide-up-fade">
                                     <ul class="dropdown" v-if="item.isActive">
@@ -229,7 +229,11 @@
             },
             submitForm () {
                 if( this.query ){
-                    window.location = `/search?q=${this.query}`;
+                    if(this.currentLocale == 'en'){
+                        window.location = `/search?q=${this.query}`;
+                    }else{
+                        window.location = `/${this.currentLocale}/search?q=${this.query}`;
+                    }
                 }
             }
         },

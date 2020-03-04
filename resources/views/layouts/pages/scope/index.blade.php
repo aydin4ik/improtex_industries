@@ -13,11 +13,23 @@
 
         <div class="columns is-multiline">
             @foreach ($scopes as $scope)
+                @php
+                    if (Voyager::translatable($scope)) {
+                        $originalScope = $scope;
+                        $scope = $scope->translate(app()->getLocale());
+                    }
+                @endphp
                 <div class="column is-4">
                     <a class="box is-paddingless" href="{{ route('scope.show', $scope->slug, true, null) }}">
-                        <figure class="image is-5by3">
-                            <img class="is-rounded-small" src="{{ Voyager::image( $scope->image ) }}">
-                        </figure>
+                        @if ($scope->image)
+                            <figure class="image is-5by3">
+                            <img src={{ Voyager::image( $originalScope->thumbnail('card') ) }}>
+                            </figure>
+                        @else
+                            <figure class="image is-5by3">
+                            <img src={{ asset('images/no-image.svg') }}>   
+                            </figure>
+                        @endif
                         <article class="notification is-white p-l-50 p-r-50">
                             <h4 class="title is-5 is-capitalized">{{ $scope->title }}</h4>
                             <h6 class="subtitle is-6 has-text-grey-light m-t-10">{{ Str::limit($scope->excerpt, 200) }}</h6>
@@ -38,11 +50,23 @@
 
         <div class="columns is-multiline is-centered">
             @foreach ($scopes as $scope)
+            @php
+                if (Voyager::translatable($scope)) {
+                    $originalScope = $scope;
+                    $scope = $scope->translate(app()->getLocale());
+                }
+            @endphp
                 <div class="column is-4">
                     <a class="box is-paddingless is-radiusless" href="{{ route('scope.show', $scope->slug, true, null) }}">
-                        <figure class="image is-5by3">
-                            <img src="{{ Voyager::image( $scope->image ) }}">
-                        </figure>
+                        @if ($scope->image)
+                            <figure class="image is-5by3">
+                            <img src={{ Voyager::image( $originalScope->thumbnail('card') ) }}>
+                            </figure>
+                        @else
+                            <figure class="image is-5by3">
+                            <img src={{ asset('images/no-image.svg') }}>   
+                            </figure>
+                        @endif
                         <article class="notification is-white p-l-15 p-r-15">
                             <h4 class="title is-6">{{ $scope->title }}</h4>
                             <h6 class="subtitle is-7 has-text-grey-light m-b-5">{{ $scope->excerpt }}</h6>

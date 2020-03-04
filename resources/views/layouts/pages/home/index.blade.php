@@ -230,12 +230,12 @@
         <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('news.show', [$bigPost->category, $bigPost->slug]) }}">
           <span class="tag-small has-text-weight-medium is-size-7">{{ $bigPost->category->name }}</span>
           @if ($originalBigPost->image)
-            <figure class="image is-3by2 is-covered-left">
-              <img class="is-rounded-small" src={{ Voyager::image( $originalBigPost->thumbnail('big') ) }}>
+            <figure class="image is-3by2">
+              <img src={{ Voyager::image( $originalBigPost->thumbnail('big') ) }}>
             </figure>
           @else
             <figure class="image is-3by2">
-              <img class="is-rounded-small" src={{ asset('images/no-image.svg') }}>   
+              <img src={{ asset('images/no-image.svg') }}>   
             </figure>
           @endif
           <article class="notification is-white">
@@ -258,9 +258,15 @@
           @endphp
           <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
             <span class="tag-small has-text-weight-medium is-size-7">{{ $post->category->name }}</span>
-            <figure class="image is-5by3">
-                <img src="{{ Voyager::image( $post->image ) }}">
+            @if ($originalPost->image)
+            <figure class="image is-3by2">
+              <img src={{ Voyager::image( $originalPost->thumbnail('big') ) }}>
             </figure>
+            @else
+              <figure class="image is-3by2">
+                <img src={{ asset('images/no-image.svg') }}>   
+              </figure>
+            @endif
             <article class="notification is-white">
               <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalPost->created_at->translatedFormat('d M Y') }}</h6>
               <h4 class="title is-6">{{ Str::limit($post->title, 80) }}</h4>
@@ -321,9 +327,15 @@
                       </article>
                   </div>
                   <div class="column">
-                    <figure class="image is-5by3 is-covered-right">
-                      <img src="{{ Voyager::image( $project1->image ) }}">
-                    </figure>
+                    @if ($originalProject1->image)
+                      <figure class="image is-5by3">
+                        <img src={{ Voyager::image( $originalProject1->thumbnail('big') ) }}>
+                      </figure>
+                    @else
+                      <figure class="image is-5by3">
+                        <img src={{ asset('images/no-image.svg') }}>   
+                      </figure>
+                    @endif
                   </div>
                 </div>
             </a>
@@ -331,16 +343,28 @@
           @endisset
 
           @isset($project2)
+            @php
+              if (Voyager::translatable($project2)) {
+                $originalProject2 = $project2;
+                $project2 = $project2->translate(app()->getLocale());
+              }
+            @endphp
         
             <a class="box is-paddingless is-radiusless is-marginless  has-date" href="{{ route('projects.show', $project2->slug) }}">
                 <div class="date-right has-background-grey-darker is-hidden-touch">
-                    <h5 class="title has-text-grey-light is-size-4 is-uppercase has-text-weight-bold">{{ $project2->created_at->translatedFormat('d M Y') }}</h5>
+                    <h5 class="title has-text-grey-light is-size-4 is-uppercase has-text-weight-bold">{{ $originalProject2->created_at->translatedFormat('d M Y') }}</h5>
                   </div>
                 <div class="columns is-gapless">
                     <div class="column">
-                        <figure class="image is-5by3 is-covered-left">
-                          <img src="{{ Voyager::image( $project2->image ) }}">
+                      @if ($originalProject2->image)
+                        <figure class="image is-5by3">
+                          <img src={{ Voyager::image( $originalProject2->thumbnail('big') ) }}>
                         </figure>
+                      @else
+                        <figure class="image is-5by3">
+                          <img src={{ asset('images/no-image.svg') }}>   
+                        </figure>
+                      @endif
                       </div>
                     <div class="column">
                         <article class="notification is-white is-radiusless">
@@ -407,9 +431,15 @@
           }
         @endphp
         <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('projects.show', $project1->slug) }}">
-          <figure class="image is-5by3">
-              <img src="{{ Voyager::image( $project1->image ) }}">
-          </figure>
+          @if ($originalProject1->image)
+            <figure class="image is-5by3">
+              <img src={{ Voyager::image( $originalProject1->thumbnail('big') ) }}>
+            </figure>
+          @else
+            <figure class="image is-5by3">
+              <img src={{ asset('images/no-image.svg') }}>   
+            </figure>
+          @endif
           <article class="notification is-white">
             <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalProject1->created_at->translatedFormat('d M Y') }}</h6>
             <h4 class="title is-6">{{ Str::limit($project1->title, 80) }}</h4>
@@ -429,9 +459,15 @@
           }
         @endphp
         <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('projects.show', $project2->slug) }}">
-          <figure class="image is-5by3">
-              <img src="{{ Voyager::image( $project2->image ) }}">
-          </figure>
+          @if ($originalProject2->image)
+            <figure class="image is-5by3">
+              <img src={{ Voyager::image( $originalProject2->thumbnail('big') ) }}>
+            </figure>
+          @else
+            <figure class="image is-5by3">
+              <img src={{ asset('images/no-image.svg') }}>   
+            </figure>
+          @endif
           <article class="notification is-white">
             <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">{{ $originalProject2->created_at->translatedFormat('d M Y') }}</h6>
             <h4 class="title is-6">{{ Str::limit($project2->title, 80) }}</h4>

@@ -38,12 +38,10 @@ export default {
 
 Vue.component('tab', {
   template: `
-    <transition name="slide-down">
         <div v-show="isActive">
         <slot>
         </slot>
         </div>
-    </transition>
 `,
   props: {
     name: {

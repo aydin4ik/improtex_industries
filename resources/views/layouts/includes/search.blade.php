@@ -1,6 +1,12 @@
 <div class="section is-paddingless has-bg-striped p-b-200 is-relative is-hidden-mobile">
     <div class="container">
-      <form method="POST" action="/search">
+    <form method="POST" 
+      @if (app()->getLocale() == 'en')
+        action="/search">
+      @else
+        action="{{app()->getLocale()}}/search">
+      @endif
+    
         <div class="field main-search has-addons">
           @csrf
           <div class="control is-expanded">

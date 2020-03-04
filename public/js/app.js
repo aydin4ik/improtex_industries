@@ -2251,7 +2251,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     submitForm: function submitForm() {
       if (this.query) {
-        window.location = "/search?q=".concat(this.query);
+        if (this.currentLocale == 'en') {
+          window.location = "/search?q=".concat(this.query);
+        } else {
+          window.location = "/".concat(this.currentLocale, "/search?q=").concat(this.query);
+        }
       }
     }
   },
@@ -2602,7 +2606,7 @@ __webpack_require__.r(__webpack_exports__);
   }
 });
 Vue.component('tab', {
-  template: "\n    <transition name=\"slide-down\">\n        <div v-show=\"isActive\">\n        <slot>\n        </slot>\n        </div>\n    </transition>\n",
+  template: "\n        <div v-show=\"isActive\">\n        <slot>\n        </slot>\n        </div>\n",
   props: {
     name: {
       required: true
@@ -43687,7 +43691,13 @@ var render = function() {
                                           class: item.isActive
                                             ? "is-active"
                                             : "",
-                                          attrs: { href: item.url }
+                                          attrs: {
+                                            href: _vm.route(
+                                              _vm.currentLocale +
+                                                "." +
+                                                item.route
+                                            )
+                                          }
                                         },
                                         [_vm._v(_vm._s(item.title))]
                                       )

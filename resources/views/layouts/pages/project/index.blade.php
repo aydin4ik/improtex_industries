@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+{{-- no image set for vue--}}
+
+@php
+    $noImage = asset('images/no-image.svg');
+@endphp
+
 <div id="projects">
     <div class="section has-bg-striped m-t-100 p-t-100 p-b-100 is-relative has-background-white-bis is-hidden-mobile">
         <div class="container">
@@ -13,23 +19,23 @@
             </div>
 
             <div class="columns is-multiline is-centered is-multiline">
-                    <div class="column is-12" v-for="item in projects">
-                        <a class="box is-paddingless is-relative is-clipped" :href="item.url">
+                    <div class="column is-12" v-for="project in projects">
+                        <a class="box is-paddingless is-relative is-clipped" :href="project.url">
                             
                             <article class="p-l-20 p-r-20 p-t-20 p-b-20  is-relative" style="z-index: 21">
-                                <h6 class="subtitle is-size-6 has-text-weight-bold has-text-white is-uppercase">@{{ item.date }}</h6>
-                                <h4 class="title is-5 m-t-150 has-text-weight-medium has-text-white is-capitalized">@{{ item.title }}</h4>
-                                <h6 class="subtitle is-6 m-t-10 has-text-white is-uppercase">@{{ item.scope }}</h6>
+                                <h6 class="subtitle is-size-6 has-text-weight-bold has-text-white is-uppercase">@{{ project.date }}</h6>
+                                <h4 class="title is-5 m-t-150 has-text-weight-medium has-text-white is-capitalized">@{{ project.title }}</h4>
+                                <h6 class="subtitle is-6 m-t-10 has-text-white is-uppercase">@{{ project.scope }}</h6>
                                 <h6 class="is-white subtitle is-size-6 has-text-weight-bold has-text-white is-uppercase">{{ __('general.more') }}</h6>
                             </article>
-                            <figure class="image is-2by1 is-covered-left is-absolute left-0 top-0" style="width:100%; height:100%">
-                                <img class="is-rounded-small" :src="item.image">
+                            <figure class="image is-covered-left is-absolute left-0 top-0" style="width:100%; height:100%">
+                                <img class="is-rounded-small" :src="project.image">
                             </figure>
                         </a>
                     </div>
             </div>
             <div class="level m-t-50">
-                <div class="level-item">
+                <div class="level-project">
                     <a href="#" class="link is-size-3 is-capitalized" @click.prevent="load" v-if="! completed">{{ __('general.loadMore') }} <i class="custom-icon-long-arrow"></i></a>
                         
                     <transition name="slide-down">
@@ -49,7 +55,8 @@
 
         <a class="box is-paddingless is-radiusless has-tag is-relative" v-for="project in projects" :href="project.url">
             <figure class="image is-5by3">
-                <img :src="project.image">
+                <img :src="project.imageMobile" v-if="project.imageMobile">
+                <img class="is-rounded-all" :src="noImage" v-else>
             </figure>
             <article class="notification is-white">
               <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">@{{ project.date }}</h6>
@@ -84,12 +91,14 @@
         el: '#projects',
         data: {
             projects: {!! $projects !!},
+            noImage: {!! json_encode($noImage) !!},
+            currentLocale: "{{ app()->getLocale() }}",
             completed: false,
 
         },
         methods: {
             load () {
-                axios.post('/projects', {offset: this.projects.length})
+                axios.post('/projects', {offset: this.projects.length, locale: this.currentLocale})
                     .then( response => {
                         if(response.data.length){
                             this.projects = this.projects.concat(response.data);

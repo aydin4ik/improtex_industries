@@ -5,10 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Traits\Translatable;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use TCG\Voyager\Traits\Resizable;
+use TCG\Voyager\Models\Translation;
+
 
 
 class Project extends Model
 {
+    // Allow resizable images.
+    use Resizable;
+    
     // Make Model translatable.
     use Translatable;
 
@@ -64,5 +70,33 @@ class Project extends Model
     public function scopePublished(Builder $query)
     {
         return $query->where('status', '=', static::PUBLISHED);
+    }
+
+        /**
+     * Get entries filtered by translated value.
+     *
+     * @example  Post::searchInTranslations('zuhause', ['title','body'])
+     *
+     * @param array        $columns    {required} the fields your looking to find a value in.
+     * @param string       $value    {required} value you are looking for.
+     *
+     * @return Builder
+     */
+    public static function scopeSearchInTranslations($query, $value, $columns )
+    {
+        if ($columns && !is_array($columns)) {
+            $columns = [$columns];
+        }
+
+        $self = new static();
+        $table = $self->getTable();
+
+        return $query->whereIn($self->getKeyName(), Translation::where('table_name', $table)
+            ->when(!is_null($columns), function ($query) use ($columns) {
+                return $query->whereIn('column_name', $columns);
+            })
+            ->where('value', 'like', "%$value%")
+            ->pluck('foreign_key')
+        );
     }
 }

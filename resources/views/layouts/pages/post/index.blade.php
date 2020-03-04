@@ -63,7 +63,8 @@
 
         <a class="box is-paddingless is-radiusless has-tag is-relative" v-for="post in posts" :href="post.url">
             <figure class="image is-5by3">
-                <img :src="post.image">
+                <img :src="post.image" v-if="post.image">
+                <img :src="noImage" v-else>
             </figure>
             <article class="notification is-white">
               <h6 class="subtitle is-7 has-text-primary has-text-weight-bold">@{{ post.date }}</h6>
@@ -98,12 +99,13 @@
         data: {
             posts: {!! $posts !!},
             noImage: {!! json_encode($noImage) !!},
+            currentLocale: "{{ app()->getLocale() }}",
             completed: false,
 
         },
         methods: {
             load () {
-                axios.post('/news', {offset: this.posts.length})
+                axios.post('/news', {offset: this.posts.length, locale: this.currentLocale})
                     .then( response => {
                         if(response.data.length){
                             this.posts = this.posts.concat(response.data);

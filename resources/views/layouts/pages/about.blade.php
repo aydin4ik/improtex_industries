@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+@php
+    if (Voyager::translatable($about)) {
+        $originalAbout = $about;
+        $about = $about->translate(app()->getLocale());
+    }
+@endphp
 <div class="has-bg-striped is-relative has-background-white-bis p-t-50 is-hidden-desktop">
     <div class="notification has-background-transparent is-radiusless has-left-border-wide is-paddingless">
         <h1 class="title is-uppercase is-size-3-mobile has-text-weight-bold p-t-10 p-b-10 p-l-15">{{ __('general.about') }}</h1>
@@ -22,9 +28,15 @@
         </div>
     </div>
 
-    <figure class="image is-5by3 m-t-20">
-        <img src="{{ Voyager::image( $about->image ) }}">
-    </figure>
+    @if ($originalAbout->image)
+        <figure class="image is-3by2">
+        <img src={{ Voyager::image( $originalAbout->thumbnail('big') ) }}>
+        </figure>
+    @else
+        <figure class="image is-3by2">
+        <img src={{ asset('images/no-image.svg') }}>   
+        </figure>
+    @endif
     <div class="notification is-primary is-radiusless is-capitalized has-text-weight-bold p-t-10 p-b-10 p-l-10 p-r-10 is-size-7 m-b-0">
         <span>
             improtex industries
@@ -35,10 +47,10 @@
     </div>
     <div class="notification is-grey-light is-radiusless is-capitalized p-t-10 p-b-10 p-l-10 is-size-7">
         <p class="has-text-weight-bold">
-          welding warehouse and equipments
+          {{$about->image_title}}
         </p>
         <p class="has-text-weight-light">
-            welding process
+            {{$about->image_description}}
         </p>
     </div>
 </div>
@@ -83,14 +95,20 @@
                         <div class="column is-12">
                             <div class="columns is-vcentered">
                                 <div class="column is-7">
-                                    <figure class="image is-3by2">
-                                        <img class="is-rounded-all" src="{{ Voyager::image( $about->image ) }}">
-                                    </figure>                            
+                                    @if ($originalAbout->image)
+                                        <figure class="image is-3by2">
+                                        <img class="is-rounded-all" src={{ Voyager::image( $originalAbout->thumbnail('big') ) }}>
+                                        </figure>
+                                    @else
+                                        <figure class="image is-3by2">
+                                        <img src={{ asset('images/no-image.svg') }}>   
+                                        </figure>
+                                    @endif                            
                                 </div>
                                 <div class="column is-narrow">
                                     <h6 class="title is-size-6 text-rotated-90">
-                                        <span class="has-text-primary has-text-weight-bold">improtex industries</span>
-                                        <span class="has-text-black">/ image name</span> 
+                                        <span class="has-text-primary has-text-weight-bold">{{$about->image_title}}</span>
+                                        <span class="has-text-black">/ {{$about->image_description}}</span> 
                                     </h6>
                                 </div>
                             </div>

@@ -12,18 +12,22 @@ class SearchFormController extends Controller
     {
 
         $query = $request->input('query') ?? $request->get('q');
-        // Perform the db query, and return the results
 
-        $posts = Post::search($query)
-        ->with('category')
-        ->get();
+        $posts = Post::searchInTranslations($query, ['title', 'body', 'excerpt'])
+        ->where('status', 'PUBLISHED')
+        ->get();    
 
-        $projects = Project::search($query)
-        ->get();
+        $projects = Project::searchInTranslations($query, ['title', 'body', 'excerpt', 'scope'])
+        ->where('status', 'PUBLISHED')
+        ->get();  
 
-
+        if (!isset($query)) {
+            $posts = collect([]);
+            $projects = collect([]);
+        }
+        
         return view('layouts.pages.search', [
-            'results' => $query,
+            'query' => $query,
             'posts' => $posts,
             'projects' => $projects
             ]);
