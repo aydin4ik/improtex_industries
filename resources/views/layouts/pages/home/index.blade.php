@@ -291,9 +291,7 @@
         </div>
       </div>
 
-    </div>
-
-    
+    </div>   
 
   {{-- Mobile posts end--}}
 
