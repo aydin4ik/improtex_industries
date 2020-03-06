@@ -75,12 +75,12 @@
         <div class="navbar-menu-mobile" v-if="mobileMenuIsOpen">
             <div class="box is-radiusless is-paddingless">
                 <div class="wrapper">
-                    <div class="search p-t-10 p-b-10 p-l-10 p-r-10">
+                    <div class="search p-l-10 p-r-10 m-t-20">
                         <form @submit.prevent="submitForm">
-                            <input class="input is-medium" type="search" placeholder="Search" v-model="query">
+                            <input class="input is-medium is-size-6" type="search" :placeholder="placeholder" v-model="query">
                         </form>
                     </div>
-
+                    <hr class="m-b-5">    
                     <aside class="mobile-menu">
                         <div v-for="(item, i) in itemsArray" :key="i">
                             <div class="menu-item"  v-if="!item.children.length > 0">

@@ -56,11 +56,11 @@
                   <div class="columns">
                     <div class="column is-2">
                       @if ($originalProject->image)
-                        <figure class="image is-5by3 m-t-20">
+                        <figure class="image is-5by4">
                           <img src={{ Voyager::image( $originalProject->thumbnail('big') ) }}>
                         </figure>
                       @else
-                        <figure class="image is-5by3 m-t-30">
+                        <figure class="image is-5by4 m-t-30">
                           <img src={{ asset('images/no-image.svg') }}>   
                         </figure>
                       @endif

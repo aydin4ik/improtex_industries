@@ -226,9 +226,16 @@
       </div>
 
       @isset($bigPost)
+        @php
+          if (Voyager::translatable($bigPost)) {
+            $originalBigPost = $bigPost;
+            $bigPost = $bigPost->translate(app()->getLocale());
+            $category = $bigPost->category->getTranslatedAttribute('name', app()->getLocale());
+          }
+        @endphp
           
         <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('news.show', [$bigPost->category, $bigPost->slug]) }}">
-          <span class="tag-small has-text-weight-medium is-size-7">{{ $bigPost->category->name }}</span>
+          <span class="tag-small has-text-weight-medium is-size-7">{{ $category }}</span>
           @if ($originalBigPost->image)
             <figure class="image is-3by2">
               <img src={{ Voyager::image( $originalBigPost->thumbnail('big') ) }}>
@@ -254,10 +261,12 @@
             if (Voyager::translatable($post)) {
               $originalPost = $post;
               $post = $post->translate(app()->getLocale());
+              $category = $post->category->getTranslatedAttribute('name', app()->getLocale());
+
             }
           @endphp
           <a class="box is-paddingless is-radiusless has-tag is-relative" href="{{ route('news.show', [$post->category, $post->slug]) }}">
-            <span class="tag-small has-text-weight-medium is-size-7">{{ $post->category->name }}</span>
+            <span class="tag-small has-text-weight-medium is-size-7">{{ $category }}</span>
             @if ($originalPost->image)
             <figure class="image is-3by2">
               <img src={{ Voyager::image( $originalPost->thumbnail('big') ) }}>

@@ -35,7 +35,7 @@
                     </div>
             </div>
             <div class="level m-t-50">
-                <div class="level-project">
+                <div class="level-item">
                     <a href="#" class="link is-size-3 is-capitalized" @click.prevent="load" v-if="! completed">{{ __('general.loadMore') }} <i class="custom-icon-long-arrow"></i></a>
                         
                     <transition name="slide-down">
@@ -82,7 +82,7 @@
 
 
 </div>
-    
+@include('layouts.includes.search')
 @endsection
 
 @section('scripts')

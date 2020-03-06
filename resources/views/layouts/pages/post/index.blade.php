@@ -89,7 +89,7 @@
 
 
 </div>
-    
+@include('layouts.includes.search')
 @endsection
 
 @section('scripts')

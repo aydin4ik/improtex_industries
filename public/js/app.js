@@ -43592,46 +43592,47 @@ var render = function() {
           ? _c("div", { staticClass: "navbar-menu-mobile" }, [
               _c("div", { staticClass: "box is-radiusless is-paddingless" }, [
                 _c("div", { staticClass: "wrapper" }, [
-                  _c(
-                    "div",
-                    { staticClass: "search p-t-10 p-b-10 p-l-10 p-r-10" },
-                    [
-                      _c(
-                        "form",
-                        {
+                  _c("div", { staticClass: "search p-l-10 p-r-10 m-t-20" }, [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitForm($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.query,
+                              expression: "query"
+                            }
+                          ],
+                          staticClass: "input is-medium is-size-6",
+                          attrs: {
+                            type: "search",
+                            placeholder: _vm.placeholder
+                          },
+                          domProps: { value: _vm.query },
                           on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.submitForm($event)
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.query = $event.target.value
                             }
                           }
-                        },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.query,
-                                expression: "query"
-                              }
-                            ],
-                            staticClass: "input is-medium",
-                            attrs: { type: "search", placeholder: "Search" },
-                            domProps: { value: _vm.query },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.query = $event.target.value
-                              }
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  ),
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr", { staticClass: "m-b-5" }),
                   _vm._v(" "),
                   _c(
                     "aside",

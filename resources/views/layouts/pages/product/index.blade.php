@@ -78,5 +78,5 @@
         </div>
     </div>
 </div>
-    
+@include('layouts.includes.search')
 @endsection
