@@ -13,38 +13,42 @@
 
 Route::localized(function() {
 
-    Route::get('/menu', 'API\menuController@index')->name('menu');
+    Route::middleware('construction.mode')->group(function () {
 
-    Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/menu', 'API\menuController@index')->name('menu');
+
+        Route::get('/', 'HomeController@index')->name('home');
+        
+        Route::get('about', 'ShowAbout')->name('about');
+
+        Route::get('news', 'PostController@index')->name('news.index');
+        Route::get('news/{category}', 'PostController@category')->name('news.category');
+        Route::get('news/{category}/{post}', 'PostController@show')->name('news.show');
+        Route::post('news' , 'PostController@load');
+
+        Route::resource('scope', 'ScopeController')->only([
+            'index', 'show'
+        ]);
+
+        Route::resource('products', 'ProductController')->only([
+            'index', 'show'
+        ]);
+
+        Route::resource('projects', 'ProjectController')->only([
+            'index', 'show'
+        ]);
+
+        Route::post('projects' , 'ProjectController@load');
+
+
+
+        Route::get('/contacts', 'ContactController@index')->name('contacts');
+        Route::post('/contacts', 'ContactController@submit');
+
+        Route::post('/search', 'SearchFormController@submit');
+        Route::get('/search', 'SearchFormController@submit');
     
-    Route::get('about', 'ShowAbout')->name('about');
-
-    Route::get('news', 'PostController@index')->name('news.index');
-    Route::get('news/{category}', 'PostController@category')->name('news.category');
-    Route::get('news/{category}/{post}', 'PostController@show')->name('news.show');
-    Route::post('news' , 'PostController@load');
-
-    Route::resource('scope', 'ScopeController')->only([
-        'index', 'show'
-    ]);
-
-    Route::resource('products', 'ProductController')->only([
-        'index', 'show'
-    ]);
-
-    Route::resource('projects', 'ProjectController')->only([
-        'index', 'show'
-    ]);
-
-    Route::post('projects' , 'ProjectController@load');
-
-
-
-    Route::get('/contacts', 'ContactController@index')->name('contacts');
-    Route::post('/contacts', 'ContactController@submit');
-
-    Route::post('/search', 'SearchFormController@submit');
-    Route::get('/search', 'SearchFormController@submit');
+    });
 
 });
 
