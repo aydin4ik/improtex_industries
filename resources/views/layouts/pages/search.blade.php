@@ -4,7 +4,7 @@
 <div id="search">
   <div class="setion m-t-100 m-b-100 is-hidden-mobile">
     <div class="container">
-        <h3 class="subtitle is-size-4 has-text-weight-light">{{ __('general.results') }} <strong>{{ $query }}</strong></h3>
+        <h3 class="subtitle is-size-3 has-text-weight-light">{{ __('general.results') }} <strong>{{ $query }}</strong></h3>
           <tab-component>
             <tab name="{{ __('general.news') }} ({{$posts->count()}})" :selected="posts.length">
               @foreach ($posts as $post)
