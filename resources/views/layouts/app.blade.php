@@ -36,6 +36,7 @@
             }
 
             $originalItem->title = $item->title;
+            $item->href = route($originalItem->route, $originalItem->parameters);
 
         @endphp
 
@@ -49,6 +50,8 @@
                     }
 
                     $originalChild->title = $child->title;
+                    $child->href = route($child->route, json_decode($child->parameters, true));
+
                 @endphp
             @endforeach
         @else

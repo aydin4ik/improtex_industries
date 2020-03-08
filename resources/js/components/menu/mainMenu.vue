@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-      <a class="navbar-item" :href="route(currentLocale + '.home')">
+      <a class="navbar-item" href="/">
         <img :src="logo">
       </a>
 
@@ -15,14 +15,14 @@
     <div class="navbar-menu">
       <div class="navbar-start">
         <div style="display: inline-flex" v-for="(item, index) in itemsArray" :key="index">
-            <a class="navbar-item is-tab" v-if="! item.children.length > 0" :href="route(currentLocale + '.' + item.route)" :class="item.isActive ? 'is-active': ''" @mouseover="showOnHover(index)" @mouseleave="setBackActiveItem($event)" @click="itemClicked = true"> {{ item.title }}</a>
+            <a class="navbar-item is-tab" v-if="! item.children.length > 0" :href="item.href" :class="item.isActive ? 'is-active': ''" @mouseover="showOnHover(index)" @mouseleave="setBackActiveItem($event)" @click="itemClicked = true"> {{ item.title }}</a>
             <div class="navbar-item has-dropdown is-hoverable is-mega is-tab" v-else :class="item.isActive ? 'is-active': ''" @mouseover="showOnHover(index)" @mouseleave="setBackActiveItem($event)">
-                <a class="navbar-link is-arrowless" :href="route(currentLocale + '.' + item.route)" @click="itemClicked = true">{{ item.title }}</a>
+                <a class="navbar-link is-arrowless" :href="item.href" @click="itemClicked = true">{{ item.title }}</a>
                 <div class="navbar-dropdown">
                     <div class="container">
                         <div class="navbar-menu">
                             <div class="navbar-start">
-                                <a class="navbar-item is-tab" v-for="(child, index) in item.children" :key="index" :href="route(currentLocale + '.' + child.route, child.parameters)" :class="child.isActive ? 'is-subactive': ''" @click="itemClicked = true">{{ child.title }}</a>
+                                <a class="navbar-item is-tab" v-for="(child, index) in item.children" :key="index" :href="child.href" :class="child.isActive ? 'is-subactive': ''" @click="itemClicked = true">{{ child.title }}</a>
                             </div>
                         </div>
                     </div>
@@ -144,12 +144,21 @@
             },
             setActiveItem () {
                 this.menuItems.forEach(item => {
-                    item.children.forEach(child => {
-                        if( this.currentUrl == route(this.currentLocale + '.' + child.route, child.parameters).url()){
-                            child.isActive = true
+                    if(item.children.length > 0){
+                        item.children.forEach(child => {
+                            if( this.currentUrl == item.href){
+                                item.isActive = true
+                            }else if( this.currentUrl == child.href){
+                                child.isActive = true
+                                item.isActive = true
+                            }
+                        }); 
+                    }else{
+                        if( this.currentUrl == item.href){
                             item.isActive = true
                         }
-                    });
+                    }
+                    
                 });
             },
             showOnHover (index) {
