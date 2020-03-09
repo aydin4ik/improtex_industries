@@ -4,7 +4,7 @@
       @if (app()->getLocale() == 'en')
         action="/search">
       @else
-        action="{{app()->getLocale()}}/search">
+        action="/{{app()->getLocale()}}/search">
       @endif
     
         <div class="field main-search has-addons">
