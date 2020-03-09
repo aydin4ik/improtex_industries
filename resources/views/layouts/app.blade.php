@@ -87,6 +87,7 @@
                     :current-url={{ json_encode(url()->current()) }}
                     :logo="{{ json_encode(asset('img/logo.png')) }}"
                     :placeholder="{{ json_encode( __('general.searchPlaceholder')) }}"
+                    :home-route="{{ json_encode(route('home'))}}"
                     ></main-menu>
             </div>
 

@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" :href="homeRoute">
         <img :src="logo">
       </a>
 
@@ -282,6 +282,7 @@
             currentLocale: String,
             locales: Array,
             placeholder: String,
+            homeRoute: String,
         },
         created() {
             this.init()
