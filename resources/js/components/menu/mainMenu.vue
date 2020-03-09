@@ -84,19 +84,19 @@
                     <aside class="mobile-menu">
                         <div v-for="(item, i) in itemsArray" :key="i">
                             <div class="menu-item"  v-if="!item.children.length > 0">
-                                <a :href="route(currentLocale + '.' + item.route)" class="menu-link" :class="item.isActive ? 'is-active': ''">{{ item.title }}</a>
+                                <a :href="item.href" class="menu-link" :class="item.isActive ? 'is-active': ''">{{ item.title }}</a>
                             </div>
                             <div class="menu-item has-dropdown" :class="item.isActive ? 'is-active': ''" v-else>
                                 <header class="dropdown-header">
                                     <a class="dropdown-toggle p-r-15"  @click.prevent="toggleMobileDropdown(i)">
                                     <i class="fas fa-angle-right"></i>
                                     </a>
-                                    <a  class="menu-link" :class="item.isActive ? 'is-active': ''" :href="route(currentLocale + '.' + item.route)">{{ item.title }}</a>
+                                    <a  class="menu-link" :class="item.isActive ? 'is-active': ''" :href="item.href">{{ item.title }}</a>
                                 </header>
                                 <transition name="slide-up-fade">
                                     <ul class="dropdown" v-if="item.isActive">
                                     <li v-for="(child, i) in item.children" :key="i">
-                                        <a class="is-capitalized" :class="child.isActive ? 'is-current': ''" :href="route(currentLocale + '.' + child.route, child.parameters)">{{child.title}}</a>
+                                        <a class="is-capitalized" :class="child.isActive ? 'is-current': ''" :href="child.href">{{child.title}}</a>
                                     </li>
                                     </ul>
                                 </transition>
